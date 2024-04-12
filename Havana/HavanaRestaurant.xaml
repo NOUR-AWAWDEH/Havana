@@ -1,0 +1,55 @@
+﻿<Window x:Class="Havana.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Havana"
+        mc:Ignorable="d"
+        Title="Havana Restaurant" Height="823" Width="861" Icon="/LOGO.ico" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-16" RenderTransformOrigin="-0.591,0.506">
+        <Grid.RowDefinitions>
+
+        </Grid.RowDefinitions>
+        <TextBlock x:Name ="StatusText" Text ="Please Connect to DataBase" FontSize ="16" Visibility ="Visible" RenderTransformOrigin="0.593,-3.009" Margin="10,744,0,29" Foreground="Black" FontWeight="Bold" />
+        <Button x:Name="OrderButton" Content="New Order" HorizontalAlignment="Left" Margin="697,327,0,0" VerticalAlignment="Top" Height="40" Width="115" Visibility="Visible" Click="OrderButt" Foreground="White" FontWeight="Bold">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+           
+        </Button>
+        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Visible" Click="DBButt" FontWeight="Bold" Foreground="White">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+            
+        </Button>
+        <Image HorizontalAlignment="Left" Height="619" Margin="64,54,0,0" VerticalAlignment="Top" Width="684" RenderTransformOrigin="0.517,0.514" Source="/359432261_1200409907529767_3579994182958766368_n.jpg"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,534,0,0" VerticalAlignment="Top" Width="121" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+           
+        </Button>
+        <Button x:Name="ConnectButton" Content="Connect DB" HorizontalAlignment="Left" Height="46" Margin="119,54,0,0" VerticalAlignment="Top" Width="211" Visibility="Visible" Click="ConnectButt" FontWeight="Bold" BorderBrush="White" Foreground="#FFF6F1F1">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+           
+        </Button>
+        <Label Content="Havana Restaurant" HorizontalAlignment="Left" Margin="119,113,0,0" VerticalAlignment="Top" Height="89" Width="564" FontStretch="Medium" FontSize="58" Foreground="#FF617A37" FontWeight="Bold" />
+
+
+    </Grid>
+</Window>

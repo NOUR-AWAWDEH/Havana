@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Havana", "Havana\Havana.csproj", "{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Library", "WPF_Library\WPF_Library.csproj", "{54EC1B91-B017-4B7E-AF03-67DC3339569D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54EC1B91-B017-4B7E-AF03-67DC3339569D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54EC1B91-B017-4B7E-AF03-67DC3339569D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54EC1B91-B017-4B7E-AF03-67DC3339569D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54EC1B91-B017-4B7E-AF03-67DC3339569D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8971B474-A273-4702-9E28-5C1C3B39ED79}
+	EndGlobalSection
+EndGlobal

@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Shapes; 
 
 namespace Havana
 {
@@ -28,6 +28,8 @@ namespace Havana
         {
             InitializeComponent();
             connStr = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
+
+
         }
         
         private void CloseButt(object sender, RoutedEventArgs e)
@@ -35,15 +37,17 @@ namespace Havana
             Close();
         }
 
-        private void ShowButton(SqlConnection connection) 
+        public void ShowButton(SqlConnection connection) 
         {
             if (connection != null)
             {
                 ConnectButton.Visibility = Visibility.Hidden;
                 OrderButton.Visibility = Visibility.Visible;
+                DataBaseButton.Visibility = Visibility.Visible;
             }
         }
-        private void ConnectButt(object sender, RoutedEventArgs e)
+
+        public void ConnectButt(object sender, RoutedEventArgs e)
         {
 
             using (SqlConnection connection = new SqlConnection(connStr))
@@ -71,7 +75,9 @@ namespace Havana
 
         private void OrderButt(object sender, RoutedEventArgs e)
         {
-
+            NewOrder newOrder = new NewOrder();
+            this.Visibility = Visibility.Hidden;
+            newOrder.Show();
         }
 
         private void DBButt(object sender, RoutedEventArgs e)

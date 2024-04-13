@@ -10,8 +10,8 @@
         <Grid.RowDefinitions>
 
         </Grid.RowDefinitions>
-        <TextBlock x:Name ="StatusText" Text ="Please Connect to DataBase" FontSize ="16" Visibility ="Visible" RenderTransformOrigin="0.593,-3.009" Margin="10,744,0,29" Foreground="Black" FontWeight="Bold" />
-        <Button x:Name="OrderButton" Content="New Order" HorizontalAlignment="Left" Margin="697,327,0,0" VerticalAlignment="Top" Height="40" Width="115" Visibility="Visible" Click="OrderButt" Foreground="White" FontWeight="Bold">
+        <TextBlock x:Name ="StatusText" Text ="Please Connect to DataBase" FontSize ="16" Visibility ="Visible" RenderTransformOrigin="0.593,-3.009" Margin="10,761,0,12" Foreground="Black" FontWeight="Bold" />
+        <Button x:Name="OrderButton" Content="New Order" HorizontalAlignment="Left" Margin="697,327,0,0" VerticalAlignment="Top" Height="40" Width="115" Visibility="Hidden" Click="OrderButt" Foreground="White" FontWeight="Bold">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -20,7 +20,7 @@
             </Button.Background>
            
         </Button>
-        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Visible" Click="DBButt" FontWeight="Bold" Foreground="White">
+        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Hidden" Click="DBButt" FontWeight="Bold" Foreground="White">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>

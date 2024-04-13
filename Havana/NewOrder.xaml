@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana"
         mc:Ignorable="d"
-        Title="NewOrder" Height="800" Width="1046" Icon="/LOGO.ico" ResizeMode="CanMinimize">
+        Title="NewOrder" Height="800" Width="1046" ResizeMode="CanMinimize" Icon="/LOGO.ico">
     <Grid Height="800" Width="1046" Margin="0,0,0,-16" Background="#FFAFCE7E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="82*"/>

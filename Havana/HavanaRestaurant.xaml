@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana"
         mc:Ignorable="d"
-        Title="Havana Restaurant" Height="823" Width="861" Icon="/LOGO.ico" ResizeMode="NoResize">
+        Title="Havana Restaurant" Height="823" Width="861" ResizeMode="NoResize" Icon="/LOGO.ico">
     <Grid Margin="0,0,0,-16" RenderTransformOrigin="-0.591,0.506">
         <Grid.RowDefinitions>
 
@@ -29,7 +29,7 @@
             </Button.Background>
             
         </Button>
-        <Image HorizontalAlignment="Left" Height="619" Margin="64,54,0,0" VerticalAlignment="Top" Width="684" RenderTransformOrigin="0.517,0.514" Source="/359432261_1200409907529767_3579994182958766368_n.jpg"/>
+        <Image HorizontalAlignment="Left" Height="619" Margin="64,54,0,0" VerticalAlignment="Top" Width="684" RenderTransformOrigin="0.517,0.514" Source="/HavanaFullLogo.jpg"/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,534,0,0" VerticalAlignment="Top" Width="121" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold">
             <Button.Background>
                 <RadialGradientBrush>

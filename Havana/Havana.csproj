@@ -56,6 +56,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Snaks\Coffee.xaml.cs">
+      <DependentUpon>Coffee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Snaks\Juices.xaml.cs">
+      <DependentUpon>Juices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Snaks\Tea.xaml.cs">
+      <DependentUpon>Tea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Snaks\Water.xaml.cs">
+      <DependentUpon>Water.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Drinks\Cold.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Drinks\Hot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Drinks\Sweets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HavanaRestaurant.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +87,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Drinks\Cold.xaml.cs">
+      <DependentUpon>Cold.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Drinks\Hot.xaml.cs">
+      <DependentUpon>Hot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Drinks\Sweets.xaml.cs">
+      <DependentUpon>Sweets.xaml</DependentUpon>
     </Compile>
     <Compile Include="HavanaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -74,6 +107,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Snaks\Coffee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Snaks\Juices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Snaks\Tea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Snaks\Water.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

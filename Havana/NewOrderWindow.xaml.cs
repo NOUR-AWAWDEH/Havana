@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Havana.Drinks;
+using Havana.Snaks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,44 +37,64 @@ namespace Havana
             }
         }
 
+
+        public void BackToOrderWindow()
+        {
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            if (newOrderWindow != null)
+            {
+                this.Visibility = Visibility.Hidden;
+                newOrderWindow.Visibility = Visibility.Visible;
+            }
+        }
+
+        
+        public void OpenWindow(Type windowType)
+        {
+            Window window = (Window)Activator.CreateInstance(windowType);
+            this.Visibility = Visibility.Hidden;
+            window.Show();
+        }
+       
+
         private void HotSnaksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Hot));
         }
 
         private void ColdSnaksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Cold));
         }
 
         private void SweetsSnaksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Sweets));
         }
 
         private void TeaDrinksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Tea));
         }
 
         private void CoffeeDrinksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Coffee));
         }
 
         private void JuicesDrinksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Juices));
         }
 
         private void WaterDrinksButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            OpenWindow(typeof(Water));
         }
 
         private void SearchButt(object sender, RoutedEventArgs e)
         {
-            Close();
+            
         }
     }
 }

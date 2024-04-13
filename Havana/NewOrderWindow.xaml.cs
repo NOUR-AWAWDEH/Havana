@@ -52,7 +52,7 @@ namespace Havana
         public void OpenWindow(Type windowType)
         {
             Window window = (Window)Activator.CreateInstance(windowType);
-            this.Visibility = Visibility.Hidden;
+            this.Visibility = Visibility.Visible;
             window.Show();
         }
        

@@ -57,7 +57,7 @@ namespace Library.Models.Classes
             return snacks;
         }
 
-        public void Insert(Drink drink) 
+        public void InsertDrink(Drink drink) 
         {
             using (SqlConnection cnn = new SqlConnection(cnnString)) 
             {
@@ -77,17 +77,17 @@ namespace Library.Models.Classes
             }
         }
 
-        public void Delete(Drink drink) 
+        public void DeleteDrink(Drink drink) 
         {
 
         }
 
-        public void Update(Drink drink) 
+        public void UpdateDrink(Drink drink) 
         {
 
         }
 
-        public void Insert(Snack snak) 
+        public void InsertSnack(Snack snak) 
         {
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
@@ -107,15 +107,29 @@ namespace Library.Models.Classes
             }
         }
 
-        public void Delete(Snack snak) 
+        public void DeleteSnack(Snack snak) 
         {
 
         }
 
-        public void Update(Snack snack) 
+        public void UpdateSnack(Snack snack) 
         {
 
         }
+        
+        public void InsertBuyerName(Buyer buyer)
+        {
+            using (SqlConnection cnn = new SqlConnection(cnnString))
+            {
+                    cnn.Open();
+                    string sql = "insert into Buyer (name) values( @name)";
+                    SqlCommand cmd = new SqlCommand(sql, cnn);
 
+                    SqlParameter NameParameter = new SqlParameter("@name", buyer.Name);
+                    cmd.Parameters.Add(NameParameter);
+                    cmd.ExecuteReader();
+                    cnn.Close();
+            }
+        }
     }
 }

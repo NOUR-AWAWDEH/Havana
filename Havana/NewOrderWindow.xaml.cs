@@ -1,5 +1,6 @@
 ﻿using Havana.Drinks;
 using Havana.Snaks;
+using Library.Models.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,6 @@ namespace Havana
             }
         }
 
-
         public void BackToOrderWindow()
         {
             NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
@@ -47,7 +47,6 @@ namespace Havana
                 newOrderWindow.Visibility = Visibility.Visible;
             }
         }
-
         
         public void OpenWindow(Type windowType)
         {
@@ -56,7 +55,6 @@ namespace Havana
             window.Show();
         }
        
-
         private void HotSnaksButt(object sender, RoutedEventArgs e)
         {
             OpenWindow(typeof(Hot));
@@ -95,6 +93,19 @@ namespace Havana
         private void SearchButt(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void BuyerNameButt(object sender, RoutedEventArgs e)
+        {
+            DataAcces dataAcces = new DataAcces();
+            Buyer buyer = new Buyer();
+            string name = BuyerNameTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                buyer.Name = name;
+                dataAcces.InsertBuyerName(buyer);
+                BuyerNameTextBox.Text = null;
+            }
         }
     }
 }

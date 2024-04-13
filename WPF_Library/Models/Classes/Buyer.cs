@@ -8,8 +8,9 @@ namespace Library.Models.Classes
 {
     public  class Buyer
     {
-        int Id { get; set; }
-        string Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Buyer() { }
         
         public Buyer(int id , string name) 
         {

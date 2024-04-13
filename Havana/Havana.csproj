@@ -73,14 +73,14 @@
       <DependentUpon>HavanaRestaurant.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewOrder.xaml">
+    <Page Include="NewOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewOrder.xaml.cs">
-      <DependentUpon>NewOrder.xaml</DependentUpon>
+    <Compile Include="NewOrderWindow.xaml.cs">
+      <DependentUpon>NewOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -110,6 +110,8 @@
     <None Include="HavanaDataSet.xss">
       <DependentUpon>HavanaDataSet.xsd</DependentUpon>
     </None>
+    <Resource Include="OIG1.SnaksPIC" />
+    <Resource Include="OIG1.DrinksPIC" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -123,10 +125,6 @@
       <Project>{54ec1b91-b017-4b7e-af03-67dc3339569d}</Project>
       <Name>WPF_Library</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pic\HavanaFullLogo.jpg" />
-    <Resource Include="Pic\LOGO.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="HavanaFullLogo.jpg" />

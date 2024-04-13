@@ -75,7 +75,7 @@ namespace Havana
 
         private void OrderButt(object sender, RoutedEventArgs e)
         {
-            NewOrder newOrder = new NewOrder();
+            NewOrderWindow newOrder = new NewOrderWindow();
             this.Visibility = Visibility.Hidden;
             newOrder.Show();
         }

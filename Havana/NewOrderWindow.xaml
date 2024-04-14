@@ -11,6 +11,7 @@
             <ColumnDefinition Width="82*"/>
             <ColumnDefinition Width="441*"/>
         </Grid.ColumnDefinitions>
+        
         <Button Content="Back Home" HorizontalAlignment="Left" Margin="31,711,0,0" VerticalAlignment="Top" Height="41" Width="133" Click="BackToHavana" Visibility="Visible" Foreground="White" FontWeight="Bold">
             <Button.Background>
                 <RadialGradientBrush>
@@ -19,6 +20,7 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+        
         <DataGrid HorizontalAlignment="Left" Height="577" Margin="14,83,0,0" VerticalAlignment="Top" Width="358" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" />
         <Label Grid.Column="1" Content="Snaks :" HorizontalAlignment="Left" Height="69" Margin="274,78,0,0" VerticalAlignment="Top" Width="186" Background="#FFA0CC6B" Foreground="#FF3C5415" FontWeight="Bold" FontSize="50"/>
         <Label Grid.Column="1" Content="Drinks :" HorizontalAlignment="Left" Height="96" Margin="278,403,0,0" VerticalAlignment="Top" Width="208" Background="#FFA0CC6B" Foreground="#FF3C5415" FontWeight="Bold" FontSize="50"/>

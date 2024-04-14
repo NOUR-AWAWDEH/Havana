@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Reports\ReportsWindow.xaml.cs">
+      <DependentUpon>ReportsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Snaks\Coffee.xaml.cs">
       <DependentUpon>Coffee.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reports\ReportsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

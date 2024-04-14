@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Havana.Reports;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -83,6 +84,13 @@ namespace Havana
         private void DBButt(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ReportsButt(object sender, RoutedEventArgs e)
+        {
+            ReportsWindow reportsWindow = new ReportsWindow();
+            this.Visibility = Visibility.Hidden;
+            reportsWindow.Show();
         }
     }
 }

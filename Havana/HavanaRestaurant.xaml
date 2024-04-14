@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana"
         mc:Ignorable="d"
-        Title="Havana Restaurant" Height="823" Width="861" ResizeMode="NoResize" Icon="/LOGO.ico">
+        Title="Havana Restaurant" Height="823" Width="861" ResizeMode="NoResize" Icon="/LOGO.ico"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Margin="0,0,0,-16" RenderTransformOrigin="-0.591,0.506">
         <Grid.RowDefinitions>

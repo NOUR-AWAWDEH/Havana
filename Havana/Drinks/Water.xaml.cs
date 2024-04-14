@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Havana.Snaks
+namespace Havana.Drinks
 {
     /// <summary>
     /// Interaction logic for Water.xaml

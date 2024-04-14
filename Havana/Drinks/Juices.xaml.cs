@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Havana;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -16,16 +15,15 @@ using System.Windows.Shapes;
 namespace Havana.Drinks
 {
     /// <summary>
-    /// Interaction logic for Cold.xaml
+    /// Interaction logic for Juices.xaml
     /// </summary>
-    public partial class Cold : Window
+    public partial class Juices : Window
     {
-        public Cold()
+        public Juices()
         {
             InitializeComponent();
         }
 
-        
         private void BackToOrder(object sender, RoutedEventArgs e)
         {
             NewOrderWindow newOrderWindow = new NewOrderWindow();

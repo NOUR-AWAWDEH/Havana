@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Havana.Snaks
 {
     /// <summary>
-    /// Interaction logic for Coffee.xaml
+    /// Interaction logic for Sweets.xaml
     /// </summary>
-    public partial class Coffee : Window
+    public partial class Sweets : Window
     {
-        public Coffee()
+        public Sweets()
         {
             InitializeComponent();
         }

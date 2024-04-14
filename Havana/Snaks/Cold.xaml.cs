@@ -12,18 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Havana.Drinks
+namespace Havana.Snaks
 {
     /// <summary>
-    /// Interaction logic for Sweets.xaml
+    /// Interaction logic for Cold.xaml
     /// </summary>
-    public partial class Sweets : Window
+    public partial class Cold : Window
     {
-        public Sweets()
+        public Cold()
         {
             InitializeComponent();
         }
 
+        
         private void BackToOrder(object sender, RoutedEventArgs e)
         {
             NewOrderWindow newOrderWindow = new NewOrderWindow();

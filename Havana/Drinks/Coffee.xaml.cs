@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Havana.Snaks
+namespace Havana.Drinks
 {
     /// <summary>
-    /// Interaction logic for Juices.xaml
+    /// Interaction logic for Coffee.xaml
     /// </summary>
-    public partial class Juices : Window
+    public partial class Coffee : Window
     {
-        public Juices()
+        public Coffee()
         {
             InitializeComponent();
         }

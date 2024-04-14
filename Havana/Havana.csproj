@@ -59,27 +59,27 @@
     <Compile Include="Reports\ReportsWindow.xaml.cs">
       <DependentUpon>ReportsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Snaks\Coffee.xaml.cs">
+    <Compile Include="Drinks\Coffee.xaml.cs">
       <DependentUpon>Coffee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Snaks\Juices.xaml.cs">
+    <Compile Include="Drinks\Juices.xaml.cs">
       <DependentUpon>Juices.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Snaks\Tea.xaml.cs">
+    <Compile Include="Drinks\Tea.xaml.cs">
       <DependentUpon>Tea.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Snaks\Water.xaml.cs">
+    <Compile Include="Drinks\Water.xaml.cs">
       <DependentUpon>Water.xaml</DependentUpon>
     </Compile>
-    <Page Include="Drinks\Cold.xaml">
+    <Page Include="Snaks\Cold.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Drinks\Hot.xaml">
+    <Page Include="Snaks\Hot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Drinks\Sweets.xaml">
+    <Page Include="Snaks\Sweets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,13 +91,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Drinks\Cold.xaml.cs">
+    <Compile Include="Snaks\Cold.xaml.cs">
       <DependentUpon>Cold.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Drinks\Hot.xaml.cs">
+    <Compile Include="Snaks\Hot.xaml.cs">
       <DependentUpon>Hot.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Drinks\Sweets.xaml.cs">
+    <Compile Include="Snaks\Sweets.xaml.cs">
       <DependentUpon>Sweets.xaml</DependentUpon>
     </Compile>
     <Compile Include="HavanaDataSet.Designer.cs">
@@ -117,19 +117,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Snaks\Coffee.xaml">
+    <Page Include="Drinks\Coffee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Snaks\Juices.xaml">
+    <Page Include="Drinks\Juices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Snaks\Tea.xaml">
+    <Page Include="Drinks\Tea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Snaks\Water.xaml">
+    <Page Include="Drinks\Water.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

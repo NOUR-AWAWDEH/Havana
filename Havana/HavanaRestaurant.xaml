@@ -23,7 +23,7 @@
             </Button.Background>
         </Button>
 
-        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,433,0,0" VerticalAlignment="Top" Height="40" Width="116" Visibility="Visible" Click="DBButt" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.323,0.564">
+        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,433,0,0" VerticalAlignment="Top" Height="40" Width="116" Visibility="Hidden" Click="DBButt" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.323,0.564">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>

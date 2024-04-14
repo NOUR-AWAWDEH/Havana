@@ -191,5 +191,29 @@
   <ItemGroup>
     <Resource Include="Reports\LOGO.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Snaks\Pic\Grilled-Cheese-sandwich-photo.jpg" />
+    <Resource Include="Snaks\Pic\Grilled-Chicken-Sandwiches-6-1.jpg" />
+    <Resource Include="Snaks\Pic\HotDogSandwich.jpg" />
+    <Resource Include="Snaks\Pic\tomato-and-cheddar-sandwiches.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Snaks\Grilled-Chicken-Sandwiches-6-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Snaks\HotDogSandwich.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Snaks\Grilled-Cheese-sandwich-photo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Snaks\tomato-and-cheddar-sandwiches.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FastFood.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drinks.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

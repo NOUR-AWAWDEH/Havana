@@ -30,5 +30,25 @@ namespace Havana.Snaks
             newOrderWindow.BackToOrderWindow();
             this.Close();
         }
+
+        private void AddGrilledChickenButt(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddGrilledMozzarellaButt(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddChesseAndTomatoButt(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddHotDogButt(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

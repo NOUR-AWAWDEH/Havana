@@ -27,16 +27,22 @@
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Binding="{Binding name}" Width="100" Header="Product Name"/>
-                <DataGridTextColumn Binding="{Binding cost}" Width="80" Header="Buyer Name"/>
-                <DataGridTextColumn Binding="{Binding name}" Width="100" Header=""/>
+                <DataGridTextColumn Binding="{Binding id}" Width="30" Header=" Id"/>
+                <DataGridTextColumn Binding="{Binding DateTime}" Width="120" Header=" DateTime"/>
+                <DataGridTextColumn Binding="{Binding name}" Width="120" Header=" Buyer Name"/>
+                <DataGridTextColumn Binding="{Binding name}" Width="150" Header=" Product Name"/>
+                <DataGridTextColumn Binding="{Binding cost}" Width="60" Header=" Cost"/>
+                <DataGridTextColumn Binding="{Binding volume}" Width="70" Header=" Volume"/>
+                <DataGridTextColumn Binding="{Binding weigth}" Width="70" Header=" Weigth"/>
+
+
 
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Snaks :" HorizontalAlignment="Left" Height="54" Margin="10,444,0,0" VerticalAlignment="Top" Width="146" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" Grid.ColumnSpan="2"/>
+        <Label Content="Snaks :" HorizontalAlignment="Left" Height="54" Margin="14,426,0,0" VerticalAlignment="Top" Width="146" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" Grid.ColumnSpan="2"/>
 
-        <Label Content="Drinks :" HorizontalAlignment="Left" Height="62" Margin="280,418,0,0" VerticalAlignment="Top" Width="169" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" Grid.Column="1"/>
+        <Label Content="Drinks :" HorizontalAlignment="Left" Height="54" Margin="271,426,0,0" VerticalAlignment="Top" Width="149" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" RenderTransformOrigin="1.107,0.445" Grid.Column="1"/>
 
         <Button Content="Hot" HorizontalAlignment="Left" Margin="11,498,0,0" VerticalAlignment="Top" Height="39" Width="130"  Visibility="Visible" Foreground="White" FontWeight="Bold" Click="HotSnaksButt">
             <Button.Background>

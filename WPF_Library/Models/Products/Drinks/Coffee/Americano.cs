@@ -12,9 +12,6 @@ namespace Library.Models.Products.Drinks.Coffee
     {
         public Americano(int id, string name, float cost, float volume) : base(id, name, cost, volume)
         {
-        }
-
-        
-       
+        }              
     }
 }

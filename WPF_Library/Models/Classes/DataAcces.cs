@@ -13,6 +13,7 @@ namespace Library.Models.Classes
     {
         
         string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ToString();
+
         public List<Drink> GetDrinks()
         {
             List<Drink> drinks = new List<Drink>();
@@ -35,6 +36,7 @@ namespace Library.Models.Classes
             }
             return drinks;
         }
+
         public List<Snack> GetSnacks()
         {
             List<Snack> snacks = new List<Snack>();
@@ -131,7 +133,6 @@ namespace Library.Models.Classes
                     cnn.Close();
             }
         }
-
 
     }
 }

@@ -20,5 +20,6 @@ namespace Library.Models.Classes
         {
             return base.ToString() + $"{Weigth}";
         }
+
     }
 }

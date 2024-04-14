@@ -23,7 +23,17 @@
             </Button.Background>
         </Button>
 
-        <DataGrid HorizontalAlignment="Left" Height="577" Margin="14,83,0,0" VerticalAlignment="Top" Width="358" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" />
+        <DataGrid x:Name="Order" HorizontalAlignment="Left" Height="577" Margin="14,83,0,0" VerticalAlignment="Top" Width="358"  Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding cost}" Header="Cost"/>
+                <DataGridTextColumn Binding="{Binding volume}" Header="Volume"/>
+                <DataGridTextColumn Binding="{Binding weight}" Header="Weight"/>
+                <DataGridTextColumn Binding="{Binding name}" Header=""/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Label Grid.Column="1" Content="Snaks :" HorizontalAlignment="Left" Height="69" Margin="274,78,0,0" VerticalAlignment="Top" Width="186" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="50"/>
 

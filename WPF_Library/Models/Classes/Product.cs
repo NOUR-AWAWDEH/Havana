@@ -20,8 +20,7 @@ namespace Library.Models.Classes
             this.Name = name;
             this.Cost = cost;
         }
-        //public abstract void SearchByName();
-        //public abstract void SearchByCost();
+       
         public virtual new string ToString()
         {
             return $"{Id}\t{Name}\t{Cost}";

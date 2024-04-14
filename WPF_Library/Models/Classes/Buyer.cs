@@ -10,6 +10,7 @@ namespace Library.Models.Classes
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         public Buyer() { }
         
         public Buyer(int id , string name) 
@@ -20,7 +21,7 @@ namespace Library.Models.Classes
 
         public override string ToString()
         {
-            return Id + "   " + Name ;
+            return $"{Id}\t{Name}" ;
         }
     }
 }

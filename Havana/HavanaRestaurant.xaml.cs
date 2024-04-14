@@ -29,8 +29,6 @@ namespace Havana
         {
             InitializeComponent();
             connStr = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
-
-
         }
         
         private void CloseButt(object sender, RoutedEventArgs e)
@@ -45,6 +43,7 @@ namespace Havana
                 ConnectButton.Visibility = Visibility.Hidden;
                 OrderButton.Visibility = Visibility.Visible;
                 DataBaseButton.Visibility = Visibility.Visible;
+                ReportsButton.Visibility = Visibility.Visible;
             }
         }
 

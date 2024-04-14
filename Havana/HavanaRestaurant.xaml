@@ -23,7 +23,7 @@
             </Button.Background>
         </Button>
 
-        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Hidden" Click="DBButt" FontWeight="Bold" Foreground="White">
+        <Button x:Name="DataBaseButton" Content="DataBase" HorizontalAlignment="Left" Margin="697,433,0,0" VerticalAlignment="Top" Height="40" Width="116" Visibility="Visible" Click="DBButt" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.323,0.564">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -32,7 +32,7 @@
             </Button.Background>
         </Button>
 
-        <Button x:Name="ReportsButton" Content="Reports" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Visible" Click="ReportsButt" FontWeight="Bold" Foreground="White">
+        <Button x:Name="ReportsButton" Content="Reports" HorizontalAlignment="Left" Margin="697,0,0,0" VerticalAlignment="Center" Height="40" Width="116" Visibility="Hidden" Click="ReportsButt" FontWeight="Bold" Foreground="White">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -43,7 +43,7 @@
 
         <Image HorizontalAlignment="Left" Height="619" Margin="64,54,0,0" VerticalAlignment="Top" Width="684" RenderTransformOrigin="0.517,0.514" Source="/HavanaFullLogo.jpg"/>
 
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,534,0,0" VerticalAlignment="Top" Width="121" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold">
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,556,0,0" VerticalAlignment="Top" Width="116" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold" RenderTransformOrigin="0.708,1.009">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>

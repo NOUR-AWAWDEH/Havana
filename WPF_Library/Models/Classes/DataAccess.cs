@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Library.Models.Classes
 {
-    public class DataAcces
+    public class DataAccess
     {
         
         string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ToString();
@@ -37,27 +37,52 @@ namespace Library.Models.Classes
             return drinks;
         }
 
-        public List<Snack> GetSnacks()
+        public List<Snack> GetSnacks(int id)
         {
             List<Snack> snacks = new List<Snack>();
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string Request = "select * from dbo.Snack";
-                SqlCommand cmd = new SqlCommand(Request, cnn);
-                SqlDataReader Reader = cmd.ExecuteReader();
-                if (Reader.HasRows)
+                string request = "SELECT id, name, cost, weigth FROM dbo.Snack WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(request, cnn);
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    while (Reader.Read())
+                    while (reader.Read())
                     {
-                        Snack snack = new Snack(Reader.GetInt32(0), Reader.GetString(1), Reader.GetFloat(2), Reader.GetFloat(3));
+                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3));
                         snacks.Add(snack);
                     }
                 }
-                Reader.Close();
+                reader.Close();
             }
             return snacks;
         }
+
+        public Snack GetSnack(int id)
+        {
+            Snack snack = null;
+            using (SqlConnection cnn = new SqlConnection(cnnString))
+            {
+                cnn.Open();
+                string request = "SELECT id, name, cost, weigth FROM dbo.Snack WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(request, cnn);
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        snack = new Snack(id, reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3));
+                        
+                    }
+                }
+                reader.Close();
+            }
+            return snack;
+        }
+
 
         public void InsertDrink(Drink drink) 
         {
@@ -134,5 +159,6 @@ namespace Library.Models.Classes
             }
         }
 
+        
     }
 }

@@ -97,7 +97,7 @@ namespace Havana
 
         private void BuyerNameButt(object sender, RoutedEventArgs e)
         {
-            DataAcces dataAcces = new DataAcces();
+            DataAccess dataAcces = new DataAccess();
             Buyer buyer = new Buyer();
             string name = BuyerNameTextBox.Text;
             if (!string.IsNullOrWhiteSpace(name))

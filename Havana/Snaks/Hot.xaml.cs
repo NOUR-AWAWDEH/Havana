@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Havana;
+using Library.Models.Classes;
+using Library.Models.Products.Snacks.Hot;
+using Microsoft.SqlServer.Server;
 
 namespace Havana.Snaks
 {
@@ -22,6 +26,7 @@ namespace Havana.Snaks
         public Hot()
         {
             InitializeComponent();
+
         }
 
         private void BackToOrder(object sender, RoutedEventArgs e)
@@ -33,6 +38,11 @@ namespace Havana.Snaks
 
         private void AddGrilledChickenButt(object sender, RoutedEventArgs e)
         {
+            DataAccess dataAccess = new DataAccess();
+            NewOrderWindow newOrderWindow = new NewOrderWindow();
+            newOrderWindow.OrderDataGrid.Items.Add(dataAccess.GetSnack(7));
+            newOrderWindow.ShowDialog();
+
 
         }
 

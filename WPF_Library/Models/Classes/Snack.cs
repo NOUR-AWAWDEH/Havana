@@ -10,9 +10,9 @@ namespace Library.Models.Classes
     {
         public float Weigth { get; set; }
         
-        public Snack(int id, string name, float cost, float Weigth) : base(id, name, cost)
+        public Snack(int id, string name, float cost, float weigth) : base(id, name, cost)
         {
-            this.Weigth = Weigth;
+            this.Weigth = weigth;
             
         }
 

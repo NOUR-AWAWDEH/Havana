@@ -9,7 +9,7 @@ namespace Library.Models.Products.Snacks.Cold
 {
     public class CajunChickenWithLimeRice : Snack, IHot
     {
-        public CajunChickenWithLimeRice(int id, string name, float cost, float Weigth) : base(id, name, cost, Weigth)
+        public CajunChickenWithLimeRice(int id, string name, float cost, float weigth) : base(id, name, cost, weigth)
         {
         }
     }

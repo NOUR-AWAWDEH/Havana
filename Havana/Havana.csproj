@@ -56,6 +56,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase\DataBaseInfo.xaml.cs">
+      <DependentUpon>DataBaseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HavanaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HavanaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ReportsWindow.xaml.cs">
       <DependentUpon>ReportsWindow.xaml</DependentUpon>
     </Compile>
@@ -71,6 +79,10 @@
     <Compile Include="Drinks\Water.xaml.cs">
       <DependentUpon>Water.xaml</DependentUpon>
     </Compile>
+    <Page Include="DataBase\DataBaseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Snaks\Cold.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,11 +111,6 @@
     </Compile>
     <Compile Include="Snaks\Sweets.xaml.cs">
       <DependentUpon>Sweets.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HavanaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HavanaDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="HavanaRestaurant.xaml.cs">
       <DependentUpon>HavanaRestaurant.xaml</DependentUpon>
@@ -155,6 +162,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="OIG1.SnaksPIC" />
+    <Resource Include="OIG1.DrinksPIC" />
     <None Include="HavanaDataSet.xsc">
       <DependentUpon>HavanaDataSet.xsd</DependentUpon>
     </None>
@@ -166,8 +175,6 @@
     <None Include="HavanaDataSet.xss">
       <DependentUpon>HavanaDataSet.xsd</DependentUpon>
     </None>
-    <Resource Include="OIG1.SnaksPIC" />
-    <Resource Include="OIG1.DrinksPIC" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -190,24 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Reports\LOGO.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Snaks\Pic\Grilled-Cheese-sandwich-photo.jpg" />
-    <Resource Include="Snaks\Pic\Grilled-Chicken-Sandwiches-6-1.jpg" />
-    <Resource Include="Snaks\Pic\HotDogSandwich.jpg" />
-    <Resource Include="Snaks\Pic\tomato-and-cheddar-sandwiches.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Snaks\Grilled-Chicken-Sandwiches-6-1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Snaks\HotDogSandwich.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Snaks\Grilled-Cheese-sandwich-photo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Snaks\tomato-and-cheddar-sandwiches.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FastFood.jpg" />

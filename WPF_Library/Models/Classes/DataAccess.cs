@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Microsoft.Win32.SafeHandles;
 using System.Data.SqlTypes;
+using System.Data;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace Library.Models.Classes
 {
@@ -162,6 +166,67 @@ namespace Library.Models.Classes
             }
         }
 
-        
+        public void InseartSnackPhoto(string filePath, string photoName)
+        {
+            // Assuming you have an open database connection named "connection"
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+
+             
+                byte[] photoData = File.ReadAllBytes(filePath);
+                
+               
+                string query = "INSERT INTO Photo (name, photo, id_Snack) VALUES (@name, @photo, @idSnack)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                   
+                    command.Parameters.AddWithValue("@name", photoName);
+                    command.Parameters.AddWithValue("@photo", photoData);
+                    command.Parameters.AddWithValue("@idSnack", 7);
+
+                   
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public ImageSource GetPhotoSnack(int idSnack)
+        {
+            ImageSource imageSource = null;
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+
+                
+                string query = "SELECT photo FROM Photo WHERE id_Snack = @idSnack";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    
+                    command.Parameters.AddWithValue("@idSnack", idSnack);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] photoData = (byte[])reader["photo"];
+                            using (MemoryStream stream = new MemoryStream(photoData))
+                            {
+                                BitmapImage bitmapImage = new BitmapImage();
+                                bitmapImage.BeginInit();
+                                bitmapImage.StreamSource = stream;
+                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                bitmapImage.EndInit();
+
+                                imageSource = bitmapImage;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return imageSource;
+        }
     }
 }

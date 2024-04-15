@@ -16,6 +16,7 @@ using Library.Models.Classes;
 using Library.Models.Products.Snacks.Hot;
 using Microsoft.SqlServer.Server;
 
+
 namespace Havana.Snaks
 {
     /// <summary>
@@ -27,8 +28,38 @@ namespace Havana.Snaks
         public Hot()
         {
             InitializeComponent();
+            ShowImages();
 
         }
+
+        private void ShowImages() 
+        {
+            
+            DataAccess dataAccess = new DataAccess();
+
+            //Grilled Chicken Sandwich Image
+            int idSnack = 7;
+            ImageSource photo1 = dataAccess.GetPhotoSnack(idSnack);
+            GrilledChickenSandwichImage.Source = photo1;
+
+            
+            //Grilled Chicken Sandwich Image
+            idSnack = 10;
+            ImageSource photo2 = dataAccess.GetPhotoSnack(idSnack);
+            HotDogSandwichImage.Source = photo2;
+
+            //Grilled Chicken Sandwich Image
+            idSnack = 9;
+            ImageSource photo3 = dataAccess.GetPhotoSnack(idSnack);
+            GrilledMozzarellaSandwichImage.Source = photo3;
+
+            //Cheese And Tomato Sandwich Image
+            idSnack = 11;
+            ImageSource photo4 = dataAccess.GetPhotoSnack(idSnack);
+            CheeseAndTomatoSandwichImage.Source = photo3;
+
+        }
+        
 
         private void BackToOrder(object sender, RoutedEventArgs e)
         {
@@ -63,5 +94,9 @@ namespace Havana.Snaks
             NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
             newOrderWindow.AddSnackItem(10);
         }
+
+
     }
 }
+
+

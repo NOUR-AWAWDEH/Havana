@@ -14,7 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes; 
+using System.Windows.Shapes;
+
+using Havana.DataBase;
 
 namespace Havana
 {
@@ -82,7 +84,9 @@ namespace Havana
 
         private void DBButt(object sender, RoutedEventArgs e)
         {
-
+            DataBaseInfo newOrder = new DataBaseInfo();
+            this.Visibility = Visibility.Hidden;
+            newOrder.Show();
         }
 
         private void ReportsButt(object sender, RoutedEventArgs e)

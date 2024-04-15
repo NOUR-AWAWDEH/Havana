@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -43,11 +44,22 @@ namespace Havana
             NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
             if (newOrderWindow != null)
             {
+               
                 this.Visibility = Visibility.Hidden;
                 newOrderWindow.Visibility = Visibility.Visible;
             }
         }
-        
+
+        public void AddSnackItem(int id) 
+        {
+            DataAccess dataAccess = new DataAccess();
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            Snack snack = dataAccess.GetSnack(id);
+            newOrderWindow.OrderDataGrid.Items.Add(snack);
+            newOrderWindow.Show();
+            
+        }
+
         public void OpenWindow(Type windowType)
         {
             Window window = (Window)Activator.CreateInstance(windowType);
@@ -58,6 +70,7 @@ namespace Havana
         private void HotSnaksButt(object sender, RoutedEventArgs e)
         {
             OpenWindow(typeof(Hot));
+           
         }
 
         private void ColdSnaksButt(object sender, RoutedEventArgs e)

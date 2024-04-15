@@ -23,6 +23,7 @@ namespace Havana.Snaks
     /// </summary>
     public partial class Hot : Window
     {
+        public  static bool isAdd { get; set; }
         public Hot()
         {
             InitializeComponent();
@@ -38,30 +39,29 @@ namespace Havana.Snaks
 
         private void AddGrilledChickenButt(object sender, RoutedEventArgs e)
         {
-            DataAccess dataAccess = new DataAccess();
-            NewOrderWindow newOrderWindow = new NewOrderWindow();
-            Snack snack = dataAccess.GetSnack(7);
-            GrilledChickenSandwich grilledChickenSandwich = new GrilledChickenSandwich(snack.Id,snack.Name, snack.Cost, snack.Weigth);
-                
-            newOrderWindow.OrderDataGrid.Items.Add(dataAccess.GetSnack(7));
-            newOrderWindow.ShowDialog();
 
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.AddSnackItem(7);
 
         }
 
         private void AddGrilledMozzarellaButt(object sender, RoutedEventArgs e)
         {
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.AddSnackItem(9);
 
         }
 
         private void AddChesseAndTomatoButt(object sender, RoutedEventArgs e)
         {
-
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.AddSnackItem(11);
         }
 
         private void AddHotDogButt(object sender, RoutedEventArgs e)
         {
-
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.AddSnackItem(10);
         }
     }
 }

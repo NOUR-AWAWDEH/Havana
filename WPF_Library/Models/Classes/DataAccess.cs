@@ -67,10 +67,10 @@ namespace Library.Models.Classes
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string request = "SELECT id, name, cost, weigth FROM dbo.Snack";
+                string request = "SELECT id, name, cost, weigth FROM dbo.Snack where id =@id";
                 SqlCommand cmd = new SqlCommand(request, cnn);
                 SqlParameter idParametr = new SqlParameter("id", id);
-            //    cmd.Parameters.Add(idParametr);
+                cmd.Parameters.Add(idParametr);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -81,12 +81,11 @@ namespace Library.Models.Classes
                     double weight = reader.GetDouble(3);
                     snack = new Snack(Id, name, cost, weight);
                         
-                 }
+                }
                 reader.Close();
             }
             return snack;
         }
-
 
         public void InsertDrink(Drink drink) 
         {

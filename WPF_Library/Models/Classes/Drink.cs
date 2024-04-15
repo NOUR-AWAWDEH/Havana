@@ -8,9 +8,9 @@ namespace Library.Models.Classes
 {
     public class Drink : Product
     {
-        public float Volume { get; set; }
+        public double Volume { get; set; }
        
-        public Drink(int id, string name, float cost, float volume ) : base(id, name, cost)
+        public Drink(int id, string name, decimal cost, double volume ) : base(id, name, cost)
         {
             Volume = volume;
             

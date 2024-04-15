@@ -12,9 +12,9 @@ namespace Library.Models.Classes
 
         public string Name { get; set; }
 
-        public float Cost { get; set; }
+        public decimal Cost { get; set; }
 
-        public Product(int id, string name,float cost) 
+        public Product(int id, string name, decimal cost) 
         {
             this.Id = id;
             this.Name = name;

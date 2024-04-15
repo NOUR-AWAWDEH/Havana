@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Microsoft.Win32.SafeHandles;
+using System.Data.SqlTypes;
 
 namespace Library.Models.Classes
 {
@@ -27,7 +28,7 @@ namespace Library.Models.Classes
                 {
                     while (Reader.Read())
                     {
-                        Drink drink = new Drink(Reader.GetInt32(0), Reader.GetString(1), Reader.GetFloat(2), Reader.GetFloat(3));
+                        Drink drink = new Drink(Reader.GetInt32(0), Reader.GetString(1), Reader.GetDecimal(2), Reader.GetDouble(3));
                         drinks.Add(drink);
                     }
                     Reader.Close();
@@ -51,7 +52,7 @@ namespace Library.Models.Classes
                 {
                     while (reader.Read())
                     {
-                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3));
+                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDouble(3));
                         snacks.Add(snack);
                     }
                 }
@@ -66,18 +67,21 @@ namespace Library.Models.Classes
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string request = "SELECT id, name, cost, weigth FROM dbo.Snack WHERE id = @id";
+                string request = "SELECT id, name, cost, weigth FROM dbo.Snack";
                 SqlCommand cmd = new SqlCommand(request, cnn);
-                cmd.Parameters.AddWithValue("@id", id);
+                SqlParameter idParametr = new SqlParameter("id", id);
+            //    cmd.Parameters.Add(idParametr);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    while (reader.Read())
-                    {
-                        snack = new Snack(id, reader.GetString(1), reader.GetFloat(2), reader.GetFloat(3));
+                    reader.Read();
+                    int Id = reader.GetInt32(0);
+                    string name = reader.GetString(1);
+                    decimal cost =  reader.GetDecimal(2);
+                    double weight = reader.GetDouble(3);
+                    snack = new Snack(Id, name, cost, weight);
                         
-                    }
-                }
+                 }
                 reader.Close();
             }
             return snack;

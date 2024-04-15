@@ -10,7 +10,7 @@ namespace Library.Models.Products.Drinks.Water
 {
     public class WaterWithGas : Drink, IWater
     {
-        public WaterWithGas(int id, string name, float cost, float volume) : base(id, name, cost, volume)
+        public WaterWithGas(int id, string name, decimal cost, double volume) : base(id, name, cost, volume)
         {
         }
     }

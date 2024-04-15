@@ -10,7 +10,7 @@ namespace Library.Models.Products.Drinks.Juice
 {
     public class PulpyOrange : Drink, IJuice
     {
-        public PulpyOrange(int id, string name, float cost, float volume) : base(id, name, cost, volume)
+        public PulpyOrange(int id, string name, decimal cost, double volume) : base(id, name, cost, volume)
         {
         }
     }

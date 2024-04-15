@@ -40,6 +40,9 @@ namespace Havana.Snaks
         {
             DataAccess dataAccess = new DataAccess();
             NewOrderWindow newOrderWindow = new NewOrderWindow();
+            Snack snack = dataAccess.GetSnack(7);
+            GrilledChickenSandwich grilledChickenSandwich = new GrilledChickenSandwich(snack.Id,snack.Name, snack.Cost, snack.Weigth);
+                
             newOrderWindow.OrderDataGrid.Items.Add(dataAccess.GetSnack(7));
             newOrderWindow.ShowDialog();
 

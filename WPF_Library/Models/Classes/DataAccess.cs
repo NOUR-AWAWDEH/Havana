@@ -166,7 +166,7 @@ namespace Library.Models.Classes
             }
         }
 
-        public void InseartSnackPhoto(string filePath, string photoName)
+        public void InseartSnackPhoto(string filePath, string photoName, int snackId)
         {
             // Assuming you have an open database connection named "connection"
             using (SqlConnection connection = new SqlConnection(cnnString))
@@ -184,9 +184,34 @@ namespace Library.Models.Classes
                    
                     command.Parameters.AddWithValue("@name", photoName);
                     command.Parameters.AddWithValue("@photo", photoData);
-                    command.Parameters.AddWithValue("@idSnack", 7);
-
+                    command.Parameters.AddWithValue("@idSnack", snackId);
                    
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public void InseartDrinkPhoto(string filePath, string photoName, int drinkId)
+        {
+            // Assuming you have an open database connection named "connection"
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+
+
+                byte[] photoData = File.ReadAllBytes(filePath);
+
+
+                string query = "INSERT INTO Photo (name, photo, id_Drink) VALUES (@name, @photo, @idDrink)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+
+                    command.Parameters.AddWithValue("@name", photoName);
+                    command.Parameters.AddWithValue("@photo", photoData);
+                    command.Parameters.AddWithValue("@idDrink", drinkId);
+
                     command.ExecuteNonQuery();
                 }
             }

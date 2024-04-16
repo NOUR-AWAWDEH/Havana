@@ -56,7 +56,7 @@ namespace Havana.Snaks
             //Cheese And Tomato Sandwich Image
             idSnack = 11;
             ImageSource photo4 = dataAccess.GetPhotoSnack(idSnack);
-            CheeseAndTomatoSandwichImage.Source = photo3;
+            CheeseAndTomatoSandwichImage.Source = photo4;
 
         }
         
@@ -94,12 +94,10 @@ namespace Havana.Snaks
             NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
             newOrderWindow.AddSnackItem(10);
         }
-        private void InseartSnackPhotoButt(object sender, RoutedEventArgs e)
-        {
-            DataAccess dataAccess = new DataAccess();
-            string filePath = "C:\\Users\\noura\\Desktop\\tomato-and-cheddar-sandwiches.jpg";
-            dataAccess.InseartSnackPhoto(filePath, "TomatoAndCheddarSandwiches");
-        }
+       
+        
+            
+        
 
     }
 }

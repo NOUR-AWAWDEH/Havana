@@ -5,9 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.DataBase"
         mc:Ignorable="d"
-        Title="InseartPhoto" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
-    <Grid Height="450" Width="800">
-        
+        Title="InseartPhoto"
+        WindowStartupLocation="CenterScreen"
+        Height="823" Width="861" ResizeMode="NoResize">
+    <Grid Margin="-2,0,2,-6" RenderTransformOrigin="-0.591,0.506" Background="#FFCAE2A8">
+
+        <Button x:Name="InseartPhoto1" Content="Inseart Photo" HorizontalAlignment="Left" Margin="261,520,0,0" VerticalAlignment="Top" Height="34" Width="429" Click="InseartPhotoButt" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+        <TextBlock x:Name ="StatusText" Text ="Please Connect to DataBase" FontSize ="16" Visibility ="Visible" RenderTransformOrigin="0.593,-3.009" Margin="10,744,158,22" Foreground="Black" FontWeight="Bold" />
+        <TextBox x:Name="FilePathTexBox" HorizontalAlignment="Left" Height="21" Margin="262,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="429"/>
+        <Label Content="Photo Name :" HorizontalAlignment="Left" Margin="180,394,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" Height="23" FontSize="10"/>
+        <TextBox x:Name="PhotoNameTexBox"  HorizontalAlignment="Left" Height="21" Margin="262,394,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="429"/>
+        <Button Content="Get Flie Path " HorizontalAlignment="Left" Height="19" Margin="180,422,0,0" VerticalAlignment="Top" Width="77" Click="FilePathButt" Foreground="White" Background="#FF344C0E"/>
+        <Image x:Name="InseartImage" HorizontalAlignment="Left" Height="261" Margin="262,125,0,0" VerticalAlignment="Top" Width="428"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="261" Margin="262,125,0,0" VerticalAlignment="Top" Width="428"/>
+        <RadioButton x:Name="DrinkPhoto" Content="Drink Photo" HorizontalAlignment="Left" Margin="262,458,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Bold"/>
+        <RadioButton x:Name="SnackPhoto" Content="Snack Photo" HorizontalAlignment="Left" Margin="476,458,0,0" VerticalAlignment="Top" Width="214" FontWeight="Bold"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="200,491,0,0" VerticalAlignment="Top" Width="42" FontWeight="Bold" Height="23" FontSize="10"/>
+        <TextBox x:Name="IDTexBox"  HorizontalAlignment="Left" Height="21" Margin="261,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="88"/>
+        <Label Content="Photo Kind: " HorizontalAlignment="Left" Margin="178,454,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" Height="23" FontSize="10"/>
     </Grid>
 </Window>

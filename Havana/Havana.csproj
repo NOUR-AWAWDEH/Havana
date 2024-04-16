@@ -59,6 +59,9 @@
     <Compile Include="DataBase\DataBaseInfo.xaml.cs">
       <DependentUpon>DataBaseInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\InseartPhoto.xaml.cs">
+      <DependentUpon>InseartPhoto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HavanaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,6 +83,10 @@
       <DependentUpon>Water.xaml</DependentUpon>
     </Compile>
     <Page Include="DataBase\DataBaseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataBase\InseartPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

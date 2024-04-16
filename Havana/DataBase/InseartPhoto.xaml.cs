@@ -1,5 +1,4 @@
-﻿using Library.Models.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +15,13 @@ using System.Windows.Shapes;
 namespace Havana.DataBase
 {
     /// <summary>
-    /// Interaction logic for DataBase.xaml
+    /// Interaction logic for InseartPhoto.xaml
     /// </summary>
-    public partial class DataBaseInfo : Window
+    public partial class InseartPhoto : Window
     {
-        public DataBaseInfo()
+        public InseartPhoto()
         {
             InitializeComponent();
-        }
-
-        private void PhotoWindow(object sender, RoutedEventArgs e)
-        {
-            InseartPhoto inseartPhoto = new InseartPhoto();
-            this.Visibility = Visibility.Hidden;   
-            inseartPhoto.ShowDialog();
         }
     }
 }

@@ -173,11 +173,9 @@ namespace Library.Models.Classes
             {
                 connection.Open();
 
-             
                 byte[] photoData = File.ReadAllBytes(filePath);
-                
                
-                string query = "INSERT INTO Photo (name, photo, id_Snack) VALUES (@name, @photo, @idSnack)";
+                string query = "INSERT INTO Snack_Photos (name, photo, id_Snack) VALUES (@name, @photo, @idSnack)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -192,25 +190,22 @@ namespace Library.Models.Classes
 
         }
 
-        public void InseartDrinkPhoto(string filePath, string photoName, int drinkId)
+        public void InseartDrinkPhoto(string filePath, int idDrink)
         {
-            // Assuming you have an open database connection named "connection"
+            
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
 
-
                 byte[] photoData = File.ReadAllBytes(filePath);
 
-
-                string query = "INSERT INTO Photo (name, photo, id_Drink) VALUES (@name, @photo, @idDrink)";
+                string query = "INSERT INTO Drink_Photos (photo, id_Drink) VALUES (@photo, @idDrink)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
 
-                    command.Parameters.AddWithValue("@name", photoName);
                     command.Parameters.AddWithValue("@photo", photoData);
-                    command.Parameters.AddWithValue("@idDrink", drinkId);
+                    command.Parameters.AddWithValue("@idDrink", idDrink);
 
                     command.ExecuteNonQuery();
                 }
@@ -218,7 +213,7 @@ namespace Library.Models.Classes
 
         }
 
-        public ImageSource GetPhotoSnack(int idSnack)
+        public ImageSource GetSnackPhoto(int idSnack)
         {
             ImageSource imageSource = null;
             using (SqlConnection connection = new SqlConnection(cnnString))
@@ -226,7 +221,7 @@ namespace Library.Models.Classes
                 connection.Open();
 
                 
-                string query = "SELECT photo FROM Photo WHERE id_Snack = @idSnack";
+                string query = "SELECT photo FROM Snack_Photos WHERE id_Snack = @idSnack";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     

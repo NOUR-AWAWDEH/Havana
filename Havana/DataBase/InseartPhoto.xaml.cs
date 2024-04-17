@@ -28,19 +28,17 @@ namespace Havana.DataBase
 
         private void FilePathButt(object sender, RoutedEventArgs e)
         {
-            // Configure open file dialog box
+            
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "";
             dialog.DefaultExt = ".jpg";
             dialog.Filter = "Image Files (*.jpg, *.png, *.gif, *.svg, *.ico)|*.jpg;*.png;*.gif;*.svg;*.ico|All Files (*.*)|*.*";
 
-            // Show open file dialog box
+            
             bool? result = dialog.ShowDialog();
-
-            // Process open file dialog box results
+            
             if (result == true)
             {
-                // Open document
                 string filename = dialog.FileName;
                 FilePathTextBox.Text = filename;
                 ImageSource imageSource = new BitmapImage(new Uri(filename));
@@ -48,30 +46,72 @@ namespace Havana.DataBase
             }
         }
 
+        private int GetDrinkPhotoID(string str) 
+        {
+            DataAccess dataAccess = new DataAccess();
+            List<Drink> drinks = dataAccess.GetDrinks();
+            return FindDrinkID(drinks,str);
+        }
+
+        private int GetSnackPhotoID(string str)
+        {
+            DataAccess dataAccess = new DataAccess();
+            List<Snack> snacks = dataAccess.GetSnacks();
+            return FindSnackID(snacks,str);
+        }
+
+        private int FindDrinkID(List<Drink> drinks, string str) 
+        {
+            foreach (Drink drink in drinks)
+            {
+                if (drink.Name == str) 
+                {
+                    return drink.Id;
+                }
+            }
+            return -1;
+        }
+
+        private int FindSnackID(List<Snack> snacks, string str)
+        {
+            foreach (Snack snack in snacks)
+            {
+                
+                if (snack.Name == str)
+                {
+                    return snack.Id;
+                }
+            }
+            return -1;
+        }
+
+
+
         private void InseartPhotoButt(object sender, RoutedEventArgs e)
         {
-           // if (FilePathTexBox.Text != null)
-        //    {
-        //        DataAccess dataAccess = new DataAccess();
-        //        string filePath = FilePathTexBox.Text;
-        //        string photoName = PhotoNameTexBox.Text;
-        //        int id = Convert.ToInt32(IDTexBox.Text);
-        //        if (SnackPhoto.IsChecked == true)
-        //        {
-        //            dataAccess.InseartSnackPhoto(filePath, photoName, id);
-        //            StatusText.Text = "Snack Photo Insearted Sucsessfully!";
-        //        }
-        //        else 
-        //        {
-        //            dataAccess.InseartDrinkPhoto(filePath, photoName, id);
-        //            StatusText.Text = "Drink Photo Insearted Sucsessfully!";
-        //        }
+            if (FilePathTextBox.Text != null && IteamsList.SelectedItem != null)
+            {
+                DataAccess dataAccess = new DataAccess();
+                string filePath = FilePathTextBox.Text;
+                
+                if (SnacksRadioButton.IsChecked == true)
+                {
+                    int id = GetSnackPhotoID(IteamsListSelectedItem());
+                    dataAccess.InseartSnackPhoto(filePath, id);
+                    StatusText.Text = "Snack Photo Insearted Sucsessfully!";
+                }
+                else
+                {
+                    int id = GetDrinkPhotoID(IteamsListSelectedItem());
+                    dataAccess.InseartDrinkPhoto(filePath, id);
+                    StatusText.Text = "Drink Photo Insearted Sucsessfully!";
+                }
 
-                //    }
-                //    else 
-                //    {
-                //        StatusText.Text = "Please Fill the File Path  and the the Photo Name!!!";
-                //    }
+            }
+            else
+            {
+                StatusText.Text = "Please Fill t!!!";
+            }
         }
 
         private void RefreshDrinksItems(object sender, RoutedEventArgs e)
@@ -81,8 +121,9 @@ namespace Havana.DataBase
            List<Drink> drinks = dataAccess.GetDrinks();
            IteamsList.ItemsSource = drinks;
            IteamsList.DisplayMemberPath = "Name";
+         
 
-            
+
         }
 
         private void RefreshSnackssItems(object sender, RoutedEventArgs e)
@@ -91,6 +132,22 @@ namespace Havana.DataBase
             List<Snack> snacks = dataAccess.GetSnacks();
             IteamsList.ItemsSource = snacks;
             IteamsList.DisplayMemberPath = "Name";
+            
         }
+
+        private string IteamsListSelectedItem()
+        {
+            if (IteamsList.SelectedValue != null)
+            {
+
+                Snack selectedSnack = (Snack)IteamsList.SelectedValue;
+                string str = selectedSnack.Name;
+                StatusText.Text = str;
+                return str;
+            }
+            return null;
+        }
+
+        
     }
 }

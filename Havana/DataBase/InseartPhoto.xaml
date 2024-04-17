@@ -21,6 +21,6 @@
         <RadioButton x:Name="SnacksRadioButton" Content="Snacks" HorizontalAlignment="Left" Margin="478,439,0,0" VerticalAlignment="Top" Width="67" FontWeight="Bold" Click="RefreshSnackssItems"/>
         <Label Content="Items List :" HorizontalAlignment="Left" Margin="180,458,0,0" VerticalAlignment="Top" Width="70" FontWeight="Bold" Height="23" FontSize="10" RenderTransformOrigin="0.577,-0.52"/>
         <Label Content="Photo Kind: " HorizontalAlignment="Left" Margin="180,435,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" Height="23" FontSize="10"/>
-        <ComboBox x:Name="IteamsList" HorizontalAlignment="Left" Height="19" Margin="264,460,0,0" VerticalAlignment="Top" Width="433" />
+        <ComboBox x:Name="IteamsList" HorizontalAlignment="Left" Height="19" Margin="264,460,0,0" VerticalAlignment="Top" Width="433"   />
     </Grid>
 </Window>

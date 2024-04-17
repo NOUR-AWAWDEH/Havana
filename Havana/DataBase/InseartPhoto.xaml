@@ -17,8 +17,8 @@
         <Button Content="Get Flie Path " HorizontalAlignment="Left" Height="19" Margin="180,400,0,0" VerticalAlignment="Top" Width="77" Click="FilePathButt" Foreground="White" Background="#FF344C0E"/>
         <Image x:Name="InseartImage" HorizontalAlignment="Left" Height="261" Margin="262,125,0,0" VerticalAlignment="Top" Width="428"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="261" Margin="262,125,0,0" VerticalAlignment="Top" Width="428"/>
-        <RadioButton x:Name="DrinksRadioButton" Content="Drinks" HorizontalAlignment="Left" Margin="264,439,0,0" VerticalAlignment="Top"  FontWeight="Bold" Click="RefreshDrinksIteams"/>
-        <RadioButton x:Name="SnacksRadioButton" Content="Snacks" HorizontalAlignment="Left" Margin="478,439,0,0" VerticalAlignment="Top" Width="214" FontWeight="Bold" Click="RefreshSnackssIteams"/>
+        <RadioButton x:Name="DrinksRadioButton" Content="Drinks" HorizontalAlignment="Left" Margin="264,439,0,0" VerticalAlignment="Top"  FontWeight="Bold" Click="RefreshDrinksItems" Width="63"/>
+        <RadioButton x:Name="SnacksRadioButton" Content="Snacks" HorizontalAlignment="Left" Margin="478,439,0,0" VerticalAlignment="Top" Width="67" FontWeight="Bold" Click="RefreshSnackssItems"/>
         <Label Content="Items List :" HorizontalAlignment="Left" Margin="180,458,0,0" VerticalAlignment="Top" Width="70" FontWeight="Bold" Height="23" FontSize="10" RenderTransformOrigin="0.577,-0.52"/>
         <Label Content="Photo Kind: " HorizontalAlignment="Left" Margin="180,435,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" Height="23" FontSize="10"/>
         <ComboBox x:Name="IteamsList" HorizontalAlignment="Left" Height="19" Margin="264,460,0,0" VerticalAlignment="Top" Width="433" />

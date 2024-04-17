@@ -74,7 +74,7 @@ namespace Havana.DataBase
                 //    }
         }
 
-        private void RefreshDrinksIteams(object sender, RoutedEventArgs e)
+        private void RefreshDrinksItems(object sender, RoutedEventArgs e)
         {
            DataAccess dataAccess = new DataAccess();
 
@@ -85,7 +85,7 @@ namespace Havana.DataBase
             
         }
 
-        private void RefreshSnackssIteams(object sender, RoutedEventArgs e)
+        private void RefreshSnackssItems(object sender, RoutedEventArgs e)
         {
             DataAccess dataAccess = new DataAccess();
             List<Snack> snacks = dataAccess.GetSnacks();

@@ -25,7 +25,7 @@ namespace Library.Models.Classes
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string Request = "select * from dbo.Drink";
+                string Request = "select id, name, cost, volume from dbo.Drink";
                 SqlCommand cmd = new SqlCommand(Request, cnn);
                 SqlDataReader Reader = cmd.ExecuteReader();
                 if (Reader.HasRows)
@@ -42,21 +42,20 @@ namespace Library.Models.Classes
             return drinks;
         }
 
-        public List<Snack> GetSnacks(int id)
+        public List<Snack> GetSnacks()
         {
             List<Snack> snacks = new List<Snack>();
             using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string request = "SELECT id, name, cost, weigth FROM dbo.Snack WHERE id = @id";
+                string request = "SELECT id, name, cost , weigth FROM dbo.Snack";
                 SqlCommand cmd = new SqlCommand(request, cnn);
-                cmd.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDouble(3));
+                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1) ,reader.GetDecimal(2), reader.GetDouble(3));
                         snacks.Add(snack);
                     }
                 }

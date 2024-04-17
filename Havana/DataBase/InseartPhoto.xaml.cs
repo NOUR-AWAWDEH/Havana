@@ -23,34 +23,7 @@ namespace Havana.DataBase
     {
         public InseartPhoto()
         {
-            InitializeComponent();
-        }
-
-        private void InseartPhotoButt(object sender, RoutedEventArgs e)
-        {
-            if (FilePathTexBox.Text != null && PhotoNameTexBox.Text != null && IDTexBox.Text != null)
-            {
-                DataAccess dataAccess = new DataAccess();
-                string filePath = FilePathTexBox.Text;
-                string photoName = PhotoNameTexBox.Text;
-                int id = Convert.ToInt32(IDTexBox.Text);
-                if (SnackPhoto.IsChecked == true)
-                {
-                    dataAccess.InseartSnackPhoto(filePath, photoName, id);
-                    StatusText.Text = "Snack Photo Insearted Sucsessfully!";
-                }
-                else 
-                {
-                    dataAccess.InseartDrinkPhoto(filePath, photoName, id);
-                    StatusText.Text = "Drink Photo Insearted Sucsessfully!";
-                }
-                
-            }
-            else 
-            {
-                StatusText.Text = "Please Fill the File Path  and the the Photo Name!!!";
-            }
-            
+            InitializeComponent();   
         }
 
         private void FilePathButt(object sender, RoutedEventArgs e)
@@ -69,10 +42,55 @@ namespace Havana.DataBase
             {
                 // Open document
                 string filename = dialog.FileName;
-                FilePathTexBox.Text = filename;
+                FilePathTextBox.Text = filename;
                 ImageSource imageSource = new BitmapImage(new Uri(filename));
                 InseartImage.Source = imageSource;
             }
+        }
+
+        private void InseartPhotoButt(object sender, RoutedEventArgs e)
+        {
+           // if (FilePathTexBox.Text != null)
+        //    {
+        //        DataAccess dataAccess = new DataAccess();
+        //        string filePath = FilePathTexBox.Text;
+        //        string photoName = PhotoNameTexBox.Text;
+        //        int id = Convert.ToInt32(IDTexBox.Text);
+        //        if (SnackPhoto.IsChecked == true)
+        //        {
+        //            dataAccess.InseartSnackPhoto(filePath, photoName, id);
+        //            StatusText.Text = "Snack Photo Insearted Sucsessfully!";
+        //        }
+        //        else 
+        //        {
+        //            dataAccess.InseartDrinkPhoto(filePath, photoName, id);
+        //            StatusText.Text = "Drink Photo Insearted Sucsessfully!";
+        //        }
+
+                //    }
+                //    else 
+                //    {
+                //        StatusText.Text = "Please Fill the File Path  and the the Photo Name!!!";
+                //    }
+        }
+
+        private void RefreshDrinksIteams(object sender, RoutedEventArgs e)
+        {
+           DataAccess dataAccess = new DataAccess();
+
+           List<Drink> drinks = dataAccess.GetDrinks();
+           IteamsList.ItemsSource = drinks;
+           IteamsList.DisplayMemberPath = "Name";
+
+            
+        }
+
+        private void RefreshSnackssIteams(object sender, RoutedEventArgs e)
+        {
+            DataAccess dataAccess = new DataAccess();
+            List<Snack> snacks = dataAccess.GetSnacks();
+            IteamsList.ItemsSource = snacks;
+            IteamsList.DisplayMemberPath = "Name";
         }
     }
 }

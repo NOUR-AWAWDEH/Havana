@@ -39,23 +39,23 @@ namespace Havana.Snaks
 
             //Grilled Chicken Sandwich Image
             int idSnack = 7;
-            ImageSource photo1 = dataAccess.GetPhotoSnack(idSnack);
+            ImageSource photo1 = dataAccess.GetSnackPhoto(idSnack);
             GrilledChickenSandwichImage.Source = photo1;
 
             
             //Grilled Chicken Sandwich Image
             idSnack = 10;
-            ImageSource photo2 = dataAccess.GetPhotoSnack(idSnack);
+            ImageSource photo2 = dataAccess.GetSnackPhoto(idSnack);
             HotDogSandwichImage.Source = photo2;
 
             //Grilled Chicken Sandwich Image
             idSnack = 9;
-            ImageSource photo3 = dataAccess.GetPhotoSnack(idSnack);
+            ImageSource photo3 = dataAccess.GetSnackPhoto(idSnack);
             GrilledMozzarellaSandwichImage.Source = photo3;
 
             //Cheese And Tomato Sandwich Image
             idSnack = 11;
-            ImageSource photo4 = dataAccess.GetPhotoSnack(idSnack);
+            ImageSource photo4 = dataAccess.GetSnackPhoto(idSnack);
             CheeseAndTomatoSandwichImage.Source = photo4;
 
         }

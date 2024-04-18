@@ -12,9 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Havana;
+using Havana.HavanaDataSetTableAdapters;
 using Library.Models.Classes;
+using Library.Models.Interfaces.Snacks;
 using Library.Models.Products.Snacks.Hot;
 using Microsoft.SqlServer.Server;
+using WPF_Library.Models.Classes;
 
 
 namespace Havana.Snaks
@@ -32,17 +35,38 @@ namespace Havana.Snaks
 
         }
 
+        
         private void ShowImages() 
         {
             
             DataAccess dataAccess = new DataAccess();
+
+            //List<Snack> snacks = dataAccess.GetSnacks();
+
+            //List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
+
+            //Image[] images = new Image[4];
+            //images[0] = GrilledChickenSandwichImage;
+            //images[1] = GrilledMozzarellaSandwichImage;
+            //images[2] = HotDogSandwichImage;
+            //images[3] = CheeseAndTomatoSandwichImage;
+
+            ////int startPos = 7;
+            ////int endPos = 11;
+
+            ////for (int i = startPos; i < endPos; i++)
+            ////{
+            ////    images[i - startPos].Source = dataAccess.GetSnackPhoto(snacks[i].Id);
+            ////}
+
+
 
             //Grilled Chicken Sandwich Image
             int idSnack = 7;
             ImageSource photo1 = dataAccess.GetSnackPhoto(idSnack);
             GrilledChickenSandwichImage.Source = photo1;
 
-            
+
             //Grilled Chicken Sandwich Image
             idSnack = 10;
             ImageSource photo2 = dataAccess.GetSnackPhoto(idSnack);
@@ -59,7 +83,7 @@ namespace Havana.Snaks
             CheeseAndTomatoSandwichImage.Source = photo4;
 
         }
-        
+
 
         private void BackToOrder(object sender, RoutedEventArgs e)
         {

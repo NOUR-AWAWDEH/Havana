@@ -56,6 +56,7 @@
     <Compile Include="Models\Classes\Product.cs" />
     <Compile Include="Models\Classes\ReportGenerator.cs" />
     <Compile Include="Models\Classes\Snack.cs" />
+    <Compile Include="Models\Classes\SnackPhoto.cs" />
     <Compile Include="Models\Interfaces\IDrinks\ICoffee.cs" />
     <Compile Include="Models\Interfaces\ISnacks\ICold.cs" />
     <Compile Include="Models\Interfaces\ISnacks\IHot.cs" />

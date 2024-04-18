@@ -23,7 +23,13 @@ namespace Havana.DataBase
     {
         public InseartPhoto()
         {
-            InitializeComponent();   
+            InitializeComponent();
+            ClearStatuseTex();
+        }
+
+        private void ClearStatuseTex() 
+        {
+            StatusText.Text = null;
         }
 
         private void FilePathButt(object sender, RoutedEventArgs e)
@@ -86,9 +92,9 @@ namespace Havana.DataBase
         }
 
 
-
         private void InseartPhotoButt(object sender, RoutedEventArgs e)
         {
+            
             if (FilePathTextBox.Text != null && IteamsList.SelectedItem != null)
             {
                 DataAccess dataAccess = new DataAccess();
@@ -110,7 +116,7 @@ namespace Havana.DataBase
             }
             else
             {
-                StatusText.Text = "Please Fill t!!!";
+                StatusText.Text = "Please Fill DATA!!!";
             }
         }
 
@@ -142,7 +148,7 @@ namespace Havana.DataBase
 
                 Snack selectedSnack = (Snack)IteamsList.SelectedValue;
                 string str = selectedSnack.Name;
-                StatusText.Text = str;
+               
                 return str;
             }
             return null;

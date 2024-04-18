@@ -11,6 +11,8 @@ using System.Data;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using WPF_Library.Models.Classes;
+using System.Collections;
 
 namespace Library.Models.Classes
 {
@@ -211,8 +213,6 @@ namespace Library.Models.Classes
 
         }
 
-
-
         public ImageSource GetDrinkPhoto(int idDrink)
         {
             ImageSource imageSource = null;
@@ -256,12 +256,12 @@ namespace Library.Models.Classes
             {
                 connection.Open();
 
-                
-                string query = "SELECT photo FROM SnackPhotos WHERE id_Snack = @idSnack";
+
+                string query = "SELECT photo FROM SnackPhotos WHERE id_Snack = @id_Snack";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    
-                    command.Parameters.AddWithValue("@idSnack", idSnack);
+
+                    command.Parameters.AddWithValue("@id_Snack", idSnack);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -284,5 +284,33 @@ namespace Library.Models.Classes
 
             return imageSource;
         }
+
+        public List<SnackPhoto> GetSnackPhotoInfo() 
+        {
+            List <SnackPhoto> photosInfo = new List<SnackPhoto>();    
+            
+            using (SqlConnection connection = new SqlConnection(cnnString)) 
+            {
+                connection.Open();
+                string query = "select SP.id, Snack.id, Snack.name, Snack.cost, Snack.weigth from SnackPhotos SP inner join Snack on Sp.id_Snack = Snack.id";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                if (reader.HasRows)
+                {
+                    while (reader.Read()) 
+                    {
+                        SnackPhoto photoSnack = new SnackPhoto(reader.GetInt32(0),
+                            new Snack(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(photoSnack);
+                    }   
+                          
+                }  
+                
+            }
+            return photosInfo;
+        }
+
     }
 }

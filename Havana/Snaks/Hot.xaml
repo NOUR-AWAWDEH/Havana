@@ -8,31 +8,22 @@
         Title="Hot" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#FFCAE2A8">
-        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="28,372,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
-
-        <Button x:Name="AddGrilledChicken" Content="Add" HorizontalAlignment="Left" Height="31" Margin="111,108,0,0" VerticalAlignment="Top" Width="41" Background="#FF344C0E" FontWeight="Bold" Foreground="White" Click="AddGrilledChickenButt"/>
-
-        <Image x:Name="GrilledChickenSandwichImage" HorizontalAlignment="Left" Height="102" Margin="157,76,0,0" VerticalAlignment="Top" Width="80"/>
         
-        <Label Content="Grilled Chicken Sandwich" HorizontalAlignment="Left" Height="42" Margin="150,32,0,0" VerticalAlignment="Top" Width="227" FontWeight="Bold" Background="#FFCAE2A8" FontSize="18" Foreground="#FF344C0E"/>
+        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="55,369,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="AddButt1" Content="Add" HorizontalAlignment="Left" Height="32" Margin="138,92,0,0" VerticalAlignment="Top" Width="41" Background="#FF344C0E" FontWeight="Bold" Foreground="White" Click="AddButt" Tag="1"/>
+        <Button x:Name="AddButt2" Content="Add" HorizontalAlignment="Left" Height="32" Margin="529,92,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="2"/>
+        <Button x:Name="AddButt3" Content="Add" HorizontalAlignment="Left" Height="31" Margin="138,286,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="3"/>
+        <Button x:Name="AddButt4" Content="Add" HorizontalAlignment="Left" Height="30" Margin="537,286,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="4"/>
+
+        <TextBlock x:Name="TextLable1" HorizontalAlignment="Left" Margin="138,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="250" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="TextLable2" HorizontalAlignment="Left" Margin="529,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="216" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
+        <TextBlock x:Name="TextLable3" HorizontalAlignment="Left" Margin="138,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="208" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="TextLable4" HorizontalAlignment="Left" Margin="537,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="208" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
         
-        <Label Content="Grilled Mozzarella Sandwich" HorizontalAlignment="Left" Height="42" Margin="157,0,0,0" VerticalAlignment="Center" Width="251" FontWeight="Bold" Background="#FFCAE2A8" FontSize="18" Foreground="#FF344C0E"/>
-
-        <Image x:Name="HotDogSandwichImage" HorizontalAlignment="Left" Height="94" Margin="556,65,0,0" VerticalAlignment="Top" Width="161" />
-        
-        <Label Content="Hot Dog Sandwich" HorizontalAlignment="Left" Height="42" Margin="550,23,0,0" VerticalAlignment="Top" Width="227" FontWeight="Bold" Background="#FFCAE2A8" FontSize="18" Foreground="#FF344C0E"/>
-        
-        <Label Content="Cheese and tomato Sandwich" HorizontalAlignment="Left" Height="42" Margin="496,0,0,0" VerticalAlignment="Center" Width="262" FontWeight="Bold" Background="#FFCAE2A8" FontSize="18" Foreground="#FF344C0E"/>
-
-        <Button x:Name="AddHotDog" Content="Add" HorizontalAlignment="Left" Height="32" Margin="510,95,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddHotDogButt"/>
-
-        <Image x:Name="GrilledMozzarellaSandwichImage"  HorizontalAlignment="Left" Height="103" Margin="157,238,0,0" VerticalAlignment="Top" Width="82" />
-
-        <Button x:Name="AddGrilledMozzarella" Content="Add" HorizontalAlignment="Left" Height="31" Margin="111,274,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" FontWeight="Bold" Foreground="White" Click="AddGrilledMozzarellaButt" />
-
-        <Image x:Name="CheeseAndTomatoSandwichImage" HorizontalAlignment="Left" Height="109" Margin="556,250,0,0" VerticalAlignment="Top" Width="111" />
-
-        <Button x:Name="AddChesseAndTomato" Content="Add" HorizontalAlignment="Left" Height="30" Margin="510,289,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddChesseAndTomatoButt"/>
+        <Image x:Name="Image1" HorizontalAlignment="Left" Height="100" Margin="192,92,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image3" HorizontalAlignment="Left" Height="100" Margin="192,286,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image2" HorizontalAlignment="Left" Height="100" Margin="590,92,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image4" HorizontalAlignment="Left" Height="100" Margin="590,286,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.251,0.53"/>
 
     </Grid>
 </Window>

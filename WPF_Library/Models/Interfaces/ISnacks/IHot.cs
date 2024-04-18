@@ -8,5 +8,6 @@ namespace Library.Models.Interfaces.Snacks
 {
     public interface IHot
     {
+        
     }
 }

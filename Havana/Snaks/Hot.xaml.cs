@@ -31,57 +31,42 @@ namespace Havana.Snaks
         public Hot()
         {
             InitializeComponent();
-            ShowImages();
+            
+            ShowInfo();
 
         }
 
-        
-        private void ShowImages() 
+
+        private void ShowInfo()
         {
-            
             DataAccess dataAccess = new DataAccess();
+            List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
 
-            //List<Snack> snacks = dataAccess.GetSnacks();
+            Image[] images = new Image[4];
+            for (int i = 0; i < 4; i++)
+            {
+                string imageName = "Image" + (i + 1);
+                Image image = (Image)FindName(imageName);
+                if (image != null)
+                {
+                    images[i] = image;
+                }
+            }
+           
+            int endPos = Math.Min(photos.Count, images.Length);
 
-            //List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
+            for (int i = 0; i < endPos; i++)
+            {
+                int snackId = photos[i].Snack.Id;
+                images[i].Source = dataAccess.GetSnackPhoto(snackId);
 
-            //Image[] images = new Image[4];
-            //images[0] = GrilledChickenSandwichImage;
-            //images[1] = GrilledMozzarellaSandwichImage;
-            //images[2] = HotDogSandwichImage;
-            //images[3] = CheeseAndTomatoSandwichImage;
-
-            ////int startPos = 7;
-            ////int endPos = 11;
-
-            ////for (int i = startPos; i < endPos; i++)
-            ////{
-            ////    images[i - startPos].Source = dataAccess.GetSnackPhoto(snacks[i].Id);
-            ////}
-
-
-
-            //Grilled Chicken Sandwich Image
-            int idSnack = 7;
-            ImageSource photo1 = dataAccess.GetSnackPhoto(idSnack);
-            GrilledChickenSandwichImage.Source = photo1;
-
-
-            //Grilled Chicken Sandwich Image
-            idSnack = 10;
-            ImageSource photo2 = dataAccess.GetSnackPhoto(idSnack);
-            HotDogSandwichImage.Source = photo2;
-
-            //Grilled Chicken Sandwich Image
-            idSnack = 9;
-            ImageSource photo3 = dataAccess.GetSnackPhoto(idSnack);
-            GrilledMozzarellaSandwichImage.Source = photo3;
-
-            //Cheese And Tomato Sandwich Image
-            idSnack = 11;
-            ImageSource photo4 = dataAccess.GetSnackPhoto(idSnack);
-            CheeseAndTomatoSandwichImage.Source = photo4;
-
+                string textBlockName = "TextLable" + (i + 1);
+                TextBlock textBlock = (TextBlock)FindName(textBlockName);
+                if (textBlock != null)
+                {
+                    textBlock.Text = photos[i].Snack.Name;
+                }
+            }
         }
 
 
@@ -92,36 +77,22 @@ namespace Havana.Snaks
             this.Close();
         }
 
-        private void AddGrilledChickenButt(object sender, RoutedEventArgs e)
+        private void AddButt(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            int buttonIndex = int.Parse(button.Tag.ToString());
 
-            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-            newOrderWindow.AddSnackItem(7);
+            DataAccess dataAccess = new DataAccess();
+            List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
+            SnackPhoto snackPhoto = photos.ElementAtOrDefault(buttonIndex - 1);
 
+            if (snackPhoto != null)
+            {
+                NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+                newOrderWindow?.AddSnackItem(snackPhoto.Snack.Id);
+            }
         }
 
-        private void AddGrilledMozzarellaButt(object sender, RoutedEventArgs e)
-        {
-            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-            newOrderWindow.AddSnackItem(9);
-
-        }
-
-        private void AddChesseAndTomatoButt(object sender, RoutedEventArgs e)
-        {
-            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-            newOrderWindow.AddSnackItem(11);
-        }
-
-        private void AddHotDogButt(object sender, RoutedEventArgs e)
-        {
-            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-            newOrderWindow.AddSnackItem(10);
-        }
-       
-        
-            
-        
 
     }
 }

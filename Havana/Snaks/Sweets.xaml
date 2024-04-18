@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Sweets" Height="450" Width="800" 
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button Content="Back" HorizontalAlignment="Left" Height="35" Margin="38,365,0,0" VerticalAlignment="Top" Width="108" Click="BackToOrder" Visibility="Visible"/>
+    <Grid Background="#FFCAE2A8">
+        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="55,369,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
     </Grid>
 </Window>

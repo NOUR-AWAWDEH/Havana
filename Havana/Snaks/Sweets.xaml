@@ -5,10 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Snaks"
         mc:Ignorable="d"
-        Title="Sweets" Height="450" Width="800" 
+        Title="Sweets" Height="700" Width="800" 
         WindowStartupLocation="CenterScreen">
     <Grid Background="#FFCAE2A8">
-        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="55,369,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
+        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="44,605,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
+        <Button x:Name="AddButt1" Content="Add" HorizontalAlignment="Left" Height="32" Margin="138,92,0,0" VerticalAlignment="Top" Width="41" Background="#FF344C0E" FontWeight="Bold" Foreground="White" Click="AddButt" Tag="1"/>
+        <Button x:Name="AddButt2" Content="Add" HorizontalAlignment="Left" Height="32" Margin="529,92,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="2"/>
+        <Button x:Name="AddButt3" Content="Add" HorizontalAlignment="Left" Height="31" Margin="138,286,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="3"/>
+        <Button x:Name="AddButt4" Content="Add" HorizontalAlignment="Left" Height="30" Margin="537,286,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="4"/>
+        <Button x:Name="AddButt5" Content="Add" HorizontalAlignment="Left" Height="31" Margin="138,488,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="5"/>
+        <Button x:Name="AddButt6" Content="Add" HorizontalAlignment="Left" Height="30" Margin="537,488,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="6"/>
+
+        <TextBlock x:Name="TextLable1" HorizontalAlignment="Left" Margin="138,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="262" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="TextLable2" HorizontalAlignment="Left" Margin="529,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="248" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
+        <TextBlock x:Name="TextLable3" HorizontalAlignment="Left" Margin="138,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="262" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="TextLable4" HorizontalAlignment="Left" Margin="537,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="240" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
+        <TextBlock x:Name="TextLable5" HorizontalAlignment="Left" Margin="138,438,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="262" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="TextLable6" HorizontalAlignment="Left" Margin="537,438,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="240" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
+
+        <Image x:Name="Image1" HorizontalAlignment="Left" Height="100" Margin="192,92,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image2" HorizontalAlignment="Left" Height="100" Margin="590,92,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image3" HorizontalAlignment="Left" Height="100" Margin="192,286,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image4" HorizontalAlignment="Left" Height="100" Margin="590,286,0,0" VerticalAlignment="Top" Width="100" />
+        <Image x:Name="Image5" HorizontalAlignment="Left" Height="100" Margin="192,488,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="Image6" HorizontalAlignment="Left" Height="100" Margin="590,488,0,0" VerticalAlignment="Top" Width="100" />
 
     </Grid>
 </Window>

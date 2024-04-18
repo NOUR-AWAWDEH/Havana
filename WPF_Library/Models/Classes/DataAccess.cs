@@ -285,14 +285,14 @@ namespace Library.Models.Classes
             return imageSource;
         }
 
-        public List<SnackPhoto> GetSnackPhotoInfo() 
+        public List<SnackPhoto> GetHotSnackPhotos() 
         {
             List <SnackPhoto> photosInfo = new List<SnackPhoto>();    
             
             using (SqlConnection connection = new SqlConnection(cnnString)) 
             {
                 connection.Open();
-                string query = "select SP.id, Snack.id, Snack.name, Snack.cost, Snack.weigth from SnackPhotos SP inner join Snack on Sp.id_Snack = Snack.id";
+                string query = "select SP.id, Snack.id, Snack.name, Snack.cost, Snack.weigth from SnackPhotos SP inner join Snack on Sp.id_Snack = Snack.id Where Snack.id_type_sn =1";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader reader = cmd.ExecuteReader();
                 
@@ -311,6 +311,165 @@ namespace Library.Models.Classes
             }
             return photosInfo;
         }
+        public List<SnackPhoto> GetColdSnackPhotos()
+        {
+            List<SnackPhoto> photosInfo = new List<SnackPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select SP.id, Snack.id, Snack.name, Snack.cost, Snack.weigth from SnackPhotos SP inner join Snack on Sp.id_Snack = Snack.id Where Snack.id_type_sn =2";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SnackPhoto photoSnack = new SnackPhoto(reader.GetInt32(0),
+                            new Snack(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(photoSnack);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
+        public List<SnackPhoto> GetSweetSnackPhotos()
+        {
+            List<SnackPhoto> photosInfo = new List<SnackPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select SP.id, Snack.id, Snack.name, Snack.cost, Snack.weigth from SnackPhotos SP inner join Snack on Sp.id_Snack = Snack.id Where Snack.id_type_sn =3";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SnackPhoto photoSnack = new SnackPhoto(reader.GetInt32(0),
+                            new Snack(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(photoSnack);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
         
+        public List<DrinkPhoto> GetTeaDrinkPhotos()
+        {
+            List<DrinkPhoto> photosInfo = new List<DrinkPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select DP.id, Drink.id, Drink.name, Drink.cost, Drink.volume from DrinkPhotos DP inner join Drink on Dp.id_Drink = Drink.id Where Drink.id_type_dr = 5";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        DrinkPhoto drinkPhoto = new DrinkPhoto(reader.GetInt32(0),
+                            new Drink(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(drinkPhoto);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
+        public List<DrinkPhoto> GetCoffeeDrinkPhotos()
+        {
+            List<DrinkPhoto> photosInfo = new List<DrinkPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select DP.id, Drink.id, Drink.name, Drink.cost, Drink.volume from DrinkPhotos DP inner join Drink on Dp.id_Drink = Drink.id Where Drink.id_type_dr = 6";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        DrinkPhoto drinkPhoto = new DrinkPhoto(reader.GetInt32(0),
+                            new Drink(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(drinkPhoto);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
+        public List<DrinkPhoto> GetJuiceDrinkPhotos()
+        {
+            List<DrinkPhoto> photosInfo = new List<DrinkPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select DP.id, Drink.id, Drink.name, Drink.cost, Drink.volume from DrinkPhotos DP inner join Drink on Dp.id_Drink = Drink.id Where Drink.id_type_dr = 7";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        DrinkPhoto drinkPhoto = new DrinkPhoto(reader.GetInt32(0),
+                            new Drink(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(drinkPhoto);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
+        public List<DrinkPhoto> GetWaterDrinkPhotos()
+        {
+            List<DrinkPhoto> photosInfo = new List<DrinkPhoto>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "select DP.id, Drink.id, Drink.name, Drink.cost, Drink.volume from DrinkPhotos DP inner join Drink on Dp.id_Drink = Drink.id Where Drink.id_type_dr = 6";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        DrinkPhoto drinkPhoto = new DrinkPhoto(reader.GetInt32(0),
+                            new Drink(reader.GetInt32(1), reader.GetString(2), reader.GetDecimal(3), reader.GetDouble(4)));
+
+                        photosInfo.Add(drinkPhoto);
+                    }
+
+                }
+
+            }
+            return photosInfo;
+        }
+        
+
+    
     }
 }

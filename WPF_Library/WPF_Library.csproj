@@ -52,6 +52,7 @@
     <Compile Include="Models\Classes\Buyer.cs" />
     <Compile Include="Models\Classes\DataAccess.cs" />
     <Compile Include="Models\Classes\Drink.cs" />
+    <Compile Include="Models\Classes\DrinkPhoto.cs" />
     <Compile Include="Models\Classes\Orders.cs" />
     <Compile Include="Models\Classes\Product.cs" />
     <Compile Include="Models\Classes\ReportGenerator.cs" />

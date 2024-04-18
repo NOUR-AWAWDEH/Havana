@@ -27,20 +27,17 @@ namespace Havana.Snaks
     /// </summary>
     public partial class Hot : Window
     {
-        public  static bool isAdd { get; set; }
         public Hot()
         {
             InitializeComponent();
-            
             ShowInfo();
 
         }
 
-
         private void ShowInfo()
         {
             DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
+            List<SnackPhoto> photos = dataAccess.GetHotSnackPhotos();
 
             Image[] images = new Image[4];
             for (int i = 0; i < 4; i++)
@@ -69,7 +66,6 @@ namespace Havana.Snaks
             }
         }
 
-
         private void BackToOrder(object sender, RoutedEventArgs e)
         {
             NewOrderWindow newOrderWindow = new NewOrderWindow();
@@ -83,7 +79,7 @@ namespace Havana.Snaks
             int buttonIndex = int.Parse(button.Tag.ToString());
 
             DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetSnackPhotoInfo();
+            List<SnackPhoto> photos = dataAccess.GetHotSnackPhotos();
             SnackPhoto snackPhoto = photos.ElementAtOrDefault(buttonIndex - 1);
 
             if (snackPhoto != null)
@@ -92,7 +88,6 @@ namespace Havana.Snaks
                 newOrderWindow?.AddSnackItem(snackPhoto.Snack.Id);
             }
         }
-
 
     }
 }

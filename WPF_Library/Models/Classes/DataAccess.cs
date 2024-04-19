@@ -285,57 +285,54 @@ namespace Library.Models.Classes
             return imageSource;
         }
 
+        
+
         public List<SnackPhoto> GetAllSnacksPhotos()
         {
+            ImageSource imageSource = null;
             List<SnackPhoto> photosInfo = new List<SnackPhoto>();
 
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
                 string query = "SELECT SP.id, SP.photo, Snack.id, Snack.name, Snack.cost, Snack.weigth FROM SnackPhotos SP INNER JOIN Snack ON SP.id_Snack = Snack.id";
-                using (SqlCommand cmd = new SqlCommand(query, connection))
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    int photoId = reader.GetInt32(0);
+
+                    byte[] photoData = (byte[])reader["photo"];
+
+
+                    using (MemoryStream stream = new MemoryStream(photoData))
                     {
-                        int photoIdOrdinal = reader.GetOrdinal("id");
-                        int photoDataOrdinal = reader.GetOrdinal("photo");
-                        int snackIdOrdinal = reader.GetOrdinal("id");
-                        int snackNameOrdinal = reader.GetOrdinal("name");
-                        int snackCostOrdinal = reader.GetOrdinal("cost");
-                        int snackWeightOrdinal = reader.GetOrdinal("weigth");
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = stream;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
 
-                        while (reader.Read())
-                        {
-                            int photoId = reader.GetInt32(photoIdOrdinal);
-
-                            byte[] photoData = (byte[])reader[photoDataOrdinal];
-
-                            BitmapImage bitmapImage = new BitmapImage();
-                            using (MemoryStream stream = new MemoryStream(photoData))
-                            {
-                                bitmapImage.BeginInit();
-                                bitmapImage.StreamSource = stream;
-                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                                bitmapImage.EndInit();
-                            }
-
-                            int snackId = reader.GetInt32(snackIdOrdinal);
-                            string snackName = reader.GetString(snackNameOrdinal);
-                            decimal snackCost = reader.GetDecimal(snackCostOrdinal);
-                            double snackWeight = reader.GetDouble(snackWeightOrdinal);
-
-                            Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
-                            SnackPhoto photoSnack = new SnackPhoto(photoId, bitmapImage, snack);
-                            photosInfo.Add(photoSnack);
-                        }
+                        imageSource = bitmapImage;
                     }
+
+
+                    int snackId = reader.GetInt32(2);
+                    string snackName = reader.GetString(3);
+                    decimal snackCost = reader.GetDecimal(4);
+                    double snackWeight = reader.GetDouble(5);
+
+                    Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
+                    SnackPhoto photoSnack = new SnackPhoto(photoId,imageSource, snack);
+                    photosInfo.Add(photoSnack);
+
                 }
-                connection.Close();
             }
-            
+
             return photosInfo;
         }
 
-
+       
     }
 }

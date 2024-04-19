@@ -55,15 +55,12 @@ namespace Havana.Snaks
                 TextBlock textBlock = (TextBlock)FindName($"TextLable{i  + 1}");
                 image.Source = null;
                 textBlock.Text = "";
-               Button button = (Button)FindName($"AddButt{i + 1}");
-                if (textBlock.Text == "") 
-                {
-                    button.Visibility = Visibility.Hidden;
-                }
+                Button button = (Button)FindName($"AddButt{i + 1}");
+                button.Visibility = Visibility.Hidden;
 
             }
 
-            //Fill Data
+            //Fill Datat
             for (int i = startPos; i < endPos; i++)
             {
                 Image image = (Image)FindName($"Image{i - startPos + 1}");
@@ -72,22 +69,20 @@ namespace Havana.Snaks
                     image.Source = photos[i].Image;
                 }
                 TextBlock textBlock = (TextBlock)FindName($"TextLable{i - startPos + 1}");
+                Button button = (Button)FindName($"AddButt{i - startPos + 1}");
                 if (textBlock != null)
                 {
                     textBlock.Text = photos[i].Snack.Name;
-                }
-
-                Button button = (Button)FindName($"AddButt{i - startPos + 1}");
-                if (textBlock.Text != "")
-                {
                     button.Visibility = Visibility.Visible;
                 }
+                
+               
 
             }
 
         }
 
-        
+ 
 
         private void Exit(object sender, RoutedEventArgs e)
         {
@@ -98,7 +93,7 @@ namespace Havana.Snaks
 
         private void AddButt(object sender, RoutedEventArgs e)
         {
-            
+           
         }
 
         private void NextPage(object sender, RoutedEventArgs e)

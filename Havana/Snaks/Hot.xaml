@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Snaks"
         mc:Ignorable="d"
-        Title="Hot" Height="450" Width="800"
+        Title="Hot" Height="550" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#FFCAE2A8">
-        
-        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="55,369,0,0" VerticalAlignment="Top" Width="63" Click="BackToOrder" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
+        <Button Content="Exit" HorizontalAlignment="Left" Height="33" Margin="20,476,0,0" VerticalAlignment="Top" Width="81" Click="Exit" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
+        <Button Content="Back" HorizontalAlignment="Left" Height="21" Margin="210,461,0,0" VerticalAlignment="Top" Width="64" Click="Back" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+
         <Button x:Name="AddButt1" Content="Add" HorizontalAlignment="Left" Height="32" Margin="138,92,0,0" VerticalAlignment="Top" Width="41" Background="#FF344C0E" FontWeight="Bold" Foreground="White" Click="AddButt" Tag="1"/>
         <Button x:Name="AddButt2" Content="Add" HorizontalAlignment="Left" Height="32" Margin="529,92,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="2"/>
         <Button x:Name="AddButt3" Content="Add" HorizontalAlignment="Left" Height="31" Margin="138,286,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="8.358,0.679" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="AddButt" Tag="3"/>
@@ -19,11 +22,12 @@
         <TextBlock x:Name="TextLable2" HorizontalAlignment="Left" Margin="529,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="216" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
         <TextBlock x:Name="TextLable3" HorizontalAlignment="Left" Margin="138,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="208" Foreground="#FF344C0E" FontWeight="Bold" FontSize="14"/>
         <TextBlock x:Name="TextLable4" HorizontalAlignment="Left" Margin="537,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="208" FontWeight="Bold" Foreground="#FF344C0E" FontSize="14"/>
-        
+
         <Image x:Name="Image1" HorizontalAlignment="Left" Height="100" Margin="192,92,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="Image3" HorizontalAlignment="Left" Height="100" Margin="192,286,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="Image2" HorizontalAlignment="Left" Height="100" Margin="590,92,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="Image4" HorizontalAlignment="Left" Height="100" Margin="590,286,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.251,0.53"/>
 
+        <Button Content="Netx" HorizontalAlignment="Left" Height="21" Margin="574,461,0,0" VerticalAlignment="Top" Width="63" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="NextPage" />
     </Grid>
 </Window>

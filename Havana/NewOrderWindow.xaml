@@ -31,6 +31,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
                 <DataGridTextColumn Header="Weight" Binding="{Binding Weigth}" />
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" />
                   
             </DataGrid.Columns>
         </DataGrid>

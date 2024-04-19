@@ -44,7 +44,7 @@
 
         <Image HorizontalAlignment="Left" Height="619" Margin="64,54,0,0" VerticalAlignment="Top" Width="684" RenderTransformOrigin="0.517,0.514" Source="/HavanaFullLogo.jpg"/>
 
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,556,0,0" VerticalAlignment="Top" Width="116" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold" RenderTransformOrigin="0.708,1.009">
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Height="42" Margin="697,556,0,0" VerticalAlignment="Top" Width="116" Visibility="Visible" Click="CloseButt" Foreground="White" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>

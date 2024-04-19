@@ -32,6 +32,7 @@ namespace Havana
         private void BackToHavana(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
             if (mainWindow != null)
             {
                 this.Visibility = Visibility.Hidden;
@@ -50,14 +51,13 @@ namespace Havana
             }
         }
 
-        public void AddSnackItem(int id) 
+        public void AddSnackItem(int id)
         {
             DataAccess dataAccess = new DataAccess();
             NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
             Snack snack = dataAccess.GetSnack(id);
             newOrderWindow.OrderDataGrid.Items.Add(snack);
             newOrderWindow.Show();
-            
         }
 
         public void OpenWindow(Type windowType)

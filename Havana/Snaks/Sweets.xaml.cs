@@ -30,7 +30,7 @@ namespace Havana.Snaks
         private void ShowInfo()
         {
             DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetSweetSnackPhotos();
+            List<SnackPhoto> photos = dataAccess.GetAllSnacksPhotos();
 
             Image[] images = new Image[6];
             for (int i = 0; i < 6; i++)
@@ -65,7 +65,7 @@ namespace Havana.Snaks
             int buttonIndex = int.Parse(button.Tag.ToString());
 
             DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetSweetSnackPhotos();
+            List<SnackPhoto> photos = dataAccess.GetAllSnacksPhotos();
             SnackPhoto snackPhoto = photos.ElementAtOrDefault(buttonIndex - 1);
 
             if (snackPhoto != null)

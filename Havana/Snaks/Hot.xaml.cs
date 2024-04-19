@@ -1,72 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Havana;
 using Havana.HavanaDataSetTableAdapters;
 using Library.Models.Classes;
-using Library.Models.Interfaces.Snacks;
-using Library.Models.Products.Snacks.Hot;
-using Microsoft.SqlServer.Server;
 using WPF_Library.Models.Classes;
 
 
 namespace Havana.Snaks
 {
+    
     /// <summary>
     /// Interaction logic for Hot.xaml
     /// </summary>
     public partial class Hot : Window
     {
+        int currentPage = 0;
+        int sizePage = 4;
+        List<SnackPhoto> photos;
+        DataAccess dataAccess = new DataAccess();
+
         public Hot()
         {
             InitializeComponent();
-            ShowInfo();
-
+            photos = dataAccess.GetAllSnacksPhotos();
+            ShowInfo(currentPage);
         }
 
-        private void ShowInfo()
+        private void ShowInfo(int page)
         {
-            DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetHotSnackPhotos();
+            
+           
+          //  Image[] images = new Image[4];
 
-            Image[] images = new Image[4];
+            
+            int startPos = sizePage * page;
+            
+            int endPos = startPos + sizePage;
+
+            if (endPos > photos.Count)
+            {
+                endPos = photos.Count;
+            }
+
+            // Delete Data
             for (int i = 0; i < 4; i++)
             {
-                string imageName = "Image" + (i + 1);
-                Image image = (Image)FindName(imageName);
+                Image image = (Image)FindName($"Image{i  + 1}");
+                TextBlock textBlock = (TextBlock)FindName($"TextLable{i  + 1}");
+                image.Source = null;
+                textBlock.Text = "";
+               Button button = (Button)FindName($"AddButt{i + 1}");
+                if (textBlock.Text == "") 
+                {
+                    button.Visibility = Visibility.Hidden;
+                }
+
+            }
+
+            //Fill Data
+            for (int i = startPos; i < endPos; i++)
+            {
+                Image image = (Image)FindName($"Image{i - startPos + 1}");
                 if (image != null)
                 {
-                    images[i] = image;
+                    image.Source = photos[i].Image;
                 }
-            }
-           
-            int endPos = Math.Min(photos.Count, images.Length);
-
-            for (int i = 0; i < endPos; i++)
-            {
-                int snackId = photos[i].Snack.Id;
-                images[i].Source = dataAccess.GetSnackPhoto(snackId);
-
-                string textBlockName = "TextLable" + (i + 1);
-                TextBlock textBlock = (TextBlock)FindName(textBlockName);
+                TextBlock textBlock = (TextBlock)FindName($"TextLable{i - startPos + 1}");
                 if (textBlock != null)
                 {
                     textBlock.Text = photos[i].Snack.Name;
                 }
+
+                Button button = (Button)FindName($"AddButt{i - startPos + 1}");
+                if (textBlock.Text != "")
+                {
+                    button.Visibility = Visibility.Visible;
+                }
+
             }
+
         }
 
-        private void BackToOrder(object sender, RoutedEventArgs e)
+        
+
+        private void Exit(object sender, RoutedEventArgs e)
         {
             NewOrderWindow newOrderWindow = new NewOrderWindow();
             newOrderWindow.BackToOrderWindow();
@@ -75,21 +98,27 @@ namespace Havana.Snaks
 
         private void AddButt(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            int buttonIndex = int.Parse(button.Tag.ToString());
-
-            DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetHotSnackPhotos();
-            SnackPhoto snackPhoto = photos.ElementAtOrDefault(buttonIndex - 1);
-
-            if (snackPhoto != null)
-            {
-                NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-                newOrderWindow?.AddSnackItem(snackPhoto.Snack.Id);
-            }
+            
         }
 
+        private void NextPage(object sender, RoutedEventArgs e)
+        {
+            currentPage++;
+            if (photos.Count < (currentPage * sizePage))
+            {
+                currentPage--;
+            }
+            ShowInfo(currentPage);
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            currentPage--;
+            if (currentPage < 0)
+            {
+                currentPage = 0;
+            }
+            ShowInfo(currentPage);
+        }
     }
 }
-
-

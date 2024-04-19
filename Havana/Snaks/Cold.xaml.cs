@@ -30,7 +30,7 @@ namespace Havana.Snaks
         private void ShowInfo() 
         {
             DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetColdSnackPhotos();
+            List<SnackPhoto> photos = dataAccess.GetAllSnacksPhotos();
 
             Image[] images = new Image[6];
             for (int i = 0; i < 6; i++)
@@ -61,18 +61,6 @@ namespace Havana.Snaks
 
         private void AddButt(object sender, RoutedEventArgs e) 
         {
-            Button button = (Button)sender;
-            int buttonIndex = int.Parse(button.Tag.ToString());
-
-            DataAccess dataAccess = new DataAccess();
-            List<SnackPhoto> photos = dataAccess.GetColdSnackPhotos();
-            SnackPhoto snackPhoto = photos.ElementAtOrDefault(buttonIndex - 1);
-
-            if (snackPhoto != null)
-            {
-                NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-                newOrderWindow?.AddSnackItem(snackPhoto.Snack.Id);
-            }
         }
 
         private void BackToOrder(object sender, RoutedEventArgs e)

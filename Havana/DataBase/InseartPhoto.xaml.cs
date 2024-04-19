@@ -143,15 +143,23 @@ namespace Havana.DataBase
 
         private string IteamsListSelectedItem()
         {
-            if (IteamsList.SelectedValue != null)
+            if (SnacksRadioButton.IsChecked == true)
             {
 
                 Snack selectedSnack = (Snack)IteamsList.SelectedValue;
                 string str = selectedSnack.Name;
-               
+
                 return str;
             }
-            return null;
+            else 
+            {
+                Drink selectedDrink = (Drink)IteamsList.SelectedValue;
+                string str = selectedDrink.Name;
+
+                return str;
+            }
+          
+            
         }
 
         

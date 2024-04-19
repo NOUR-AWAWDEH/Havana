@@ -76,14 +76,10 @@ namespace Havana.Snacks
                     textBlock.Text = photos[i].Snack.Name;
                     button.Visibility = Visibility.Visible;
                 }
-                
-               
-
+              
             }
 
         }
-
- 
 
         private void Exit(object sender, RoutedEventArgs e)
         {

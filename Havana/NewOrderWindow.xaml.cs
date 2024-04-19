@@ -78,24 +78,10 @@ namespace Havana
 
         private void TeaDrinksButt(object sender, RoutedEventArgs e)
         {
-            OpenWindow(typeof(Tea));
+            OpenWindow(typeof(DrinksItems));
         }
 
-        private void CoffeeDrinksButt(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(typeof(Coffee));
-        }
-
-        private void JuicesDrinksButt(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(typeof(Juices));
-        }
-
-        private void WaterDrinksButt(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(typeof(Water));
-        }
-
+        
         private void SearchButt(object sender, RoutedEventArgs e)
         {
             

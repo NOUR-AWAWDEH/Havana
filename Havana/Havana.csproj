@@ -70,17 +70,8 @@
     <Compile Include="Reports\ReportsWindow.xaml.cs">
       <DependentUpon>ReportsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Drinks\Coffee.xaml.cs">
-      <DependentUpon>Coffee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Drinks\Juices.xaml.cs">
-      <DependentUpon>Juices.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Drinks\Tea.xaml.cs">
-      <DependentUpon>Tea.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Drinks\Water.xaml.cs">
-      <DependentUpon>Water.xaml</DependentUpon>
+    <Compile Include="Drinks\DrinksItems.xaml.cs">
+      <DependentUpon>DrinksItems.xaml</DependentUpon>
     </Compile>
     <Page Include="DataBase\DataBaseInfo.xaml">
       <SubType>Designer</SubType>
@@ -117,19 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Drinks\Coffee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Drinks\Juices.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Drinks\Tea.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Drinks\Water.xaml">
+    <Page Include="Drinks\DrinksItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,9 +156,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WPF_Library\WPF_Library.csproj">
+    <ProjectReference Include="..\WPF_Library\Library.csproj">
       <Project>{54ec1b91-b017-4b7e-af03-67dc3339569d}</Project>
-      <Name>WPF_Library</Name>
+      <Name>Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

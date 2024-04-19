@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Havana.Drinks
 {
     /// <summary>
-    /// Interaction logic for Water.xaml
+    /// Interaction logic for Tea.xaml
     /// </summary>
-    public partial class Water : Window
+    public partial class DrinksItems : Window
     {
-        public Water()
+        public DrinksItems()
         {
             InitializeComponent();
         }

@@ -11,8 +11,9 @@ using System.Data;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using WPF_Library.Models.Classes;
+
 using System.Collections;
+using System.Reflection;
 
 namespace Library.Models.Classes
 {
@@ -285,7 +286,7 @@ namespace Library.Models.Classes
             return imageSource;
         }
 
-        
+
 
         public List<SnackPhoto> GetAllSnacksPhotos()
         {
@@ -324,7 +325,7 @@ namespace Library.Models.Classes
                     double snackWeight = reader.GetDouble(5);
 
                     Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
-                    SnackPhoto photoSnack = new SnackPhoto(photoId,imageSource, snack);
+                    SnackPhoto photoSnack = new SnackPhoto(photoId, imageSource, snack);
                     photosInfo.Add(photoSnack);
 
                 }
@@ -333,6 +334,6 @@ namespace Library.Models.Classes
             return photosInfo;
         }
 
-       
+
     }
 }

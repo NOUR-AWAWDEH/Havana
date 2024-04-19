@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_Library.Models.Classes
+namespace Library.Models.Classes
 {
     public class DrinkPhoto
     {

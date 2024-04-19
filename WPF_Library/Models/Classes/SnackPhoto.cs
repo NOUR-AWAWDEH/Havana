@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Media;
 
-namespace WPF_Library.Models.Classes
+namespace Library.Models.Classes
 {
     public class SnackPhoto
     {

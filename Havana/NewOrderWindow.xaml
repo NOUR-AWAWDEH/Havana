@@ -40,7 +40,7 @@
 
         <Label Content="Drinks :" HorizontalAlignment="Left" Height="54" Margin="271,426,0,0" VerticalAlignment="Top" Width="149" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" RenderTransformOrigin="1.107,0.445" Grid.Column="1"/>
 
-        <Button Content="Hot" HorizontalAlignment="Left" Margin="11,498,0,0" VerticalAlignment="Top" Height="39" Width="130"  Visibility="Visible" Foreground="White" FontWeight="Bold" Click="HotSnaksButt">
+        <Button Content="Snacks Items" HorizontalAlignment="Left" Margin="11,498,0,0" VerticalAlignment="Top" Height="39" Width="130"  Visibility="Visible" Foreground="White" FontWeight="Bold" Click="HotSnaksButt">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -49,7 +49,8 @@
             </Button.Background>
         </Button>
 
-        <Button Content="Cold" HorizontalAlignment="Left" Margin="11,553,0,0" VerticalAlignment="Top" Height="40" Width="130" Click="ColdSnaksButt" Visibility="Visible" Foreground="White" FontWeight="Bold">
+
+        <Button Content="Drinks Items" HorizontalAlignment="Left" Margin="280,485,0,0" VerticalAlignment="Top" Height="36" Width="140" Click="TeaDrinksButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -58,50 +59,7 @@
             </Button.Background>
         </Button>
 
-        <Button Content="Sweets" HorizontalAlignment="Left" Margin="11,618,0,0" VerticalAlignment="Top" Height="41" Width="130" Click="SweetsSnaksButt" Visibility="Visible" Foreground="White" FontWeight="Bold">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button Content="Tea" HorizontalAlignment="Left" Margin="280,485,0,0" VerticalAlignment="Top" Height="36" Width="140" Click="TeaDrinksButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button Content="Coffee" HorizontalAlignment="Left" Margin="280,535,0,0" VerticalAlignment="Top" Height="38" Width="140" Click="CoffeeDrinksButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button Content="Juices" HorizontalAlignment="Left" Margin="280,591,0,0" VerticalAlignment="Top" Height="36" Width="140" Click="JuicesDrinksButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button Content="Water" HorizontalAlignment="Left" Margin="280,643,0,0" VerticalAlignment="Top" Height="36" Width="140" Click="WaterDrinksButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
+   
 
         <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="26" Margin="14,41,0,0" VerticalAlignment="Top" Width="96"  Foreground="White" FontWeight="Bold"  Visibility="Visible" Click="SearchButt">
             <Button.Background>

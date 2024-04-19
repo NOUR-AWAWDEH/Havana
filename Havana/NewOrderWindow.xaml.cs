@@ -1,7 +1,4 @@
-﻿using Havana.Drinks;
-using Havana.Snaks;
-using Library.Models.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Havana.Drinks;
+using Havana.Snacks;
+using Library.Models.Classes;
+
 
 
 namespace Havana
@@ -69,19 +70,11 @@ namespace Havana
        
         private void HotSnaksButt(object sender, RoutedEventArgs e)
         {
-            OpenWindow(typeof(Hot));
+            OpenWindow(typeof(SnacksItems));
            
         }
 
-        private void ColdSnaksButt(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(typeof(Cold));
-        }
-
-        private void SweetsSnaksButt(object sender, RoutedEventArgs e)
-        {
-            OpenWindow(typeof(Sweets));
-        }
+       
 
         private void TeaDrinksButt(object sender, RoutedEventArgs e)
         {

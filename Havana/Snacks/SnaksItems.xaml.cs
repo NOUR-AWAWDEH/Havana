@@ -9,23 +9,24 @@ using System.Windows.Media.Imaging;
 using Havana;
 using Havana.HavanaDataSetTableAdapters;
 using Library.Models.Classes;
-using WPF_Library.Models.Classes;
 
 
-namespace Havana.Snaks
+
+
+namespace Havana.Snacks
 {
     
     /// <summary>
     /// Interaction logic for Hot.xaml
     /// </summary>
-    public partial class Hot : Window
+    public partial class SnacksItems : Window
     {
         int currentPage = 0;
         int sizePage = 4;
         List<SnackPhoto> photos;
         DataAccess dataAccess = new DataAccess();
 
-        public Hot()
+        public SnacksItems()
         {
             InitializeComponent();
             photos = dataAccess.GetAllSnacksPhotos();

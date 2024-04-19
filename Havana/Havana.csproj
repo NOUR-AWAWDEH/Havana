@@ -90,15 +90,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Snaks\Cold.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Snaks\Hot.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Snaks\Sweets.xaml">
+    <Page Include="Snacks\SnaksItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,14 +102,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Snaks\Cold.xaml.cs">
-      <DependentUpon>Cold.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Snaks\Hot.xaml.cs">
-      <DependentUpon>Hot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Snaks\Sweets.xaml.cs">
-      <DependentUpon>Sweets.xaml</DependentUpon>
+    <Compile Include="Snacks\SnaksItems.xaml.cs">
+      <DependentUpon>SnaksItems.xaml</DependentUpon>
     </Compile>
     <Compile Include="HavanaRestaurant.xaml.cs">
       <DependentUpon>HavanaRestaurant.xaml</DependentUpon>

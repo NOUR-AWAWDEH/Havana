@@ -41,15 +41,15 @@ namespace Havana
             }
         }
 
-        public void BackToOrderWindow()
+        public void BackToOrderWindow(NewOrderWindow newOrderWindow)
         {
-            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
             if (newOrderWindow != null)
-            {
-               
+            { 
                 this.Visibility = Visibility.Hidden;
                 newOrderWindow.Visibility = Visibility.Visible;
+
             }
+           
         }
 
         public void AddSnackItem(int id)

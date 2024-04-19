@@ -5,10 +5,11 @@ using System.Windows.Media;
 namespace Library.Models.Classes
 {
     public class SnackPhoto
-    {
+    {      
         public int Id { get; set; }
-       
+
         public  ImageSource  Image{ get; set; }
+
         public Snack Snack { get; set; }
 
         public SnackPhoto(int id, ImageSource image, Snack snack)
@@ -17,7 +18,7 @@ namespace Library.Models.Classes
             Image  = image;
             Snack = snack;
         }
-
+        
         public override string ToString()
         {
             return $"{Id}\t{Snack}";

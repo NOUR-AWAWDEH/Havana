@@ -26,8 +26,8 @@ namespace Havana.Drinks
 
         private void BackToOrder(object sender, RoutedEventArgs e)
         {
-            NewOrderWindow newOrderWindow = new NewOrderWindow();
-            newOrderWindow.BackToOrderWindow();
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.BackToOrderWindow(newOrderWindow);
             this.Close();
         }
     }

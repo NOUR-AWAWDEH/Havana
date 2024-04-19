@@ -23,25 +23,24 @@ namespace Havana.Snacks
     {
         int currentPage = 0;
         int sizePage = 4;
-        List<SnackPhoto> photos;
-        DataAccess dataAccess = new DataAccess();
+       
 
         public SnacksItems()
         {
             InitializeComponent();
-            photos = dataAccess.GetAllSnacksPhotos();
             ShowInfo(currentPage);
         }
 
         private void ShowInfo(int page)
         {
-            
-           
-          //  Image[] images = new Image[4];
+            DataAccess dataAccess = new DataAccess();
+            List<SnackPhoto> photos = dataAccess.GetSnacksPhotos();   
 
-            
+            //Image[] images = new Image[4];
+
+
             int startPos = sizePage * page;
-            
+
             int endPos = startPos + sizePage;
 
             if (endPos > photos.Count)
@@ -49,42 +48,46 @@ namespace Havana.Snacks
                 endPos = photos.Count;
             }
 
-            // Delete Data
+            //Delete Data
             for (int i = 0; i < 4; i++)
             {
-                Image image = (Image)FindName($"Image{i  + 1}");
-                TextBlock textBlock = (TextBlock)FindName($"TextLable{i  + 1}");
+                string ImageName = $"Image{i + 1}";
+                Image image = (Image)FindName(ImageName);
+                TextBlock textBlock = (TextBlock)FindName($"TextLable{i + 1}");
                 image.Source = null;
                 textBlock.Text = "";
-                Button button = (Button)FindName($"AddButt{i + 1}");
-                button.Visibility = Visibility.Hidden;
+                string NameButton = $"AddButt{i + 1}";
+                Button button = (Button)FindResource(NameButton);
 
             }
 
             //Fill Datat
             for (int i = startPos; i < endPos; i++)
             {
-                Image image = (Image)FindName($"Image{i - startPos + 1}");
+                string ImageName = $"Image{i - startPos + 1}";
+
+                Image image = (Image)FindName(ImageName);
                 if (image != null)
                 {
                     image.Source = photos[i].Image;
                 }
-                TextBlock textBlock = (TextBlock)FindName($"TextLable{i - startPos + 1}");
-                Button button = (Button)FindName($"AddButt{i - startPos + 1}");
-                if (textBlock != null)
+
+                string TexLableName = $"TextLable{i - startPos + 1}";
+                TextBlock textBlock = (TextBlock)FindName(TexLableName);
+
+                if (image != null)
                 {
                     textBlock.Text = photos[i].Snack.Name;
-                    button.Visibility = Visibility.Visible;
                 }
-              
+
             }
 
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            NewOrderWindow newOrderWindow = new NewOrderWindow();
-            newOrderWindow.BackToOrderWindow();
+            NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+            newOrderWindow.BackToOrderWindow(newOrderWindow);
             this.Close();
         }
 
@@ -95,12 +98,14 @@ namespace Havana.Snacks
 
         private void NextPage(object sender, RoutedEventArgs e)
         {
+            DataAccess dataAccess = new DataAccess();
+            List<SnackPhoto> photos = dataAccess.GetSnacksPhotos();
             currentPage++;
             if (photos.Count < (currentPage * sizePage))
             {
                 currentPage--;
             }
-            ShowInfo(currentPage);
+           ShowInfo(currentPage);
         }
 
         private void Back(object sender, RoutedEventArgs e)

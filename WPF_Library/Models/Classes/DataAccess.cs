@@ -14,13 +14,14 @@ using System.Windows.Media;
 
 using System.Collections;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 
 namespace Library.Models.Classes
 {
     public class DataAccess
     {
         
-        readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ToString();
+        readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
 
         public List<Drink> GetDrinks()
         {
@@ -288,52 +289,48 @@ namespace Library.Models.Classes
 
 
 
-        public List<SnackPhoto> GetAllSnacksPhotos()
+        public List<SnackPhoto> GetSnacksPhotos()
         {
-            ImageSource imageSource = null;
-            List<SnackPhoto> photosInfo = new List<SnackPhoto>();
+            List<SnackPhoto> photos = new List<SnackPhoto>();
 
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
-                string query = "SELECT SP.id, SP.photo, Snack.id, Snack.name, Snack.cost, Snack.weigth FROM SnackPhotos SP INNER JOIN Snack ON SP.id_Snack = Snack.id";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                string query = "Select Sp.id, Sp.photo ,S.Id, S.name, S.cost, S.weigth From SnackPhotos SP inner join Snack S on S.id = SP.id_Snack";
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    int photoId = reader.GetInt32(0);
-
-                    byte[] photoData = (byte[])reader["photo"];
-
-
-                    using (MemoryStream stream = new MemoryStream(photoData))
+                    while (reader.Read())
                     {
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.StreamSource = stream;
-                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmapImage.EndInit();
+                        int snackPhotoId = reader.GetInt32(0);
+                        byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
 
-                        imageSource = bitmapImage;
+                        using (MemoryStream stream = new MemoryStream(photoData))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.StreamSource = stream;
+                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmapImage.EndInit();
+
+                            ImageSource imageSource = bitmapImage;
+
+                            int snackId = reader.GetInt32(2);
+                            string snackName = reader.GetString(3);
+                            decimal snackCost = reader.GetDecimal(4);
+                            double snackWeight = reader.GetDouble(5);
+                            Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
+                            SnackPhoto snackPhoto = new SnackPhoto(snackPhotoId, imageSource, snack);
+
+                            photos.Add(snackPhoto);
+                        }
                     }
-
-
-                    int snackId = reader.GetInt32(2);
-                    string snackName = reader.GetString(3);
-                    decimal snackCost = reader.GetDecimal(4);
-                    double snackWeight = reader.GetDouble(5);
-
-                    Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
-                    SnackPhoto photoSnack = new SnackPhoto(photoId, imageSource, snack);
-                    photosInfo.Add(photoSnack);
-
                 }
             }
 
-            return photosInfo;
+            return photos;
         }
-
 
     }
 }

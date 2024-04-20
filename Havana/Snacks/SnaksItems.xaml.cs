@@ -108,7 +108,6 @@ namespace Havana.Snacks
         private void AddButt(object sender, RoutedEventArgs e)
         {
             int startPos = sizePage * currentPage;
-
             int endPos = startPos + sizePage;
 
             if (endPos > photos.Count)
@@ -116,25 +115,27 @@ namespace Havana.Snacks
                 endPos = photos.Count;
             }
 
-            Button[] buttons = new Button[4];
+            List<Button> buttons = new List<Button>();
+
             for (int i = startPos; i < endPos; i++)
             {
-                string buttonname = $"AddButt{i - startPos+1}";
-                buttons[i - startPos] = (Button)FindName(buttonname);
-                //buttons[i - startPos] = (Button)sender; //to Creat new object
-
-                if (buttons[i - startPos] != null)
-                {
-                    NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-                    Snack snack = photos[i - startPos].Snack;
-                    newOrderWindow.OrderDataGrid.Items.Add(snack);
-                    newOrderWindow.Show();
-                }
+                string buttonName = $"AddButt{i - startPos + 1}";
+                buttons.Add((Button)FindName(buttonName));
             }
 
+            Button clickedButton = (Button)sender;
 
-           // StatusText.Text = null;
-
+            for (int i = startPos; i < endPos; i++)
+            {
+                if (buttons[i - startPos] == clickedButton)
+                {
+                    NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
+                    Snack snack = photos[i].Snack;
+                    newOrderWindow.OrderDataGrid.Items.Add(snack);
+                    newOrderWindow.Show();
+                    break; // Exit the loop once the button is found
+                }
+            }
         }
 
 

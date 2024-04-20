@@ -60,6 +60,7 @@ namespace Havana.Snacks
                 TextBlock textBlock = (TextBlock)FindName($"TextLable{i + 1}");
                 image.Source = null;
                 textBlock.Text = "";
+
                 string NameButton = $"AddButt{i + 1}";
                 Button button = (Button)FindName(NameButton);
                 if (image.Source == null)

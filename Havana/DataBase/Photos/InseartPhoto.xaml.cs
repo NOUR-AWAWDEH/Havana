@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
-namespace Havana.DataBase
+namespace Havana.DataBase.Photos
 {
     /// <summary>
     /// Interaction logic for InseartPhoto.xaml
@@ -162,6 +162,9 @@ namespace Havana.DataBase
             
         }
 
-        
+        private void BackToDataBaseWindowButt(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -100,7 +100,7 @@
       <DependentUpon>HavanaRestaurant.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewOrderWindow.xaml">
+    <Page Include="Orders\NewOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,7 +114,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewOrderWindow.xaml.cs">
+    <Compile Include="Orders\NewOrderWindow.xaml.cs">
       <DependentUpon>NewOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

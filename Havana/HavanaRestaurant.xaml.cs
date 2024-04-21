@@ -9,7 +9,7 @@ using Havana.Orders;
 namespace Havana
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {

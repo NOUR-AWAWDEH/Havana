@@ -169,7 +169,7 @@ namespace Library.Models.Classes
             }
         }
 
-        public void InseartSnackPhoto(string filePath, int snackId)
+        public void InsertSnackPhoto(string filePath, int snackId)
         {
             // Assuming you have an open database connection named "connection"
             using (SqlConnection connection = new SqlConnection(cnnString))
@@ -192,7 +192,7 @@ namespace Library.Models.Classes
 
         }
 
-        public void InseartDrinkPhoto(string filePath, int idDrink)
+        public void InsertDrinkPhoto(string filePath, int idDrink)
         {
             
             using (SqlConnection connection = new SqlConnection(cnnString))

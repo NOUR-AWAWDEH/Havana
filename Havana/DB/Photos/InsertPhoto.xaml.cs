@@ -12,9 +12,9 @@ namespace Havana.DB.Photos
     /// <summary>
     /// Interaction logic for InseartPhoto.xaml
     /// </summary>
-    public partial class InseartPhoto : Window
+    public partial class InsertPhotos : Window
     {
-        public InseartPhoto()
+        public InsertPhotos()
         {
             InitializeComponent();
             ClearStatuseText();
@@ -41,7 +41,7 @@ namespace Havana.DB.Photos
                 string filename = dialog.FileName;
                 FilePathTextBox.Text = filename;
                 ImageSource imageSource = new BitmapImage(new Uri(filename));
-                InseartImage.Source = imageSource;
+                InsertImage.Source = imageSource;
             }
         }
 
@@ -85,7 +85,7 @@ namespace Havana.DB.Photos
         }
 
 
-        private void InseartPhotoButt(object sender, RoutedEventArgs e)
+        private void InsertPhotoButt(object sender, RoutedEventArgs e)
         {
             
             if (FilePathTextBox.Text != null && IteamsList.SelectedItem != null)
@@ -96,13 +96,13 @@ namespace Havana.DB.Photos
                 if (SnacksRadioButton.IsChecked == true)
                 {
                     int id = GetSnackPhotoID(IteamsListSelectedItem());
-                    dataAccess.InseartSnackPhoto(filePath, id);
+                    dataAccess.InsertSnackPhoto(filePath, id);
                     StatusText.Text = "Snack Photo Insearted Sucsessfully!";
                 }
                 else
                 {
                     int id = GetDrinkPhotoID(IteamsListSelectedItem());
-                    dataAccess.InseartDrinkPhoto(filePath, id);
+                    dataAccess.InsertDrinkPhoto(filePath, id);
                     StatusText.Text = "Drink Photo Insearted Sucsessfully!";
                 }
 
@@ -120,10 +120,7 @@ namespace Havana.DB.Photos
 
            List<Drink> drinks = dataAccess.GetDrinks();
            IteamsList.ItemsSource = drinks;
-           IteamsList.DisplayMemberPath = "Name";
-         
-
-
+           IteamsList.DisplayMemberPath = "Name";         
         }
 
         private void RefreshSnackssItems(object sender, RoutedEventArgs e)

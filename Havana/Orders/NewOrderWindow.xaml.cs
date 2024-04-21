@@ -58,19 +58,16 @@ namespace Havana.Orders
             window.Show();
         }
        
-        private void HotSnaksButt(object sender, RoutedEventArgs e)
+        private void SnaksItemsButt(object sender, RoutedEventArgs e)
         {
             OpenWindow(typeof(SnacksItems));
            
         }
 
-       
-
-        private void TeaDrinksButt(object sender, RoutedEventArgs e)
+        private void DrinksItemsButt(object sender, RoutedEventArgs e)
         {
             OpenWindow(typeof(DrinksItems));
         }
-
         
         private void SearchButt(object sender, RoutedEventArgs e)
         {

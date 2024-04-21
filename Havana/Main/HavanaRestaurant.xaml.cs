@@ -6,7 +6,7 @@ using System.Windows;
 using Havana.DB;
 using Havana.Orders;
 
-namespace Havana
+namespace Havana.Main
 {
     /// <summary>
     /// MainWindow.xaml

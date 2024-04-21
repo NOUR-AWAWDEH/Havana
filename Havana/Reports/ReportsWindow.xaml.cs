@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using Havana.Main;
 
 namespace Havana.Reports
 {

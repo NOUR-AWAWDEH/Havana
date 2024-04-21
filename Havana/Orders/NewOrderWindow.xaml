@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
-        Title="NewOrder" Height="800" Width="900" ResizeMode="CanMinimize" Icon="/LOGO.ico"
+        Title="NewOrder" Height="800" Width="900" ResizeMode="CanMinimize" Icon="../Resources/LOGO.ico"
         WindowStartupLocation="CenterScreen">
 
     <Grid Height="800" Width="900" Margin="0,0,0,-16" Background="#FFCAE2A8">
@@ -70,9 +70,9 @@
             </Button.Background>
         </Button>
 
-        <Image HorizontalAlignment="Left" Height="97" Margin="150,529,0,0" VerticalAlignment="Top" Width="140"  Grid.Column="1" Source="/Drinks.jpg"/>
+        <Image HorizontalAlignment="Left" Height="97" Margin="150,529,0,0" VerticalAlignment="Top" Width="140"  Grid.Column="1" Source="../Resources/Drinks.jpg"/>
 
-        <Image HorizontalAlignment="Left" Height="96" Margin="17,526,0,0" VerticalAlignment="Top" Width="140" Source="/FastFood.jpg" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Left" Height="96" Margin="17,526,0,0" VerticalAlignment="Top" Width="140" Source="../Resources/FastFood.jpg" Grid.ColumnSpan="2"/>
 
         <TextBox HorizontalAlignment="Left" Height="26" Margin="115,41,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Visibility="Visible" />
 

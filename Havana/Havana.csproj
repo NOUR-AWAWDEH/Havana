@@ -85,7 +85,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HavanaRestaurant.xaml">
+    <Page Include="Main\HavanaRestaurant.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,7 +96,7 @@
     <Compile Include="Snacks\SnaksItems.xaml.cs">
       <DependentUpon>SnaksItems.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HavanaRestaurant.xaml.cs">
+    <Compile Include="Main\HavanaRestaurant.xaml.cs">
       <DependentUpon>HavanaRestaurant.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -162,19 +162,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="HavanaFullLogo.jpg" />
+    <Resource Include="Resources\HavanaFullLogo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LOGO.ico" />
+    <Resource Include="Resources\LOGO.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Reports\LOGO.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FastFood.jpg" />
+    <Resource Include="Resources\FastFood.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Drinks.jpg" />
+    <Resource Include="Resources\Drinks.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

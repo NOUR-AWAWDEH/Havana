@@ -1,6 +1,7 @@
 ﻿using Havana.DB.Photos;
 using System.Linq;
 using System.Windows;
+using Havana.Main;
 
 namespace Havana.DB
 {

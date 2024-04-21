@@ -15,8 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Havana.DataBase;
+using Havana.DB;
 
 namespace Havana
 {
@@ -25,7 +24,7 @@ namespace Havana
     /// </summary>
     public partial class MainWindow : Window
     {
-        string connStr;
+        readonly string connStr;
 
         public MainWindow()
         {

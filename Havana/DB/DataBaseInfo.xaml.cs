@@ -1,20 +1,8 @@
-﻿using Library.Models.Classes;
-using System;
-using System.Collections.Generic;
+﻿using Havana.DB.Photos;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Havana.DataBase.Photos;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Havana.DataBase
+namespace Havana.DB
 {
     /// <summary>
     /// Interaction logic for DataBase.xaml
@@ -26,19 +14,15 @@ namespace Havana.DataBase
             InitializeComponent();
         }
 
-        private void OpenWindow(Type window)
-        {
-
-        }
-
-        
+             
         private void InsertPhotosWindowbutt(object sender, RoutedEventArgs e)
         {
             InseartPhoto inseartPhoto = new InseartPhoto();
             this.Visibility = Visibility.Hidden;   
             inseartPhoto.ShowDialog();
         }
-
+              
+       
         private void DeletePhotoWindowButt(object sender, RoutedEventArgs e)
         {
 
@@ -51,7 +35,13 @@ namespace Havana.DataBase
 
         private void BackToMainWindowButt(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
+            if (mainWindow != null)
+            {
+                this.Visibility = Visibility.Hidden;
+                mainWindow.Visibility = Visibility.Visible;
+            }
         }
 
         private void DeleteDrinksTypeWindowButt(object sender, RoutedEventArgs e)

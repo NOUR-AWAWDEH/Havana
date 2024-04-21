@@ -56,10 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataBase\DataBaseInfo.xaml.cs">
+    <Compile Include="DB\DataBaseInfo.xaml.cs">
       <DependentUpon>DataBaseInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Photos\InseartPhoto.xaml.cs">
+    <Compile Include="DB\Photos\InseartPhoto.xaml.cs">
       <DependentUpon>InseartPhoto.xaml</DependentUpon>
     </Compile>
     <Compile Include="HavanaDataSet.Designer.cs">
@@ -73,11 +73,11 @@
     <Compile Include="Drinks\DrinksItems.xaml.cs">
       <DependentUpon>DrinksItems.xaml</DependentUpon>
     </Compile>
-    <Page Include="DataBase\DataBaseInfo.xaml">
+    <Page Include="DB\DataBaseInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataBase\Photos\InseartPhoto.xaml">
+    <Page Include="DB\Photos\InseartPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

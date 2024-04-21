@@ -12,9 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Havana.DB;
 
 
-namespace Havana.DataBase.Photos
+namespace Havana.DB.Photos
 {
     /// <summary>
     /// Interaction logic for InseartPhoto.xaml
@@ -24,10 +25,10 @@ namespace Havana.DataBase.Photos
         public InseartPhoto()
         {
             InitializeComponent();
-            ClearStatuseTex();
+            ClearStatuseText();
         }
 
-        private void ClearStatuseTex() 
+        private void ClearStatuseText() 
         {
             StatusText.Text = null;
         }
@@ -118,6 +119,7 @@ namespace Havana.DataBase.Photos
             {
                 StatusText.Text = "Please Fill DATA!!!";
             }
+            
         }
 
         private void RefreshDrinksItems(object sender, RoutedEventArgs e)
@@ -164,7 +166,13 @@ namespace Havana.DataBase.Photos
 
         private void BackToDataBaseWindowButt(object sender, RoutedEventArgs e)
         {
+            DataBaseInfo databaseInfoWindow = Application.Current.Windows.OfType<DataBaseInfo>().FirstOrDefault();
 
+            if (databaseInfoWindow != null)
+            {
+                this.Visibility = Visibility.Hidden;
+                databaseInfoWindow.Visibility = Visibility.Visible;
+            }
         }
     }
 }

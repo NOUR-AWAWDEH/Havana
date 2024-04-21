@@ -1,4 +1,4 @@
-﻿<Window x:Class="Havana.DataBase.DataBaseInfo"
+﻿<Window x:Class="Havana.DB.DataBaseInfo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         Title="DataBaseInfo" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFCAE2A8" Height="650" Width="800">
 
+        
         <!--Photos-->
         <TextBlock x:Name="PhotosDB" Text="Photos" FontSize="15" Margin="630,372,39,256" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
@@ -37,6 +38,7 @@
             </Button.Background>
         </Button>
 
+        
         <!--Drinks-->
         <TextBlock x:Name="DrinksDB" Text="Drinks" FontSize="15" Margin="630,38,32,590" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
@@ -67,6 +69,7 @@
             </Button.Background>
         </Button>
 
+        
         <!--Back To Main Window -->
         <Button x:Name="BackToMainWindow" Content="Back" Click="BackToMainWindowButt" Margin="10,548,671,69" FontWeight="Bold" Foreground="White">
             <Button.Background>
@@ -77,8 +80,8 @@
             </Button.Background>
         </Button>
 
+        
         <!--Snacks-->
-
         <TextBlock x:Name="SnacksDB" Text="Snacks" FontSize="15" Margin="195,37,474,593" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
         <Button x:Name="InsertSnacks" Content="Insert Snacks" Click="InsertSnacksWindowButt" Margin="195,65,474,551" FontWeight="Bold" Foreground="White">
@@ -169,10 +172,6 @@
             </Button.Background>
         </Button>
 
-
-
-
-
-
+        
     </Grid>
 </Window>

@@ -331,6 +331,47 @@ namespace Library.Models.Classes
 
             return photos;
         }
+        
+        public List<DrinkPhoto> GetDrinksPhotos() 
+        {
+            List<DrinkPhoto> drinkPhotos = new List<DrinkPhoto>();
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "Select DP.id, DP.photo ,D.Id, D.name, D.cost, D.volume From DrinkPhotos DP inner join Drink D on D.id = DP.id_Drink";
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        int DrinkPhotoId = reader.GetInt32(0);
+                        byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
 
+                        using (MemoryStream stream = new MemoryStream(photoData))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.StreamSource = stream;
+                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmapImage.EndInit();
+
+                            ImageSource imageSource = bitmapImage;
+
+                            int drinkId = reader.GetInt32(2);
+                            string drinkName = reader.GetString(3);
+                            decimal drinkCost = reader.GetDecimal(4);
+                            double drinkVolume = reader.GetDouble(5);
+
+                            Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume);
+                            DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, imageSource, drink);
+
+                            drinkPhotos.Add(drinkPhoto);
+                        }
+                    }
+                }
+            }
+            return drinkPhotos;
+        }
     }
 }

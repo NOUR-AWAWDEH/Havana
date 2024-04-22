@@ -31,11 +31,6 @@ namespace Havana.Snacks
 
         private void ShowInfo(int page)
         {
-        
-
-            //Image[] images = new Image[4];
-
-
             int startPos = sizePage * page;
 
             int endPos = startPos + sizePage;

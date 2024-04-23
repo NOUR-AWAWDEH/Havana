@@ -9,8 +9,12 @@
         Height="823" Width="861" 
         ResizeMode="NoResize">
     <Grid Margin="-2,0,2,-6" RenderTransformOrigin="-0.591,0.506" Background="#FFCAE2A8" Height="823" Width="861">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="585*"/>
+            <RowDefinition Height="238*"/>
+        </Grid.RowDefinitions>
 
-        <Button x:Name="BackToDataBaseWindow" Content="Back" Click="BackToDataBaseWindowButt" Margin="10,666,713,123" FontWeight="Bold" Foreground="White">
+        <Button x:Name="BackToDataBaseWindow" Content="Back" Click="BackToDataBaseWindowButt" Margin="10,81,713,123" FontWeight="Bold" Foreground="White" Grid.Row="1">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -18,6 +22,28 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+
+        <DataGrid x:Name="DrinksDataGrid" HorizontalAlignment="Left" Height="246" Margin="79,190,0,0" VerticalAlignment="Top" Width="414" >
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Image HorizontalAlignment="Left" Height="251" Margin="616,190,0,0" VerticalAlignment="Top" Width="209"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="35" Margin="80,132,0,0" VerticalAlignment="Top" Width="76"/>
+        <TextBox HorizontalAlignment="Left" Height="35" Margin="184,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="194,444,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299"/>
+        <Label Content=" Edit Volume" FontSize="15" Background="#FF344C0E" Foreground="White" HorizontalAlignment="Left" Height="33" Margin="80,542,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="194,542,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="246" Margin="511,190,0,0" VerticalAlignment="Top" Width="322"/>
+        <Label Content=" Edit Namr" FontSize="15" Background="#FF344C0E" Foreground="White" HorizontalAlignment="Left" Height="33" Margin="79,444,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Content=" Edit cost" FontSize="15" Background="#FF344C0E" Foreground="White" HorizontalAlignment="Left" Height="33" Margin="79,494,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="194,494,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299"/>
 
     </Grid>
 </Window>

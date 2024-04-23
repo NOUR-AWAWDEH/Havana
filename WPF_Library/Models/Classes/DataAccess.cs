@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using Microsoft.Win32.SafeHandles;
-using System.Data.SqlTypes;
-using System.Data;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-
-using System.Collections;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
+using System;
 
 namespace Library.Models.Classes
 {
@@ -80,10 +70,28 @@ namespace Library.Models.Classes
                 cnn.Close();
             }
         }
-        public void DeleteDrink(Drink drink) 
+        public void DeleteDrink(int idDrink) 
         {
+            using (SqlConnection connection = new SqlConnection(cnnString)) 
+            {
+                connection.Open();
+                string query = "DELETE  FROM Drink  WHERE Drink.id = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
 
+                    command.Parameters.AddWithValue("@id", idDrink);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            command.ExecuteReader().Close();
+                        }
+                    }
+                }
+            }
         }
+            
+     
         public void UpdateDrink(Drink drink) 
         {
 
@@ -186,8 +194,7 @@ namespace Library.Models.Classes
             }
 
         }
-        
-        
+       
         //Snacks :
         public void InsertSnack(Snack snak) 
         {
@@ -361,6 +368,34 @@ namespace Library.Models.Classes
             }
 
         }
-        
+
+        public Drink GetDrinkByName(string selectedDrinkName)
+        {
+            Drink drink = null;
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Drink WHERE Name = @selectedDrinkName";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@selectedDrinkName", selectedDrinkName);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int id = reader.GetInt32(reader.GetOrdinal("id"));
+                            string name = reader.GetString(reader.GetOrdinal("Name"));
+                            decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
+                            double volume = reader.GetDouble(reader.GetOrdinal("Volume"));
+
+                            drink = new Drink(id, name, cost, volume);
+                        }
+                    }
+                }
+            }
+
+            return drink;
+        }
     }
 }

@@ -34,5 +34,10 @@ namespace Havana.DB.DrinksType
                 databaseInfoWindow.Visibility = Visibility.Visible;
             }
         }
+
+        private void DelleteDrinkButt(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

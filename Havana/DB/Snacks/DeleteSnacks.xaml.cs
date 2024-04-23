@@ -23,5 +23,15 @@ namespace Havana.DB.Snacks
         {
             InitializeComponent();
         }
+
+        private void DelleteDrinkButt(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackToDataBaseWindowButt(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

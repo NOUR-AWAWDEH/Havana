@@ -19,5 +19,17 @@
             </Button.Background>
         </Button>
 
+        <Button x:Name="DeleteDrink" Content="Delete" Click="DelleteDrinkButt" Margin="302,520,460,279" FontWeight="Bold" Foreground="White">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Label Content="Drinks Type :" HorizontalAlignment="Left" Margin="210,476,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FFCAE2A8" Foreground="#FF344C0E" Width="87" Height="26"/>
+        <ComboBox x:Name="DrinksTypeItems" HorizontalAlignment="Left" Height="20" Margin="302,482,0,0" VerticalAlignment="Top" Width="311"/>
+
     </Grid>
 </Window>

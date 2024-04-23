@@ -12,7 +12,7 @@
         ResizeMode="NoResize">
     <Grid Margin="-2,0,2,-6" RenderTransformOrigin="-0.591,0.506" Background="#FFCAE2A8" Height="823" Width="861">
 
-        <Button x:Name="BackToDataBaseWindow" Content="Back" Click="BackToDataBaseWindowButt" Margin="10,666,713,123" FontWeight="Bold" Foreground="White">
+        <Button x:Name="BackToDataBaseWindow" Content="Back" Click="BackToDataBaseWindowButt" Margin="21,603,702,186" FontWeight="Bold" Foreground="White">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -20,6 +20,35 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+
+        <Button x:Name="DeleteDrink" Content="Delete" Click="DeleteDrinkButt" Margin="21,505,699,284" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.636,0.057">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Label Content="Drinks :" HorizontalAlignment="Left" Margin="21,461,0,0" VerticalAlignment="Top" FontWeight="Bold" Background="#FFCAE2A8" Foreground="#FF344C0E" Width="108" Height="36" FontSize="20"/>
+        <ComboBox x:Name="DrinksComboBox"  HorizontalAlignment="Left" Height="27" Margin="135,470,0,0" VerticalAlignment="Top" Width="683" SelectionChanged ="cb_SelectChanged"/>
+        <Image x:Name="DrinkImage"  HorizontalAlignment="Left" Height="283" Margin="529,169,0,0" VerticalAlignment="Top" Width="289"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="283" Margin="529,169,0,0" VerticalAlignment="Top" Width="289"/>
+        <Button x:Name="SearchByName" Content="Search" HorizontalAlignment="Left" Height="31" Margin="15,169,0,0" VerticalAlignment="Top" Width="90" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="SearchByNameButt"/>
+        <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="31" Margin="110,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="415"/>
+
+        <DataGrid x:Name="DrinksDataGrid" HorizontalAlignment="Left" Height="247" Margin="15,205,0,0" VerticalAlignment="Top" Width="510" SelectionChanged="DrinksDataGrid_SelectionChanged"  MouseDoubleClick="DataGrid_PreviewMouseDoubleClick" IsReadOnly="True">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock x:Name="DrinksTextBlock" HorizontalAlignment="Left" Height="33" Margin="32,707,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="712" FontSize="20" FontWeight="Bold"/>
 
     </Grid>
 </Window>

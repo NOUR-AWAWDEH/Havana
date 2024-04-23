@@ -163,5 +163,10 @@ namespace Havana.DB.Photos
                 databaseInfoWindow.Visibility = Visibility.Visible;
             }
         }
+
+        private void IteamsList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

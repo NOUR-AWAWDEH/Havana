@@ -21,7 +21,7 @@
             </Button.Background>
         </Button>
 
-        <Button x:Name="DeleteDrink" Content="Delete" Click="DeleteDrinkButt" Margin="21,505,699,284" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.636,0.057">
+        <Button x:Name="DDrinkbutt" Content="Delete" Click="DeleteDrinkButt" Margin="32,514,688,275" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.636,0.057">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>

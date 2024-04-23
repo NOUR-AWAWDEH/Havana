@@ -77,16 +77,31 @@ namespace Havana.DB.Drinks
                 if (selectedDrink != null)
                 {
                     dataAccess.DeleteDrink(selectedDrink.Id);
-                    DrinksTextBlock.Text = $"{selectedDrink.Name} Has beeb Deleted"; 
+                    RefreshWindow();
+                    DrinksTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
+
                 }
             }
             else if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
             {
                 dataAccess.DeleteDrink(selectedDrink.Id);
-                DrinksTextBlock.Text = $"{selectedDrink.Name} Has beeb Deleted";
+                RefreshWindow();
+                DrinksTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
+
             }
         }
 
+        private void RefreshWindow() 
+        {
+            
+            DeleteDrinks  deleteDrinks = Application.Current.Windows.OfType<DeleteDrinks>().FirstOrDefault();
+
+            if (deleteDrinks != null)
+            {
+                this.Visibility = Visibility.Hidden;
+                deleteDrinks.Visibility = Visibility.Visible;
+            }
+        }
         private void cb_SelectChanged(object sender, SelectionChangedEventArgs e)
         {
 

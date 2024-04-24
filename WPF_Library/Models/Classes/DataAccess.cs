@@ -5,13 +5,16 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System;
+using System.Windows.Controls.Primitives;
+using System.Xml.Linq;
 
 namespace Library.Models.Classes
 {
     public class DataAccess
     {
         
-        readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
+        public readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
+        
         public void InsertBuyerName(Buyer buyer)
         {
             using (SqlConnection cnn = new SqlConnection(cnnString))
@@ -27,6 +30,27 @@ namespace Library.Models.Classes
             }
         }
 
+        public List<TypeOfDrink> GetDrinkType()
+        {
+            List<TypeOfDrink> typeOfDrinks = new List<TypeOfDrink>();
+            using (SqlConnection cnn = new SqlConnection(cnnString))
+            {
+                cnn.Open();
+                string sql = "SELECT  id, name FROM TypeOfDrink";
+                SqlCommand cmd = new SqlCommand(sql, cnn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    TypeOfDrink typeOfDrink = new TypeOfDrink(reader.GetInt32(0), reader.GetString(1));
+                    typeOfDrinks.Add(typeOfDrink);
+                }
+
+                cnn.Close();
+            }
+            return typeOfDrinks;
+        }
 
         //Drinks : 
         public List<Drink> GetDrinks()
@@ -47,29 +71,34 @@ namespace Library.Models.Classes
                     }
                     Reader.Close();
                 }
-
+                cnn.Close();
             }
             return drinks;
         }
-        public void InsertDrink(Drink drink) 
+
+        public void InsertDrink(Drink drink)
         {
-            using (SqlConnection cnn = new SqlConnection(cnnString)) 
+            using (SqlConnection cnn = new SqlConnection(cnnString))
             {
                 cnn.Open();
-                string sql = "insreat into dbo.Drink (name, cost, volume) values( @name, @cost, @volume)";
-                SqlCommand cmd = new SqlCommand (sql, cnn);
 
-                SqlParameter NameParameter = new SqlParameter("@name", drink.Name);
-                SqlParameter CostParameter = new SqlParameter("@cost", drink.Cost);
-                SqlParameter ValumeParameter = new SqlParameter("@volume", drink.Volume);
-                
-                cmd.Parameters.Add(NameParameter);
-                cmd.Parameters.Add(CostParameter);
-                cmd.Parameters.Add(ValumeParameter);
-                cmd.ExecuteReader();
+                string insertDrinkSql = "INSERT INTO Drink (name, id_type_drink, cost, volume) " +
+                                        "VALUES (@name, @id_type_drink, @cost, @volume)";
+
+                using (SqlCommand insertDrinkCmd = new SqlCommand(insertDrinkSql, cnn))
+                {
+                    insertDrinkCmd.Parameters.AddWithValue("@name", drink.Name);
+                    insertDrinkCmd.Parameters.AddWithValue("@id_type_drink", drink.IdTypeOFDrink);
+                    insertDrinkCmd.Parameters.AddWithValue("@cost", drink.Cost);
+                    insertDrinkCmd.Parameters.AddWithValue("@volume", drink.Volume);
+
+                    insertDrinkCmd.ExecuteNonQuery();
+                }
+
                 cnn.Close();
             }
         }
+
         public void DeleteDrink(int idDrink) 
         {
             using (SqlConnection connection = new SqlConnection(cnnString)) 
@@ -88,14 +117,15 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close();
             }
         }
-            
-     
+      
         public void UpdateDrink(Drink drink) 
         {
 
         }
+        
         public ImageSource GetDrinkPhoto(int idDrink)
         {
             ImageSource imageSource = null;
@@ -127,10 +157,12 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close ();
             }
 
             return imageSource;
         }
+        
         public List<DrinkPhoto> GetDrinksPhotos()
         {
             List<DrinkPhoto> drinkPhotos = new List<DrinkPhoto>();
@@ -169,9 +201,11 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close();
             }
             return drinkPhotos;
         }
+        
         public void InsertDrinkPhoto(string filePath, int idDrink)
         {
 
@@ -191,6 +225,7 @@ namespace Library.Models.Classes
 
                     command.ExecuteNonQuery();
                 }
+                connection.Close();
             }
 
         }
@@ -215,10 +250,12 @@ namespace Library.Models.Classes
                 cnn.Close();
             }
         }
+        
         public void DeleteSnack(Snack snak) 
         {
 
         }
+        
         public void UpdateSnack(Snack snack) 
         {
 
@@ -241,10 +278,11 @@ namespace Library.Models.Classes
                         snacks.Add(snack);
                     }
                 }
-                reader.Close();
+                cnn.Close();
             }
             return snacks;
         }
+        
         public Snack GetSnack(int id)
         {
             Snack snack = null;
@@ -266,10 +304,11 @@ namespace Library.Models.Classes
                     snack = new Snack(Id, name, cost, weight);
 
                 }
-                reader.Close();
+                cnn.Close( );
             }
             return snack;
         }
+        
         public ImageSource GetSnackPhoto(int idSnack)
         {
             ImageSource imageSource = null;
@@ -301,10 +340,12 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close();
             }
 
             return imageSource;
         }
+        
         public List<SnackPhoto> GetSnacksPhotos()
         {
             List<SnackPhoto> photos = new List<SnackPhoto>();
@@ -343,10 +384,12 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close();
             }
 
             return photos;
         }
+        
         public void InsertSnackPhoto(string filePath, int snackId)
         {
             using (SqlConnection connection = new SqlConnection(cnnString))
@@ -365,6 +408,7 @@ namespace Library.Models.Classes
 
                     command.ExecuteNonQuery();
                 }
+                connection.Close(); 
             }
 
         }
@@ -393,6 +437,7 @@ namespace Library.Models.Classes
                         }
                     }
                 }
+                connection.Close ();
             }
 
             return drink;

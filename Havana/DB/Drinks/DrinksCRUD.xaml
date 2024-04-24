@@ -1,0 +1,244 @@
+﻿<Window x:Class="Havana.DB.Drinks.DrinksCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Havana.DB.Drinks"
+        mc:Ignorable="d"
+        Title="DrinksCRUD" 
+        WindowStartupLocation="CenterScreen"
+        Height="823" 
+        Width="861" 
+        ResizeMode="NoResize">
+
+    <Grid Margin="-2,0,2,-6" 
+          RenderTransformOrigin="-0.591,0.506" 
+          Background="#FFCAE2A8" 
+          Height="823" 
+          Width="861">
+
+
+        <Button x:Name="BackToDataBaseWindow" 
+                Content="Back" 
+                Click="BackToDataBaseWindowButt" 
+                Margin="10,672,713,123" 
+                FontWeight="Bold" 
+                Foreground="White">
+
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <DataGrid x:Name="DrinksDataGrid" 
+                  HorizontalAlignment="Left" 
+                  Height="246" 
+                  Margin="25,93,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="414" 
+                  SelectionChanged="DrinksDataGrid_SelectionChanged"
+                  MouseDoubleClick="DrinksDataGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Image x:Name="DrinkImage"
+               HorizontalAlignment="Left" 
+               Height="244" 
+               Margin="468,93,0,0" 
+               VerticalAlignment="Top" 
+               Width="370"/>
+
+        <Button x:Name="SearchButt"
+                Content="Search" 
+                HorizontalAlignment="Left" 
+                Height="20" 
+                Margin="25,55,0,0" 
+                VerticalAlignment="Top" 
+                Width="76" 
+                BorderBrush="#FF344C0E" 
+                Background="#FF344C0E" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                Click="SearchByNameButt"/>
+
+        <TextBox x:Name="SearchTextBox"
+                 HorizontalAlignment="Left"
+                 Height="20" 
+                 Margin="106,55,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="" 
+                 VerticalAlignment="Top" 
+                 Width="300"/>
+
+        <TextBox x:Name="NameTexBox"
+                 HorizontalAlignment="Left"
+                 Height="18" 
+                 Margin="165,438,0,0" 
+                 TextWrapping="Wrap"
+                 Text="" 
+                 VerticalAlignment="Top"
+                 Width="274"/>
+
+        <Label   x:Name="Volume"
+                 Content="Volume :" 
+                 FontSize="15" 
+                 Background="#FFCAE2A8" 
+                 Foreground="#FF344C0E"
+                 FontWeight="Bold"
+                 HorizontalAlignment="Left" 
+                 Height="33" 
+                 Margin="45,495,0,0" 
+                 VerticalAlignment="Top" 
+                 Width="114"/>
+
+        <TextBox x:Name="VolumeTextBox"
+                 HorizontalAlignment="Left"
+                 Height="17"
+                 Margin="165,503,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="274"/>
+
+        <Border BorderBrush="Black"
+                BorderThickness="1"
+                HorizontalAlignment="Left"
+                Height="246"
+                Margin="468,93,0,0"
+                VerticalAlignment="Top"
+                Width="372"/>
+
+        <Label  x:Name="NameLabel"
+                Content="Drinks Name : "
+                FontSize="15" 
+                Background="#FFCAE2A8" 
+                Foreground="#FF344C0E"
+                FontWeight="Bold"
+                HorizontalAlignment="Left" 
+                Height="34" 
+                Margin="45,430,0,0" 
+                VerticalAlignment="Top" 
+                Width="114"/>
+
+        <Label  x:Name="CostLable"
+                Content="Cost :"
+                FontSize="15" 
+                Background="#FFCAE2A8" 
+                Foreground="#FF344C0E"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Height="34"
+                Margin="45,464,0,0"
+                VerticalAlignment="Top"
+                Width="100"/>
+
+        <TextBox x:Name="CostTexBox"
+                 HorizontalAlignment="Left"
+                 Height="18"
+                 Margin="165,472,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="47"/>
+
+        <TextBox x:Name="FilePathTextBox"
+                 HorizontalAlignment="Left"
+                 Height="28" Margin="547,361,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="294"/>
+
+        <Button x:Name="FilePathButt"
+                Content="File Path"
+                FontSize="15"
+                Background="#FF344C0E"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                Height="28" 
+                Margin="468,361,0,0" 
+                VerticalAlignment="Top"
+                Width="66"
+                Click="FilePathButt_Click"/>
+            
+        <Button x:Name="EditDrinkButt" 
+                Content="Edit Drink" 
+                HorizontalAlignment="Left" 
+                Height="28" 
+                Margin="547,406,0,0" 
+                VerticalAlignment="Top" 
+                Width="198" 
+                BorderBrush="#FF344C0E" 
+                Background="#FF344C0E" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                RenderTransformOrigin="0.435,0.258"
+                Click="EditDrinkButt_Click"/>
+
+        <Label  x:Name="DrinksLable"
+                Content="Drinks : "
+                FontSize="15" 
+                Background="#FFCAE2A8" 
+                Foreground="#FF344C0E"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Margin="45,388,0,0"
+                VerticalAlignment="Top" RenderTransformOrigin="0.779,0.723" Width="114"/>
+
+        <ComboBox   x:Name="DrinksComboBox"
+                    HorizontalAlignment="Left"
+                    Margin="165,393,0,0"
+                    VerticalAlignment="Top"
+                    Width="274" 
+                    SelectionChanged="DrinksComboBox_SelectionChanged"/>
+
+        <Button x:Name="AddDrinkButt" 
+            Content="Add Drink" 
+            HorizontalAlignment="Left" 
+            Height="28" 
+            Margin="547,446,0,0" 
+            VerticalAlignment="Top" 
+            Width="198" 
+            BorderBrush="#FF344C0E" 
+            Background="#FF344C0E" 
+            Foreground="White" 
+            FontWeight="Bold" 
+            RenderTransformOrigin="0.435,0.258"
+            Click="AddDrinkButt_Click"/>
+
+        <Button x:Name="DeleteDrinkButt" 
+            Content="Delete Drink" 
+            HorizontalAlignment="Left" 
+            Height="28" 
+            Margin="547,492,0,0" 
+            VerticalAlignment="Top" 
+            Width="198" 
+            BorderBrush="#FF344C0E" 
+            Background="#FF344C0E" 
+            Foreground="White" 
+            FontWeight="Bold" 
+            RenderTransformOrigin="0.435,0.258"
+            Click="DeleteDrinkButt_Click"/>
+        
+        <TextBlock x:Name="DrinkTextBlock"
+                   HorizontalAlignment="Left"
+                   Margin="10,726,0,0"
+                   TextWrapping="Wrap"
+                   Text=""
+                   VerticalAlignment="Top"
+                   Width="777"
+                   Height="29"/>
+
+    </Grid>
+</Window>

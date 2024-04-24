@@ -7,42 +7,14 @@
         Title="DataBaseInfo" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFCAE2A8" Height="650" Width="800">
 
-        
+
         <!--Photos-->
-        <TextBlock x:Name="PhotosDB" Text="Photos" FontSize="15" Margin="630,372,39,256" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
-        <Button x:Name="InsertPhotos" Content="Insert Photos" Click="InsertPhotosWindowbutt" Margin="628,399,37,215" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
 
-        <Button x:Name="EditPhotos" Content="Edit Photos" Click="EditPhotosWindowButt" Margin="628,455,39,159" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="DeletePhotos" Content="Delete Photos" Click="DeletePhotosWindowButt" Margin="628,509,39,105" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        
         <!--Drinks-->
-        <TextBlock x:Name="DrinksDB" Text="Drinks" FontSize="15" Margin="630,38,32,590" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
+        <TextBlock x:Name="DrinksDB" Text="Drinks" FontSize="15" Margin="539,264,60,354" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
-        <Button x:Name="InsertDrinks" Content="Insert Drinks" Click="InsertDrinksWindowButt" Margin="630,65,32,551" FontWeight="Bold" Foreground="White">
+        <Button x:Name="EditDrinks" Content="Edit Drinks" Click="EditDrinksWindowButt" Margin="539,299,60,299" FontWeight="Bold" Foreground="White">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -51,25 +23,7 @@
             </Button.Background>
         </Button>
 
-        <Button x:Name="DeleteDrinks" Content="Delete Drinks" Click="DeleteDrinksWindowButt" Margin="630,178,32,438" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
 
-        <Button x:Name="EditDrinks" Content="Edit Drinks" Click="EditDrinksWindowButt" Margin="630,120,32,494" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        
         <!--Back To Main Window -->
         <Button x:Name="BackToMainWindow" Content="Back" Click="BackToMainWindowButt" Margin="10,548,671,69" FontWeight="Bold" Foreground="White">
             <Button.Background>
@@ -80,29 +34,11 @@
             </Button.Background>
         </Button>
 
-        
+
         <!--Snacks-->
-        <TextBlock x:Name="SnacksDB" Text="Snacks" FontSize="15" Margin="195,37,474,593" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
+        <TextBlock x:Name="SnacksDB" Text="Snacks" FontSize="15" Margin="140,265,470,356" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
-        <Button x:Name="InsertSnacks" Content="Insert Snacks" Click="InsertSnacksWindowButt" Margin="195,65,474,551" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="DeleteSnacks" Content="Delete Snacks" Click="DeleteSnacksWindowButt" Margin="195,178,474,436" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="EditSnacks" Content="Edit Snacks" Click="EditSnacksWindowButt" Margin="195,120,474,494" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.493,1.002">
+        <Button x:Name="EditSnacks" Content="Edit Snacks" Click="EditSnacksWindowButt" Margin="140,299,470,299" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.493,1.002">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -112,66 +48,10 @@
         </Button>
 
         <!--Snacks Type-->
-        <TextBlock x:Name="SnacksTypeDB" Text="Snacks Type" FontSize="15" Margin="10,38,671,590" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
-
-        <Button x:Name="InsertSnacksType" Content="Insert Snacks Type" Click="InsertSnacksTypeWindowButt" Margin="10,65,671,550" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="EditSnacksType" Content="Edit Snacks Type" Click="EditSnacksTypeWindowButt" Margin="10,120,671,494" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="DeleteSnacksType" Content="Delete Snacks Type" Click="DeleteSnacksTypeWindowButt" Margin="10,178,671,438" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
 
 
         <!--Drinks Type-->
-        <TextBlock x:Name="DrinksType" Text="Drinks Type" FontSize="15" Margin="446,36,234,590" Foreground="#FF344C0E" FontWeight="Bold" RenderTransformOrigin="0.82,0.726"/>
 
-        <Button x:Name="InsertDrinksType" Content="Insert Drinks Type" Click="InsertDrinksTypeWindowButt" Margin="440,65,228,551" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
 
-        <Button x:Name="EditDrinksType" Content="Edit Drinks Type" Click="EditDrinksTypeWindowButt" Margin="440,120,226,494" FontWeight="Bold" Foreground="White">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Button x:Name="DeleteDrinksType" Content="Delete Drinks Type" Click="DeleteDrinksTypeWindowButt" Margin="440,178,226,436" FontWeight="Bold" Foreground="White" RenderTransformOrigin="-0.69,0.959">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        
     </Grid>
 </Window>

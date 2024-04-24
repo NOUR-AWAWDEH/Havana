@@ -59,50 +59,11 @@
     <Compile Include="DB\DataBaseInfo.xaml.cs">
       <DependentUpon>DataBaseInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DB\DrinksType\DeleteDrinksType.xaml.cs">
-      <DependentUpon>DeleteDrinksType.xaml</DependentUpon>
+    <Compile Include="DB\Drinks\DrinksCRUD.xaml.cs">
+      <DependentUpon>DrinksCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DB\DrinksType\EditDrinksType.xaml.cs">
-      <DependentUpon>EditDrinksType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\DrinksType\InsertDrinksType.xaml.cs">
-      <DependentUpon>InsertDrinksType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Drinks\DeleteDrinks.xaml.cs">
-      <DependentUpon>DeleteDrinks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Drinks\EditDrinks.xaml.cs">
-      <DependentUpon>EditDrinks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Drinks\InsertDrinks.xaml.cs">
-      <DependentUpon>InsertDrinks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Photos\DeletePhotos.xaml.cs">
-      <DependentUpon>DeletePhotos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Photos\EditPhotos.xaml.cs">
-      <DependentUpon>EditPhotos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Photos\InsertPhoto.xaml.cs">
-      <DependentUpon>InsertPhoto.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\SnacksType\DeleteSnacksType.xaml.cs">
-      <DependentUpon>DeleteSnacksType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\SnacksType\EditSnacksType.xaml.cs">
-      <DependentUpon>EditSnacksType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\SnacksType\InsertSnacksType.xaml.cs">
-      <DependentUpon>InsertSnacksType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Snacks\DeleteSnacks.xaml.cs">
-      <DependentUpon>DeleteSnacks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Snacks\EditSnacks.xaml.cs">
-      <DependentUpon>EditSnacks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DB\Snacks\InsertSnacks.xaml.cs">
-      <DependentUpon>InsertSnacks.xaml</DependentUpon>
+    <Compile Include="DB\Snacks\SnacksCRUD.xaml.cs">
+      <DependentUpon>SnacksCRUD.xaml</DependentUpon>
     </Compile>
     <Compile Include="HavanaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -119,63 +80,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DB\DrinksType\DeleteDrinksType.xaml">
+    <Page Include="DB\Drinks\DrinksCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DB\DrinksType\EditDrinksType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\DrinksType\InsertDrinksType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Drinks\DeleteDrinks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Drinks\EditDrinks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Drinks\InsertDrinks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Photos\DeletePhotos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Photos\EditPhotos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Photos\InsertPhoto.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\SnacksType\DeleteSnacksType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\SnacksType\EditSnacksType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\SnacksType\InsertSnacksType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Snacks\DeleteSnacks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Snacks\EditSnacks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DB\Snacks\InsertSnacks.xaml">
+    <Page Include="DB\Snacks\SnacksCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

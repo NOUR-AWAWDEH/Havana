@@ -20,7 +20,7 @@ namespace Library.Models.Classes
 
         public override string ToString()
         {
-            return $"{Name}/t";
+            return $"{Id}\t{Name}/t";
         }
 
     }

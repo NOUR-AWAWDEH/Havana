@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System;
 using System.Windows.Controls.Primitives;
 using System.Xml.Linq;
+using System.Data;
 
 namespace Library.Models.Classes
 {
@@ -76,27 +77,39 @@ namespace Library.Models.Classes
             return drinks;
         }
 
-        public void InsertDrink(Drink drink)
+        public int InsertDrink(Drink drink)
         {
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            int insertedId = 0;
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
             {
-                cnn.Open();
+                connection.Open();
 
-                string insertDrinkSql = "INSERT INTO Drink (name, id_type_drink, cost, volume) " +
-                                        "VALUES (@name, @id_type_drink, @cost, @volume)";
+                string insertDrinkSql = "INSERT INTO Drink (name, id_type_dr, cost, volume) " +
+                        "VALUES (@name, @id_type_dr, @cost, @volume); " +
+                        "SELECT @id = SCOPE_IDENTITY();";
 
-                using (SqlCommand insertDrinkCmd = new SqlCommand(insertDrinkSql, cnn))
+                using (SqlCommand command = new SqlCommand(insertDrinkSql, connection))
                 {
-                    insertDrinkCmd.Parameters.AddWithValue("@name", drink.Name);
-                    insertDrinkCmd.Parameters.AddWithValue("@id_type_drink", drink.IdTypeOFDrink);
-                    insertDrinkCmd.Parameters.AddWithValue("@cost", drink.Cost);
-                    insertDrinkCmd.Parameters.AddWithValue("@volume", drink.Volume);
+                    command.Parameters.AddWithValue("@name", drink.Name);
+                    command.Parameters.AddWithValue("@id_type_dr", drink.IdTypeOFDrink);
+                    command.Parameters.AddWithValue("@cost", drink.Cost);
+                    command.Parameters.AddWithValue("@volume", drink.Volume);
 
-                    insertDrinkCmd.ExecuteNonQuery();
+                    SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
+                    idParameter.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(idParameter);
+
+                    command.ExecuteNonQuery();
+
+                    if (idParameter.Value != DBNull.Value)
+                    {
+                        insertedId = Convert.ToInt32(idParameter.Value);
+                    }
                 }
-
-                cnn.Close();
             }
+
+            return insertedId;
         }
 
         public void DeleteDrink(int idDrink) 
@@ -182,11 +195,12 @@ namespace Library.Models.Classes
                         using (MemoryStream stream = new MemoryStream(photoData))
                         {
                             BitmapImage bitmapImage = new BitmapImage();
+                            
+
                             bitmapImage.BeginInit();
                             bitmapImage.StreamSource = stream;
                             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                             bitmapImage.EndInit();
-
                             ImageSource imageSource = bitmapImage;
 
                             int drinkId = reader.GetInt32(2);

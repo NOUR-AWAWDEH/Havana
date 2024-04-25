@@ -8,6 +8,7 @@ using System;
 using System.Windows.Controls.Primitives;
 using System.Xml.Linq;
 using System.Data;
+using System.Windows.Controls;
 
 namespace Library.Models.Classes
 {
@@ -191,17 +192,11 @@ namespace Library.Models.Classes
                     {
                         int DrinkPhotoId = reader.GetInt32(0);
                         byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
-
+                        
+                        Image ImageSource = new Image();
                         using (MemoryStream stream = new MemoryStream(photoData))
-                        {
-                            BitmapImage bitmapImage = new BitmapImage();
-                            
-
-                            bitmapImage.BeginInit();
-                            bitmapImage.StreamSource = stream;
-                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                            bitmapImage.EndInit();
-                            ImageSource imageSource = bitmapImage;
+                        { 
+                            ImageSource.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None,BitmapCacheOption.OnLoad);
 
                             int drinkId = reader.GetInt32(2);
                             string drinkName = reader.GetString(3);
@@ -209,7 +204,7 @@ namespace Library.Models.Classes
                             double drinkVolume = reader.GetDouble(5);
 
                             Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume);
-                            DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, imageSource, drink);
+                            DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, ImageSource.Source, drink);
 
                             drinkPhotos.Add(drinkPhoto);
                         }

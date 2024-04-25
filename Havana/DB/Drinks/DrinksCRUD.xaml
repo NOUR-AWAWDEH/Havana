@@ -53,6 +53,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        
         <Image x:Name="DrinkImage"
                HorizontalAlignment="Left" 
                Height="244" 

@@ -30,7 +30,7 @@ namespace Havana.DB
   
         private void EditSnacksWindowButt(object sender, RoutedEventArgs e)
         {
-            OpenWindow(typeof(EditSnacks));
+            OpenWindow(typeof(SnacksCRUD));
         }
 
         // Drinks :

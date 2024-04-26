@@ -46,6 +46,7 @@ namespace Havana.DB.Drinks
             DrinkTextBlock.Text = newDrink.Name.ToString() + " has been added!";
 
             RefreshList();
+            CleanDrinkDataButt_Click(sender, e);
         }
 
         private void EditDrinkButt_Click(object sender, RoutedEventArgs e)
@@ -63,6 +64,7 @@ namespace Havana.DB.Drinks
             DrinkTextBlock.Text = $"{updatedDrink.Name} Data IS Updated!! ";
 
             RefreshList();
+            CleanDrinkDataButt_Click(sender, e);
         }
         
         private void DeleteDrinkButt_Click(object sender, RoutedEventArgs e)
@@ -74,19 +76,21 @@ namespace Havana.DB.Drinks
                 if (selectedDrink != null)
                 {
                     dataAccess.DeleteDrink(selectedDrink.Id);
-                    RefreshWindow();
+                   
                     DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
 
                 }
-                RefreshList();
+                
             }
             else if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
             {
                 dataAccess.DeleteDrink(selectedDrink.Id);
-                RefreshWindow();
+               
                 DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
 
             }
+            RefreshList();
+            CleanDrinkDataButt_Click (sender, e);   
         }
 
 
@@ -120,6 +124,7 @@ namespace Havana.DB.Drinks
                 ImageSource imageSource = new BitmapImage(new Uri(filename));
                 DrinkImage.Source = imageSource;
             }
+
             ShowCRUDButtons();
         }
 
@@ -159,7 +164,7 @@ namespace Havana.DB.Drinks
             DrinksComboBox.SelectedItem = null;
             DrinkIdTextBox.Text = null;
             TypeOfDrinkComboBox.SelectedItem = null;
-            RefreshList();
+            
         }
 
 
@@ -171,6 +176,7 @@ namespace Havana.DB.Drinks
                 DrinksComboBox.SelectedItem = selectedDrink.Name;
 
             }
+
             ShowCRUDButtons();
         }
 
@@ -181,9 +187,9 @@ namespace Havana.DB.Drinks
                 int drinkId = selectedDrink.Id;  
                 string drinkName = selectedDrink.Name;
                 decimal drinkCost = selectedDrink.Cost;
-                double drinkVolume = selectedDrink.Volume; 
-                   
+                double drinkVolume = selectedDrink.Volume;        
             }
+
             ShowCRUDButtons();
 
         }
@@ -213,8 +219,8 @@ namespace Havana.DB.Drinks
                     DrinkVolumeTextBox.Text = selectedDrinkPhoto.Drink.Volume.ToString();
                 }
             }
-            
 
+            ShowDrinks(DrinksInfo,typeOfDrinks);
         }
 
         private void TypeDrinksComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -226,6 +232,7 @@ namespace Havana.DB.Drinks
                 TypeOfDrink selectedItemType = (TypeOfDrink)selectedItem;
                 DrinkTextBlock.Text = $"Selected item type: {selectedItemType.Id}";
             }
+
             ShowCRUDButtons();
         }
 
@@ -236,7 +243,7 @@ namespace Havana.DB.Drinks
             DrinksComboBox.ItemsSource = drinksInfo.Select(drinkPhoto => drinkPhoto.Drink.Name);
 
             TypeOfDrinkComboBox.ItemsSource = typeOfDrinks;
-            ShowCRUDButtons();
+            
 
         }
 
@@ -262,28 +269,16 @@ namespace Havana.DB.Drinks
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void RefreshWindow()
-        {
-
-            DrinksCRUD drinksCRUD = Application.Current.Windows.OfType<DrinksCRUD>().FirstOrDefault();
-
-            if (drinksCRUD != null)
-            {
-                this.Visibility = Visibility.Hidden;
-                drinksCRUD.Visibility = Visibility.Visible;
-            }
-
-        }
 
         private void RefreshList()
         {
             DrinksInfo = dataAccess.GetDrinksPhotos();
-            typeOfDrinks = dataAccess.GetDrinkType();
+            typeOfDrinks = dataAccess.GetDrinksType();
         }
 
         private void ShowCRUDButtons()
         {
-            if (DrinkNameTextBox.Text != null && DrinkCostTextBox.Text != null && DrinkVolumeTextBox.Text != null && DrinkImage.Source != null && TypeOfDrinkComboBox.SelectedItem != null)
+            if (DrinkNameTextBox.Text != null && DrinkCostTextBox.Text != null && DrinkVolumeTextBox.Text != null &&  TypeOfDrinkComboBox.SelectedItem != null)
             {
                 AddDrinkButt.Visibility = Visibility.Visible;
                 DeleteDrinkButt.Visibility = Visibility.Visible;

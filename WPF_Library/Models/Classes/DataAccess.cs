@@ -93,7 +93,7 @@ namespace Library.Models.Classes
                 using (SqlCommand command = new SqlCommand(insertDrinkSql, connection))
                 {
                     command.Parameters.AddWithValue("@name", drink.Name);
-                    command.Parameters.AddWithValue("@id_type_dr", drink.IdTypeOFDrink);
+                    command.Parameters.AddWithValue("@id_type_dr", drink.TypeOfDrinkId);
                     command.Parameters.AddWithValue("@cost", drink.Cost);
                     command.Parameters.AddWithValue("@volume", drink.Volume);
 
@@ -134,48 +134,63 @@ namespace Library.Models.Classes
                 connection.Close();
             }
         }
-      
-        public void UpdateDrink(Drink drink) 
-        {
 
-        }
-        
-        public ImageSource GetDrinkPhoto(int idDrink)
+        public void UpdateDrink(Drink drink)
         {
-            ImageSource imageSource = null;
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
+                string query = "UPDATE Drink SET Name = @Name, Cost = @Cost, Volume = @Volume, id_type_dr = @TypeOfDrinkId WHERE Id = @Id";
 
-
-                string query = "SELECT photo FROM DrinkPhotos WHERE id_Drink = @idSnack";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@Name", drink.Name);
+                    command.Parameters.AddWithValue("@Cost", drink.Cost);
+                    command.Parameters.AddWithValue("@Volume", drink.Volume);
+                    command.Parameters.AddWithValue("@TypeOfDrinkId", drink.TypeOfDrinkId);
+                    command.Parameters.AddWithValue("@Id", drink.Id);
 
-                    command.Parameters.AddWithValue("@id_Drink", idDrink);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            byte[] photoData = (byte[])reader["photo"];
-                            using (MemoryStream stream = new MemoryStream(photoData))
-                            {
-                                BitmapImage bitmapImage = new BitmapImage();
-                                bitmapImage.BeginInit();
-                                bitmapImage.StreamSource = stream;
-                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                                bitmapImage.EndInit();
-
-                                imageSource = bitmapImage;
-                            }
-                        }
-                    }
+                    command.ExecuteNonQuery();
                 }
-                connection.Close ();
             }
-
-            return imageSource;
         }
+
+        //public ImageSource GetDrinkPhoto(int idDrink)
+        //{
+        //    ImageSource imageSource = null;
+        //    using (SqlConnection connection = new SqlConnection(cnnString))
+        //    {
+        //        connection.Open();
+
+
+        //        string query = "SELECT photo FROM DrinkPhotos WHERE id_Drink = @idSnack";
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+
+        //            command.Parameters.AddWithValue("@id_Drink", idDrink);
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    byte[] photoData = (byte[])reader["photo"];
+        //                    using (MemoryStream stream = new MemoryStream(photoData))
+        //                    {
+        //                        BitmapImage bitmapImage = new BitmapImage();
+        //                        bitmapImage.BeginInit();
+        //                        bitmapImage.StreamSource = stream;
+        //                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+        //                        bitmapImage.EndInit();
+
+        //                        imageSource = bitmapImage;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        connection.Close ();
+        //    }
+
+        //    return imageSource;
+        //}
         
         public List<DrinkPhoto> GetDrinksPhotos()
         {
@@ -183,7 +198,7 @@ namespace Library.Models.Classes
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
-                string query = "Select DP.id, DP.photo ,D.Id, D.name, D.cost, D.volume From DrinkPhotos DP inner join Drink D on D.id = DP.id_Drink";
+                string query = "Select DP.id, DP.photo ,D.Id, D.name, D.id_type_dr ,D.cost, D.volume From DrinkPhotos DP inner join Drink D on D.id = DP.id_Drink";
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -200,10 +215,11 @@ namespace Library.Models.Classes
 
                             int drinkId = reader.GetInt32(2);
                             string drinkName = reader.GetString(3);
-                            decimal drinkCost = reader.GetDecimal(4);
-                            double drinkVolume = reader.GetDouble(5);
+                            int idTypeOFDrink = reader.GetInt32(4);
+                            decimal drinkCost = reader.GetDecimal(5);
+                            double drinkVolume = reader.GetDouble(6);
 
-                            Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume);
+                            Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume, idTypeOFDrink);
                             DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, ImageSource.Source, drink);
 
                             drinkPhotos.Add(drinkPhoto);
@@ -239,6 +255,9 @@ namespace Library.Models.Classes
 
         }
        
+
+
+
         //Snacks :
         public void InsertSnack(Snack snak) 
         {

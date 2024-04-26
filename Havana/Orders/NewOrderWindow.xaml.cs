@@ -6,6 +6,7 @@ using Havana.Snacks;
 using Library.Models.Classes;
 using Havana.Main;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 
 
@@ -105,47 +106,55 @@ namespace Havana.Orders
             }
         }
 
-        private void DeleteSelectedItem_Click(object sender, RoutedEventArgs e)
+        private void DeleteSelectedItemButt_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Method implementation
+            // Perform actions when the "Delete Selected Item" button is clicked
         }
 
-        private void OrderDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Perform any necessary actions when the selection in the OrderDataGrid changes
-            // For example, you may enable or disable buttons based on the selection status
-            if (OrderDataGrid.SelectedItem != null)
-            {
-                DeleteSelectedItemButt.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                DeleteSelectedItemButt.Visibility = Visibility.Collapsed;
-            }
+
         }
 
-        private void OrderDataGridMouseDoubleClick_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (OrderDataGrid.SelectedItem is Drink selectedDrink)
-            {
-                int drinkId = selectedDrink.Id;
-                string drinkName = selectedDrink.Name;
-                decimal drinkCost = selectedDrink.Cost;
-                double drinkVolume = selectedDrink.Volume;
 
-            }
-            else if (OrderDataGrid.SelectedItem is Snack selectedSnack)
-            {
 
-                int snackId = selectedSnack.Id;
-                string snackName = selectedSnack.Name;
-                decimal snackCost = selectedSnack.Cost;
-                double snackVolume = selectedSnack.Weigth;
-            }
-            else 
-            {
-                //Do nothing 
-            }
-        }
+        //private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    // Perform any necessary actions when the selection in the OrderDataGrid changes
+        //    // For example, you may enable or disable buttons based on the selection status
+        //    if (OrderDataGrid.SelectedItem != null)
+        //    {
+        //        DeleteSelectedItemButt.Visibility = Visibility.Visible;
+        //    }
+        //    else
+        //    {
+        //        DeleteSelectedItemButt.Visibility = Visibility.Collapsed;
+        //    }
+        //}
+
+        //private void OrderDataGridMouseDoubleClick(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (OrderDataGrid.SelectedItem is Drink selectedDrink)
+        //    {
+        //        int drinkId = selectedDrink.Id;
+        //        string drinkName = selectedDrink.Name;
+        //        decimal drinkCost = selectedDrink.Cost;
+        //        double drinkVolume = selectedDrink.Volume;
+
+        //    }
+        //    else if (OrderDataGrid.SelectedItem is Snack selectedSnack)
+        //    {
+
+        //        int snackId = selectedSnack.Id;
+        //        string snackName = selectedSnack.Name;
+        //        decimal snackCost = selectedSnack.Cost;
+        //        double snackVolume = selectedSnack.Weigth;
+        //    }
+        //    else 
+        //    {
+        //        //Do nothing 
+        //}
+        //}
     }
 }

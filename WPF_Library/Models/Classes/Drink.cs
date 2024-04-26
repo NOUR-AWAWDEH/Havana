@@ -10,7 +10,7 @@ namespace Library.Models.Classes
     {
         public double Volume { get; set; }
 
-        public int IdTypeOFDrink { get;set;}
+        public int TypeOfDrinkId { get;set;}
        
         public Drink(int id, string name, decimal cost, double volume ) : base(id, name, cost)
         {
@@ -18,10 +18,10 @@ namespace Library.Models.Classes
             
         }
 
-        public Drink(int id, string name, decimal cost, double volume, int idTypeOfDrink) : base(id, name, cost)
+        public Drink(int id, string name, decimal cost, double volume, int typeOfDrinkId) : base(id, name, cost)
         {
             Volume = volume;
-            IdTypeOFDrink = idTypeOfDrink;
+            TypeOfDrinkId = typeOfDrinkId;
         }
 
         public override string ToString()

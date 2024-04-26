@@ -68,17 +68,17 @@ namespace Havana.DB.Drinks
 
         private void EditDrinkButt_Click(object sender, RoutedEventArgs e)
         {
-            DrinkIdTextBox.Text = null;
 
             int drinkId = Convert.ToInt32(DrinkIdTextBox.Text);
             string drinkName = DrinkNameTextBox.Text;
-            int idTypOFDrink = TypeOfDrinkComboBox.SelectedIndex;
+            var selectedItem = (TypeOfDrink)TypeOfDrinkComboBox.SelectedItem;
+            int idTypeOFDrink = selectedItem.Id;
             decimal  drinkCost = Convert.ToDecimal(DrinkCostTextBox.Text);
             double drinkVolume = Convert.ToDouble(DrinkVolumeTextBox.Text);
-            Drink updatedDrink = new Drink(drinkId,drinkName,drinkCost, drinkVolume, idTypOFDrink);
+            Drink updatedDrink = new Drink(drinkId,drinkName,drinkCost, drinkVolume, idTypeOFDrink);
 
             dataAccess.UpdateDrink(updatedDrink);
-            DrinkIdTextBox.Text = $"{updatedDrink.Name}Updated!! ";
+            DrinkTextBlock.Text = $"{updatedDrink.Name} Data IS Updated!! ";
         }
 
         private void FilePathButt_Click(object sender, RoutedEventArgs e)

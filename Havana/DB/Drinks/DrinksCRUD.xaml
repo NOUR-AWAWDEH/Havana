@@ -21,8 +21,8 @@
         <Border BorderBrush="#FF344C0E"
                 BorderThickness="1"
                 HorizontalAlignment="Left"
-                Height="180"
-                Margin="25,434,0,0"
+                Height="168"
+                Margin="25,446,0,0"
                 VerticalAlignment="Top"
                 Width="443"
                 />
@@ -262,29 +262,31 @@
                    Height="29"/>
 
         <Button x:Name="CleanDrinkData" 
-            Content="Clean Inputs" 
-            HorizontalAlignment="Left" 
-            Height="28" 
-            Margin="555,672,0,0" 
-            VerticalAlignment="Top" 
-            Width="198" 
-            BorderBrush="#FF344C0E" 
-            Background="#FF344C0E" 
-            Foreground="White" 
-            FontWeight="Bold" 
-            RenderTransformOrigin="0.435,0.258"
-            Click="CleanDrinkDataButt_Click"/>
+                Content="Clean Inputs" 
+                HorizontalAlignment="Left" 
+                Height="28" 
+                Margin="555,672,0,0" 
+                VerticalAlignment="Top" 
+                Width="198" 
+                BorderBrush="#FF344C0E" 
+                Background="#FF344C0E" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                RenderTransformOrigin="0.435,0.258"
+                Click="CleanDrinkDataButt_Click"/>
+
         <Label  x:Name="DrinksTypeLable"
-            Content="Type Drinks : "
-            FontSize="15" 
-            Background="#FFCAE2A8" 
-            Foreground="#FF344C0E"
-            FontWeight="Bold"
-            HorizontalAlignment="Left"
-            Margin="50,478,0,0"
-            VerticalAlignment="Top" 
-            RenderTransformOrigin="0.779,0.723" 
-            Width="114"/>
+                Content="Type Drinks : "
+                FontSize="15" 
+                Background="#FFCAE2A8" 
+                Foreground="#FF344C0E"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Margin="50,478,0,0"
+                VerticalAlignment="Top" 
+                RenderTransformOrigin="0.779,0.723" 
+                Width="114"
+                />
 
         <ComboBox   x:Name="TypeOfDrinkComboBox"
                     HorizontalAlignment="Left"
@@ -294,16 +296,18 @@
                     SelectionChanged="TypeDrinksComboBox_SelectionChanged"/>
 
         <Label  x:Name="DrinkId"
-            Content="Id :"
-            FontSize="15" 
-            Background="#FFCAE2A8" 
-            Foreground="#FF344C0E"
-            FontWeight="Bold"
-            HorizontalAlignment="Left"
-            Height="34"
-            Margin="49,448,0,0"
-            VerticalAlignment="Top"
-            Width="100"/>
+                Content="Id :"
+                FontSize="15" 
+                Background="#FFCAE2A8" 
+                Foreground="#FF344C0E"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Height="34"
+                Margin="49,448,0,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Visibility="Visible"
+                />
 
         <TextBox x:Name="DrinkIdTextBox"
                  HorizontalAlignment="Left"
@@ -312,8 +316,9 @@
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
-                 Width="47" 
-                 IsReadOnly="True"
+                 Width="47"
+                 Visibility="Visible"
+                 IsReadOnly="true"
                  />
 
 

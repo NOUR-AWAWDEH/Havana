@@ -2,19 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
-using System.Windows.Shapes;
-using static Havana.HavanaDataSet;
 
 namespace Havana.DB.Drinks
 {
@@ -75,7 +68,17 @@ namespace Havana.DB.Drinks
 
         private void EditDrinkButt_Click(object sender, RoutedEventArgs e)
         {
+            DrinkIdTextBox.Text = null;
 
+            int drinkId = Convert.ToInt32(DrinkIdTextBox.Text);
+            string drinkName = DrinkNameTextBox.Text;
+            int idTypOFDrink = TypeOfDrinkComboBox.SelectedIndex;
+            decimal  drinkCost = Convert.ToDecimal(DrinkCostTextBox.Text);
+            double drinkVolume = Convert.ToDouble(DrinkVolumeTextBox.Text);
+            Drink updatedDrink = new Drink(drinkId,drinkName,drinkCost, drinkVolume, idTypOFDrink);
+
+            dataAccess.UpdateDrink(updatedDrink);
+            DrinkIdTextBox.Text = $"{updatedDrink.Name}Updated!! ";
         }
 
         private void FilePathButt_Click(object sender, RoutedEventArgs e)
@@ -138,7 +141,7 @@ namespace Havana.DB.Drinks
                     DrinksDataGrid.Items.Add(selectedDrinkPhoto.Drink);
                     DrinkImage.Source = selectedDrinkPhoto.Image;
                     DrinkTextBlock.Text = selectedDrinkPhoto.Drink.Name;
-
+                    DrinkIdTextBox.Text = selectedDrinkPhoto.Drink.Id.ToString();
                     DrinkNameTextBox.Text = selectedDrinkPhoto.Drink.Name;
                     DrinkCostTextBox.Text = selectedDrinkPhoto.Drink.Cost.ToString();
                     DrinkVolumeTextBox.Text = selectedDrinkPhoto.Drink.Volume.ToString();

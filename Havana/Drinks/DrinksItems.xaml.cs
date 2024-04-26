@@ -53,7 +53,7 @@ namespace Havana.Drinks
                 }
             }
 
-            //Fill Datat
+            //Fill Data
             for (int i = startPos; i < endPos; i++)
             {
                 string ImageName = $"Image{i - startPos + 1}";

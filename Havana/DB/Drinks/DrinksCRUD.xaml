@@ -18,6 +18,16 @@
           Width="861">
 
 
+        <Border BorderBrush="#FF344C0E"
+                BorderThickness="1"
+                HorizontalAlignment="Left"
+                Height="180"
+                Margin="25,434,0,0"
+                VerticalAlignment="Top"
+                Width="443"
+                />
+
+
         <Button x:Name="BackToDataBaseWindow" 
                 Content="Back" 
                 Click="BackToDataBaseWindowButt" 
@@ -53,7 +63,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        
+
         <Image x:Name="DrinkImage"
                HorizontalAlignment="Left" 
                Height="244" 
@@ -86,11 +96,11 @@
         <TextBox x:Name="DrinkNameTextBox"
                  HorizontalAlignment="Left"
                  Height="18" 
-                 Margin="165,460,0,0" 
+                 Margin="170,514,0,0" 
                  TextWrapping="Wrap"
                  Text="" 
                  VerticalAlignment="Top"
-                 Width="274"/>
+                 Width="269"/>
 
         <Label   x:Name="Volume"
                  Content="Volume :" 
@@ -99,22 +109,22 @@
                  Foreground="#FF344C0E"
                  FontWeight="Bold"
                  HorizontalAlignment="Left" 
-                 Height="33" 
-                 Margin="45,517,0,0" 
+                 Height="34" 
+                 Margin="50,570,0,0" 
                  VerticalAlignment="Top" 
                  Width="114"/>
 
         <TextBox x:Name="DrinkVolumeTextBox"
                  PreviewTextInput="NumberValidationTextBox"
                  HorizontalAlignment="Left"
-                 Height="17"
-                 Margin="165,525,0,0"
+                 Height="18"
+                 Margin="170,578,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
                  Width="47" />
 
-        <Border BorderBrush="Black"
+        <Border BorderBrush="#FF344C0E"
                 BorderThickness="1"
                 HorizontalAlignment="Left"
                 Height="246"
@@ -130,7 +140,7 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Left" 
                 Height="34" 
-                Margin="45,452,0,0" 
+                Margin="50,506,0,0" 
                 VerticalAlignment="Top" 
                 Width="114"/>
 
@@ -142,7 +152,7 @@
                 FontWeight="Bold"
                 HorizontalAlignment="Left"
                 Height="34"
-                Margin="45,486,0,0"
+                Margin="50,540,0,0"
                 VerticalAlignment="Top"
                 Width="100"/>
 
@@ -151,7 +161,7 @@
                  
                  HorizontalAlignment="Left"
                  Height="18"
-                 Margin="165,494,0,0"
+                 Margin="170,548,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
@@ -199,14 +209,14 @@
                 Foreground="#FF344C0E"
                 FontWeight="Bold"
                 HorizontalAlignment="Left"
-                Margin="45,388,0,0"
-                VerticalAlignment="Top" RenderTransformOrigin="0.779,0.723" Width="114"/>
+                Margin="24,348,0,0"
+                VerticalAlignment="Top" RenderTransformOrigin="0.779,0.723" Width="120"/>
 
         <ComboBox   x:Name="DrinksComboBox"
                     HorizontalAlignment="Left"
-                    Margin="165,393,0,0"
+                    Margin="150,353,0,0"
                     VerticalAlignment="Top"
-                    Width="274" 
+                    Width="289" 
                     SelectionChanged="DrinksComboBox_SelectionChanged"/>
 
         <Button x:Name="AddDrinkButt" 
@@ -246,8 +256,7 @@
                    Text="Ready"
                    FontSize="15"
                    FontWeight="Bold"
-                   Foreground=" #FF344C0E
-"
+                   Foreground=" #FF344C0E "
                    VerticalAlignment="Top"
                    Width="762"
                    Height="29"/>
@@ -272,17 +281,40 @@
             Foreground="#FF344C0E"
             FontWeight="Bold"
             HorizontalAlignment="Left"
-            Margin="45,425,0,0"
+            Margin="50,478,0,0"
             VerticalAlignment="Top" 
             RenderTransformOrigin="0.779,0.723" 
             Width="114"/>
 
         <ComboBox   x:Name="TypeOfDrinkComboBox"
                     HorizontalAlignment="Left"
-                    Margin="165,430,0,0"
+                    Margin="170,484,0,0"
                     VerticalAlignment="Top"
-                    Width="274" 
+                    Width="269" 
                     SelectionChanged="TypeDrinksComboBox_SelectionChanged"/>
+
+        <Label  x:Name="DrinkId"
+            Content="Id :"
+            FontSize="15" 
+            Background="#FFCAE2A8" 
+            Foreground="#FF344C0E"
+            FontWeight="Bold"
+            HorizontalAlignment="Left"
+            Height="34"
+            Margin="49,448,0,0"
+            VerticalAlignment="Top"
+            Width="100"/>
+
+        <TextBox x:Name="DrinkIdTextBox"
+                 HorizontalAlignment="Left"
+                 Height="18"
+                 Margin="170,456,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="47" 
+                 IsReadOnly="True"
+                 />
 
 
     </Grid>

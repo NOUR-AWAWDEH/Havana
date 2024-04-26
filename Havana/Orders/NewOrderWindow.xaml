@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
-        Title="NewOrder" Height="800" Width="900" ResizeMode="CanMinimize" Icon="../Resources/LOGO.ico"
+        Title="NewOrder" Height="700" Width="1000" ResizeMode="CanMinimize" Icon="../Resources/LOGO.ico"
         WindowStartupLocation="CenterScreen">
 
-    <Grid Height="800" Width="900" Margin="0,0,0,-16" Background="#FFCAE2A8">
+    <Grid Height="700" Width="1000" Margin="0,0,0,-16" Background="#FFCAE2A8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="82*"/>
             <ColumnDefinition Width="441*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Content="Back" HorizontalAlignment="Left" Margin="14,698,0,0" VerticalAlignment="Top" Height="29" Width="127" Click="BackToHavana" Visibility="Visible" Foreground="White" FontWeight="Bold">
+        <Button Content="Back" HorizontalAlignment="Left" Margin="14,413,0,0" VerticalAlignment="Top" Height="29" Width="127" Click="BackToHavana" Visibility="Visible" Foreground="White" FontWeight="Bold">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -23,7 +23,17 @@
             </Button.Background>
         </Button>
 
-        <DataGrid x:Name="OrderDataGrid" HorizontalAlignment="Left" Height="297" Margin="14,83,0,0" VerticalAlignment="Top" Width="867"  Grid.ColumnSpan="2" >
+        <DataGrid x:Name="OrderDataGrid"
+          HorizontalAlignment="Left"
+          Height="297"
+          Margin="14,83,0,0"
+          VerticalAlignment="Top"
+          Width="385"
+          Grid.ColumnSpan="2"
+           
+          SelectionChanged="OrderDataGrid_SelectionChanged"
+          MouseDoubleClick="OrderDataGridMouseDoubleClick_Click"
+          IsReadOnly="True">
 
             <DataGrid.Columns>
 
@@ -36,11 +46,30 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="Snaks :" HorizontalAlignment="Left" Height="54" Margin="14,426,0,0" VerticalAlignment="Top" Width="146" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" Grid.ColumnSpan="2"/>
+        <Label Content="Snaks :"
+               HorizontalAlignment="Center"
+               Height="54" Margin="0,187,0,0"
+               VerticalAlignment="Top"
+               Width="146"
+               Background="#FFCAE2A8"
+               Foreground="#FF3C5415"
+               FontWeight="Bold"
+               FontSize="40" Grid.Column="1"/>
 
-        <Label Content="Drinks :" HorizontalAlignment="Left" Height="54" Margin="141,429,0,0" VerticalAlignment="Top" Width="149" Background="#FFCAE2A8" Foreground="#FF3C5415" FontWeight="Bold" FontSize="40" RenderTransformOrigin="1.107,0.445" Grid.Column="1"/>
+        <Label Content="Drinks :"
+               HorizontalAlignment="Left"
+               Height="54"
+               Margin="579,187,0,0"
+               VerticalAlignment="Top"
+               Width="159"
+               Background="#FFCAE2A8"
+               Foreground="#FF3C5415"
+               FontWeight="Bold"
+               FontSize="40"
+               RenderTransformOrigin="1.107,0.445"
+               Grid.Column="1"/>
 
-        <Button Content="Snacks Items" HorizontalAlignment="Left" Margin="17,485,0,0" VerticalAlignment="Top" Height="36" Width="140"  Visibility="Visible" Foreground="White" FontWeight="Bold" Click="SnaksItemsButt" Grid.ColumnSpan="2">
+        <Button Content="Snacks Items" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Height="36" Width="140"  Visibility="Visible" Foreground="White" FontWeight="Bold" Click="SnaksItemsButt" Grid.Column="1">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -50,7 +79,16 @@
         </Button>
 
 
-        <Button Content="Drinks Items" HorizontalAlignment="Left" Margin="150,488,0,0" VerticalAlignment="Top" Height="36" Width="140" Click="DrinksItemsButt" Visibility="Visible" Foreground="White" FontWeight="Bold" Grid.Column="1">
+        <Button Content="Drinks Items"
+                HorizontalAlignment="Left"
+                Margin="588,246,0,0"
+                VerticalAlignment="Top"
+                Height="36" Width="140"
+                Click="DrinksItemsButt"
+                Visibility="Visible"
+                Foreground="White"
+                FontWeight="Bold"
+                Grid.Column="1">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -61,7 +99,18 @@
 
 
 
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Height="26" Margin="14,41,0,0" VerticalAlignment="Top" Width="96"  Foreground="White" FontWeight="Bold"  Visibility="Visible" Click="SearchButt">
+        <Button x:Name="SearchButton"
+                Content="Search"
+                HorizontalAlignment="Left"
+                Height="26"
+                Margin="14,49,0,0"
+                VerticalAlignment="Top"
+                Width="96"
+                Foreground="White"
+                FontWeight="Bold"
+                Visibility="Visible"
+                Click="SearchButt">
+            
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -70,13 +119,45 @@
             </Button.Background>
         </Button>
 
-        <Image HorizontalAlignment="Left" Height="97" Margin="150,529,0,0" VerticalAlignment="Top" Width="140"  Grid.Column="1" Source="../Resources/Drinks.jpg"/>
+        <Image HorizontalAlignment="Left"
+               Height="97"
+               Margin="588,287,0,0"
+               VerticalAlignment="Top"
+               Width="140"
+               Grid.Column="1"
+               Source="../Resources/Drinks.jpg"/>
 
-        <Image HorizontalAlignment="Left" Height="96" Margin="17,526,0,0" VerticalAlignment="Top" Width="140" Source="../Resources/FastFood.jpg" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Center"
+               Height="96"
+               Margin="0,287,0,0"
+               VerticalAlignment="Top"
+               Width="140"
+               Source="../Resources/FastFood.jpg"
+               Grid.Column="1"/>
 
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="115,41,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="284" Grid.ColumnSpan="2" Visibility="Visible" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="26"
+                 Margin="115,49,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="284"
+                 Grid.ColumnSpan="2"
+                 Visibility="Visible" 
+                 />
 
-        <Button x:Name="BuyerNameButton" Content="Buyer Name" HorizontalAlignment="Left" Height="26" Margin="355,400,0,0" VerticalAlignment="Top" Width="96"  Foreground="White" FontWeight="Bold"  Visibility="Visible" Click="BuyerNameButt" Grid.Column="1">
+        <Button x:Name="BuyerNameButton"
+                Content="Buyer Name"
+                HorizontalAlignment="Left"
+                Height="26"
+                Margin="284,83,0,0"
+                VerticalAlignment="Top"
+                Width="96"
+                Foreground="White"
+                FontWeight="Bold"
+                Visibility="Visible"
+                Click="BuyerNameButt"
+                Grid.Column="1">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -85,7 +166,50 @@
             </Button.Background>
         </Button>
 
-        <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="26" Margin="456,400,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="284" Visibility="Visible" Grid.Column="1"/>
+        <TextBox x:Name="BuyerNameTextBox"
+                 HorizontalAlignment="Left"
+                 Height="26" 
+                 Margin="385,83,0,0"
+                 TextWrapping="Wrap"
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="284" 
+                 Visibility="Visible"
+                 Grid.Column="1"/>
+
+        <Button x:Name="DeleteSelectedItemButt" 
+                Content="Delete Selected Item" 
+                HorizontalAlignment="Left" 
+                Height="26" 
+                Margin="14,10,0,0" 
+                VerticalAlignment="Top" 
+                Width="137"  
+                Foreground="White" 
+                FontWeight="Bold"  
+                Visibility="Hidden" 
+                Click="DeleteSelectedItemButt_Click" 
+                Grid.ColumnSpan="2">
+
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="OrderTextBlock"
+                   FontSize="15"
+                   FontWeight="Bold"
+                   Foreground="#FF344C0E"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Left"
+                   Height="28"
+                   Margin="14,662,0,0"
+                   TextWrapping="Wrap"
+                   Text="Ready"
+                   VerticalAlignment="Top"
+                   Width="895"
+                   />
 
     </Grid>
 

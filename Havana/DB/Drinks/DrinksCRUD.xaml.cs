@@ -26,43 +26,26 @@ namespace Havana.DB.Drinks
             InitializeComponent();
             RefreshList();
             ShowDrinks(DrinksInfo, typeOfDrinks);
-            ShowCRUDButtons();
         }
 
-        private void ShowDrinks(List<DrinkPhoto> drinksInfo, List<TypeOfDrink> typeOfDrinks)
+
+        //CRUD BUTTONS
+        private void AddDrinkButt_Click(object sender, RoutedEventArgs e)
         {
-            DrinksComboBox.ItemsSource = drinksInfo.Select(drinkPhoto => drinkPhoto.Drink.Name);
+            int id = -1;
+            string nameDrink = DrinkNameTextBox.Text;
+            decimal costDrink = Convert.ToDecimal(DrinkCostTextBox.Text);
+            double volumeDrink = Convert.ToDouble(DrinkVolumeTextBox.Text);
+            int idTypeOFDrink = TypeDrinksSelectedItemID();
 
-            TypeOfDrinkComboBox.ItemsSource = typeOfDrinks;
-            ShowCRUDButtons();
-            
-        }
+            Drink newDrink = new Drink(id, nameDrink, costDrink, volumeDrink, idTypeOFDrink);
 
-        private int TypeDrinksSelectedItemID()
-        {
-            if (TypeOfDrinkComboBox.SelectedItem is TypeOfDrink selectedType)
-            {
-                foreach (TypeOfDrink typeOfDrink in typeOfDrinks)
-                {
-                    if (selectedType.Id == typeOfDrink.Id)
-                    {
-                        return typeOfDrink.Id;
-                    }
-                }
-            }
-            ShowCRUDButtons();
-            return -1;
-        }
+            int newIdDrink = dataAccess.InsertDrink(newDrink);
+            string photoPath = FilePathTextBox.Text;
+            dataAccess.InsertDrinkPhoto(photoPath, newIdDrink);
+            DrinkTextBlock.Text = newDrink.Name.ToString() + " has been added!";
 
-        private void BackToDataBaseWindowButt(object sender, RoutedEventArgs e)
-        {
-            DataBaseInfo databaseInfoWindow = Application.Current.Windows.OfType<DataBaseInfo>().FirstOrDefault();
-
-            if (databaseInfoWindow != null)
-            {
-                this.Visibility = Visibility.Hidden;
-                databaseInfoWindow.Visibility = Visibility.Visible;
-            }
+            RefreshList();
         }
 
         private void EditDrinkButt_Click(object sender, RoutedEventArgs e)
@@ -72,14 +55,51 @@ namespace Havana.DB.Drinks
             string drinkName = DrinkNameTextBox.Text;
             var selectedItem = (TypeOfDrink)TypeOfDrinkComboBox.SelectedItem;
             int idTypeOFDrink = selectedItem.Id;
-            decimal  drinkCost = Convert.ToDecimal(DrinkCostTextBox.Text);
+            decimal drinkCost = Convert.ToDecimal(DrinkCostTextBox.Text);
             double drinkVolume = Convert.ToDouble(DrinkVolumeTextBox.Text);
-            Drink updatedDrink = new Drink(drinkId,drinkName,drinkCost, drinkVolume, idTypeOFDrink);
+            Drink updatedDrink = new Drink(drinkId, drinkName, drinkCost, drinkVolume, idTypeOFDrink);
 
             dataAccess.UpdateDrink(updatedDrink);
             DrinkTextBlock.Text = $"{updatedDrink.Name} Data IS Updated!! ";
 
             RefreshList();
+        }
+        
+        private void DeleteDrinkButt_Click(object sender, RoutedEventArgs e)
+        {
+            DrinkTextBlock.Text = null;
+            if (DrinksComboBox.SelectedItem is string selectedDrinkName)
+            {
+                Drink selectedDrink = dataAccess.GetDrinkByName(selectedDrinkName);
+                if (selectedDrink != null)
+                {
+                    dataAccess.DeleteDrink(selectedDrink.Id);
+                    RefreshWindow();
+                    DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
+
+                }
+                RefreshList();
+            }
+            else if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
+            {
+                dataAccess.DeleteDrink(selectedDrink.Id);
+                RefreshWindow();
+                DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
+
+            }
+        }
+
+
+        //Other Buttons
+        private void BackToDataBaseWindowButt(object sender, RoutedEventArgs e)
+        {
+            DataBaseInfo databaseInfoWindow = Application.Current.Windows.OfType<DataBaseInfo>().FirstOrDefault();
+
+            if (databaseInfoWindow != null)
+            {
+                this.Visibility = Visibility.Hidden;
+                databaseInfoWindow.Visibility = Visibility.Visible;
+            }
         }
 
         private void FilePathButt_Click(object sender, RoutedEventArgs e)
@@ -103,6 +123,47 @@ namespace Havana.DB.Drinks
             ShowCRUDButtons();
         }
 
+        private void SearchByNameButt(object sender, RoutedEventArgs e)
+        {
+            DrinksDataGrid.Items.Clear();
+            DrinkImage.Source = null;
+            string searchTerm = SearchTextBox.Text.ToLower();
+
+            foreach (DrinkPhoto drinkPhoto in DrinksInfo)
+            {
+                if (drinkPhoto.Drink.Name.ToLower().StartsWith(searchTerm) ||
+                    drinkPhoto.Drink.Cost.ToString().ToLower().StartsWith(searchTerm))
+                {
+                    DrinkTextBlock.Text = drinkPhoto.Drink.Name;
+                    DrinksDataGrid.Items.Add(drinkPhoto.Drink);
+                    DrinkImage.Source = drinkPhoto.Image;
+                    DrinkNameTextBox.Text = drinkPhoto.Drink.Name;
+                    DrinkCostTextBox.Text = drinkPhoto.Drink.Cost.ToString();
+                    DrinkVolumeTextBox.Text = drinkPhoto.Drink.Volume.ToString();
+
+                }
+            }
+            ShowCRUDButtons();
+        }
+       
+        private void CleanDrinkDataButt_Click(object sender, RoutedEventArgs e)
+        {
+
+            DrinkTextBlock.Text = null;
+            DrinksDataGrid.Items.Clear();
+            DrinkImage.Source = null;
+            DrinkNameTextBox.Text = null;
+            DrinkCostTextBox.Text = null;
+            DrinkVolumeTextBox.Text = null;
+            FilePathTextBox.Text = null;
+            DrinksComboBox.SelectedItem = null;
+            DrinkIdTextBox.Text = null;
+            TypeOfDrinkComboBox.SelectedItem = null;
+            RefreshList();
+        }
+
+
+        //Data Grind :
         private void DrinksDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
@@ -127,6 +188,8 @@ namespace Havana.DB.Drinks
 
         }
 
+
+        //ComboBox:
         private void DrinksComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -154,51 +217,43 @@ namespace Havana.DB.Drinks
 
         }
 
-        private void DeleteDrinkButt_Click(object sender, RoutedEventArgs e)
+        private void TypeDrinksComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DrinkTextBlock.Text = null;
-            if (DrinksComboBox.SelectedItem is string selectedDrinkName)
-            {
-                Drink selectedDrink = dataAccess.GetDrinkByName(selectedDrinkName);
-                if (selectedDrink != null)
-                {
-                    dataAccess.DeleteDrink(selectedDrink.Id);
-                    RefreshWindow();
-                    DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
+            if(TypeOfDrinkComboBox.SelectedItem != null) 
+            { 
 
-                }
-                RefreshList();
+                var selectedItem = TypeOfDrinkComboBox.SelectedItem;
+                TypeOfDrink selectedItemType = (TypeOfDrink)selectedItem;
+                DrinkTextBlock.Text = $"Selected item type: {selectedItemType.Id}";
             }
-            else if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
-            {
-                dataAccess.DeleteDrink(selectedDrink.Id);
-                RefreshWindow();
-                DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
-
-            }
+            ShowCRUDButtons();
         }
 
-        private void SearchByNameButt(object sender, RoutedEventArgs e)
+
+        //Implements Methods
+        private void ShowDrinks(List<DrinkPhoto> drinksInfo, List<TypeOfDrink> typeOfDrinks)
         {
-            DrinksDataGrid.Items.Clear();
-            DrinkImage.Source = null;
-            string searchTerm = SearchTextBox.Text.ToLower();
+            DrinksComboBox.ItemsSource = drinksInfo.Select(drinkPhoto => drinkPhoto.Drink.Name);
 
-            foreach (DrinkPhoto drinkPhoto in DrinksInfo)
+            TypeOfDrinkComboBox.ItemsSource = typeOfDrinks;
+            ShowCRUDButtons();
+
+        }
+
+        private int TypeDrinksSelectedItemID()
+        {
+            if (TypeOfDrinkComboBox.SelectedItem is TypeOfDrink selectedType)
             {
-                if (drinkPhoto.Drink.Name.ToLower().StartsWith(searchTerm) ||
-                    drinkPhoto.Drink.Cost.ToString().ToLower().StartsWith(searchTerm))
+                foreach (TypeOfDrink typeOfDrink in typeOfDrinks)
                 {
-                    DrinkTextBlock.Text = drinkPhoto.Drink.Name;
-                    DrinksDataGrid.Items.Add(drinkPhoto.Drink);
-                    DrinkImage.Source = drinkPhoto.Image;
-                    DrinkNameTextBox.Text = drinkPhoto.Drink.Name;
-                    DrinkCostTextBox.Text = drinkPhoto.Drink.Cost.ToString();
-                    DrinkVolumeTextBox.Text = drinkPhoto.Drink.Volume.ToString();
-
+                    if (selectedType.Id == typeOfDrink.Id)
+                    {
+                        return typeOfDrink.Id;
+                    }
                 }
             }
             ShowCRUDButtons();
+            return -1;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -217,10 +272,10 @@ namespace Havana.DB.Drinks
                 this.Visibility = Visibility.Hidden;
                 drinksCRUD.Visibility = Visibility.Visible;
             }
-           
+
         }
 
-        private void RefreshList() 
+        private void RefreshList()
         {
             DrinksInfo = dataAccess.GetDrinksPhotos();
             typeOfDrinks = dataAccess.GetDrinkType();
@@ -228,59 +283,14 @@ namespace Havana.DB.Drinks
 
         private void ShowCRUDButtons()
         {
-            if (DrinkNameTextBox.Text != null && DrinkCostTextBox.Text != null && DrinkVolumeTextBox.Text != null && DrinkImage.Source != null && TypeOfDrinkComboBox.SelectedItem != null) 
+            if (DrinkNameTextBox.Text != null && DrinkCostTextBox.Text != null && DrinkVolumeTextBox.Text != null && DrinkImage.Source != null && TypeOfDrinkComboBox.SelectedItem != null)
             {
                 AddDrinkButt.Visibility = Visibility.Visible;
-                DeleteDrinkButt.Visibility= Visibility.Visible;
+                DeleteDrinkButt.Visibility = Visibility.Visible;
                 EditDrinkButt.Visibility = Visibility.Visible;
             }
         }
 
-        private void AddDrinkButt_Click(object sender, RoutedEventArgs e)
-        {
-            int id = -1;
-            string nameDrink = DrinkNameTextBox.Text;
-            decimal costDrink = Convert.ToDecimal(DrinkCostTextBox.Text);
-            double volumeDrink = Convert.ToDouble(DrinkVolumeTextBox.Text);
-            int idTypeOFDrink = TypeDrinksSelectedItemID();
-
-            Drink newDrink = new Drink( id,nameDrink, costDrink, volumeDrink, idTypeOFDrink);
-
-            int newIdDrink = dataAccess.InsertDrink(newDrink);           
-            string photoPath = FilePathTextBox.Text;
-            dataAccess.InsertDrinkPhoto(photoPath, newIdDrink);
-            DrinkTextBlock.Text = newDrink.Name.ToString() + " has been added!";
-
-            RefreshList();
-        }
-
-        private void CleanDrinkDataButt_Click(object sender, RoutedEventArgs e)
-        {
-
-            DrinkTextBlock.Text = null;
-            DrinksDataGrid.Items.Clear();
-            DrinkImage.Source = null;
-            DrinkNameTextBox.Text = null;
-            DrinkCostTextBox.Text = null;
-            DrinkVolumeTextBox.Text = null;
-            FilePathTextBox.Text = null;
-            DrinksComboBox.SelectedItem = null;
-            DrinkIdTextBox.Text = null;
-            TypeOfDrinkComboBox.SelectedItem = null;
-            RefreshList();
-        }
-
-        private void TypeDrinksComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(TypeOfDrinkComboBox.SelectedItem != null) 
-            { 
-
-                var selectedItem = TypeOfDrinkComboBox.SelectedItem;
-                TypeOfDrink selectedItemType = (TypeOfDrink)selectedItem;
-                DrinkTextBlock.Text = $"Selected item type: {selectedItemType.Id}";
-            }
-            ShowCRUDButtons();
-        }
 
     }
 }

@@ -24,8 +24,7 @@ namespace Havana.DB.Drinks
         public DrinksCRUD()
         {
             InitializeComponent();
-            DrinksInfo = dataAccess.GetDrinksPhotos();
-            typeOfDrinks = dataAccess.GetDrinkType();
+            RefreshList();
             ShowDrinks(DrinksInfo, typeOfDrinks);
             ShowCRUDButtons();
         }
@@ -79,6 +78,8 @@ namespace Havana.DB.Drinks
 
             dataAccess.UpdateDrink(updatedDrink);
             DrinkTextBlock.Text = $"{updatedDrink.Name} Data IS Updated!! ";
+
+            RefreshList();
         }
 
         private void FilePathButt_Click(object sender, RoutedEventArgs e)
@@ -166,6 +167,7 @@ namespace Havana.DB.Drinks
                     DrinkTextBlock.Text = $"{selectedDrink.Name} Has been Deleted";
 
                 }
+                RefreshList();
             }
             else if (DrinksDataGrid.SelectedItem is Drink selectedDrink)
             {
@@ -215,6 +217,13 @@ namespace Havana.DB.Drinks
                 this.Visibility = Visibility.Hidden;
                 drinksCRUD.Visibility = Visibility.Visible;
             }
+           
+        }
+
+        private void RefreshList() 
+        {
+            DrinksInfo = dataAccess.GetDrinksPhotos();
+            typeOfDrinks = dataAccess.GetDrinkType();
         }
 
         private void ShowCRUDButtons()
@@ -241,6 +250,8 @@ namespace Havana.DB.Drinks
             string photoPath = FilePathTextBox.Text;
             dataAccess.InsertDrinkPhoto(photoPath, newIdDrink);
             DrinkTextBlock.Text = newDrink.Name.ToString() + " has been added!";
+
+            RefreshList();
         }
 
         private void CleanDrinkDataButt_Click(object sender, RoutedEventArgs e)
@@ -254,7 +265,9 @@ namespace Havana.DB.Drinks
             DrinkVolumeTextBox.Text = null;
             FilePathTextBox.Text = null;
             DrinksComboBox.SelectedItem = null;
-            
+            DrinkIdTextBox.Text = null;
+            TypeOfDrinkComboBox.SelectedItem = null;
+            RefreshList();
         }
 
         private void TypeDrinksComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -32,6 +32,7 @@ namespace Library.Models.Classes
             }
         }
 
+        //TypOFDrink
         public List<TypeOfDrink> GetDrinkType()
         {
             List<TypeOfDrink> typeOfDrinks = new List<TypeOfDrink>();
@@ -155,43 +156,6 @@ namespace Library.Models.Classes
             }
         }
 
-        //public ImageSource GetDrinkPhoto(int idDrink)
-        //{
-        //    ImageSource imageSource = null;
-        //    using (SqlConnection connection = new SqlConnection(cnnString))
-        //    {
-        //        connection.Open();
-
-
-        //        string query = "SELECT photo FROM DrinkPhotos WHERE id_Drink = @idSnack";
-        //        using (SqlCommand command = new SqlCommand(query, connection))
-        //        {
-
-        //            command.Parameters.AddWithValue("@id_Drink", idDrink);
-        //            using (SqlDataReader reader = command.ExecuteReader())
-        //            {
-        //                if (reader.Read())
-        //                {
-        //                    byte[] photoData = (byte[])reader["photo"];
-        //                    using (MemoryStream stream = new MemoryStream(photoData))
-        //                    {
-        //                        BitmapImage bitmapImage = new BitmapImage();
-        //                        bitmapImage.BeginInit();
-        //                        bitmapImage.StreamSource = stream;
-        //                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-        //                        bitmapImage.EndInit();
-
-        //                        imageSource = bitmapImage;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        connection.Close ();
-        //    }
-
-        //    return imageSource;
-        //}
-        
         public List<DrinkPhoto> GetDrinksPhotos()
         {
             List<DrinkPhoto> drinkPhotos = new List<DrinkPhoto>();

@@ -139,6 +139,8 @@ namespace Havana.DB.Drinks
                     DrinkTextBlock.Text = null;
                     DrinksDataGrid.Items.Clear();
                     DrinksDataGrid.Items.Add(selectedDrinkPhoto.Drink);
+                    var selectedItem = TypeOfDrinkComboBox.Items.OfType<TypeOfDrink>().FirstOrDefault(item => item.Id == selectedDrinkPhoto.Drink.TypeOfDrinkId);
+                    TypeOfDrinkComboBox.SelectedItem = selectedItem;
                     DrinkImage.Source = selectedDrinkPhoto.Image;
                     DrinkTextBlock.Text = selectedDrinkPhoto.Drink.Name;
                     DrinkIdTextBox.Text = selectedDrinkPhoto.Drink.Id.ToString();

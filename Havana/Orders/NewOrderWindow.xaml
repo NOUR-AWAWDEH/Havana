@@ -5,13 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
-        Title="NewOrder" Height="700" Width="1000" ResizeMode="CanMinimize" Icon="../Resources/LOGO.ico"
+        Title="NewOrder"
+        Height="800"
+        Width="1100"
+        ResizeMode="CanMinimize"
+        Icon="../Resources/LOGO.ico"
         WindowStartupLocation="CenterScreen">
 
-    <Grid Height="700" Width="1000"  Background="#FFCAE2A8">
+    <Grid Height="800"
+          Width="1100"
+          Background="#FFCAE2A8">
 
 
-        <Button Content="Back" HorizontalAlignment="Left" Margin="14,518,0,0" VerticalAlignment="Top" Height="29" Width="127" Click="BackToHavana" Visibility="Visible" Foreground="White" FontWeight="Bold">
+        <Button Content="Back"
+                HorizontalAlignment="Left"
+                Margin="14,518,0,0"
+                VerticalAlignment="Top"
+                Height="29"
+                Width="127"
+                Click="BackToHavana"
+                Visibility="Visible"
+                Foreground="White"
+                FontWeight="Bold"
+                >
+
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -21,32 +38,53 @@
         </Button>
 
         <DataGrid x:Name="OrderDataGrid"
-                  
                   HorizontalAlignment="Left"
-                  Height="297"
-                  Margin="14,200,0,0"
+                  Height="284"
+                  Margin="14,213,0,0"
                   VerticalAlignment="Top"
-                  Width="385"
-                  SelectionMode="Single" SelectionChanged="OrderDataGrid_SelectionChanged"
+                  Width="728"
+                  SelectionMode="Single"
+                  SelectionChanged="OrderDataGrid_SelectionChanged"
                   >
 
             <DataGrid.Columns>
+               
 
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
-                <DataGridTextColumn Header="Weight" Binding="{Binding Weigth}" />
-                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" />
+                <DataGridTextColumn Header="ID"
+                                    Binding="{Binding Id}"
+                                    CanUserResize="True"
+                                    />
+
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}"
+                                    CanUserResize="True"
+                                    />
+
+                <DataGridTextColumn Header="Cost"
+                                    Binding="{Binding Cost}"
+                                    CanUserResize="True"
+                                    />
+
+                <DataGridTextColumn Header="Weight"
+                                    Binding="{Binding Weigth}"
+                                    CanUserResize="True"
+                                    />
+
+                <DataGridTextColumn Header="Volume"
+                                    Binding="{Binding Volume}"
+                                    CanUserResize="True" 
+                                    />
 
             </DataGrid.Columns>
+            
         </DataGrid>
 
         <Label Content="Snaks :"
                HorizontalAlignment="Left"
                Height="54" 
-               Margin="472,187,0,0"
+               Margin="206,521,0,0"
                VerticalAlignment="Top"
-               Width="146"
+               Width="157"
                Background="#FFCAE2A8"
                Foreground="#FF3C5415"
                FontWeight="Bold"
@@ -55,9 +93,9 @@
         <Label Content="Drinks :"
                HorizontalAlignment="Left"
                Height="54"
-               Margin="810,187,0,0"
+               Margin="479,514,0,0"
                VerticalAlignment="Top"
-               Width="160"
+               Width="158"
                Background="#FFCAE2A8"
                Foreground="#FF3C5415"
                FontWeight="Bold"
@@ -66,10 +104,10 @@
 
         <Button Content="Snacks Items"
                 HorizontalAlignment="Left"
-                Margin="475,246,0,0"
+                Margin="206,575,0,0"
                 VerticalAlignment="Top"
                 Height="36"
-                Width="140"
+                Width="157"
                 Visibility="Visible"
                 Foreground="White"
                 FontWeight="Bold"
@@ -87,13 +125,15 @@
 
         <Button Content="Drinks Items"
                 HorizontalAlignment="Left"
-                Margin="810,241,0,0"
+                Margin="479,570,0,0"
                 VerticalAlignment="Top"
-                Height="36" Width="140"
+                Height="36" Width="158"
                 Click="DrinksItemsButt"
                 Visibility="Visible"
                 Foreground="White"
-                FontWeight="Bold">
+                FontWeight="Bold"
+                >
+
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -108,13 +148,14 @@
                 Content="Search"
                 HorizontalAlignment="Left"
                 Height="26"
-                Margin="14,129,0,0"
+                Margin="14,60,0,0"
                 VerticalAlignment="Top"
                 Width="96"
                 Foreground="White"
                 FontWeight="Bold"
                 Visibility="Visible"
-                Click="SearchButt">
+                Click="SearchButt"
+                >
 
             <Button.Background>
                 <RadialGradientBrush>
@@ -124,27 +165,32 @@
             </Button.Background>
         </Button>
 
-        <Image HorizontalAlignment="Left"
-               Height="97"
-               Margin="810,287,0,0"
+        <Image x:Name="DrinksImage"
+               HorizontalAlignment="Left"
+               Height="126"
+               Margin="479,616,0,0"
                VerticalAlignment="Top"
-               Width="140"
-               Source="../Resources/Drinks.jpg"/>
+               Width="158"
+               Source="../Resources/Drinks.jpg"
+               />
 
-        <Image HorizontalAlignment="Left"
-               Height="96"
-               Margin="475,287,0,0"
+        <Image x:Name="SnacksImage"
+               HorizontalAlignment="Left"
+               Height="109"
+               Margin="206,616,0,0"
                VerticalAlignment="Top"
-               Width="140"
-               Source="../Resources/FastFood.jpg"/>
+               Width="157"
+               Source="../Resources/FastFood.jpg"
+               />
 
-        <TextBox HorizontalAlignment="Left"
+        <TextBox x:Name="SearchTextBox"
+                 HorizontalAlignment="Left"
                  Height="26"
-                 Margin="115,129,0,0"
+                 Margin="141,60,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
-                 Width="284"
+                 Width="601"
                  Visibility="Visible" 
                  />
 
@@ -158,7 +204,10 @@
                 Foreground="White"
                 FontWeight="Bold"
                 Visibility="Visible"
-                Click="BuyerNameButt" RenderTransformOrigin="0.544,0.521">
+                Click="BuyerNameButt" 
+                RenderTransformOrigin="0.5,0.5"
+                >
+
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -170,12 +219,13 @@
         <TextBox x:Name="BuyerNameTextBox"
                  HorizontalAlignment="Left"
                  Height="26" 
-                 Margin="115,169,0,0"
+                 Margin="125,169,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
-                 Width="284" 
-                 Visibility="Visible"/>
+                 Width="617" 
+                 Visibility="Visible"
+                 />
 
         <Button x:Name="DeleteSelectedItemButt" 
                 Content="Delete Selected Item" 
@@ -197,18 +247,59 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+
         <TextBlock x:Name="OrderTextBlock"
                    FontSize="15"
                    FontWeight="Bold"
                    Foreground="#FF344C0E"
                    HorizontalAlignment="Left"
                    Height="28"
-                   Margin="14,648,0,0"
+                   Margin="14,741,0,0"
                    TextWrapping="Wrap"
                    Text="Ready"
                    VerticalAlignment="Top"
                    Width="895"
                    />
+
+        <Image  x:Name="OrderImage"
+                HorizontalAlignment="Left"
+                Height="281"
+                Margin="787,213,0,0"
+                VerticalAlignment="Top"
+                Width="292"
+                />
+
+        <Border BorderBrush="Black"
+                BorderThickness="1"
+                HorizontalAlignment="Left"
+                Height="284"
+                Margin="787,213,0,0"
+                VerticalAlignment="Top"
+                Width="290"
+                />
+
+        <Label  x:Name="ItemsLable"
+                Content="Search Resualt :"
+                HorizontalAlignment="Left"
+                Height="28"
+                Margin="14,91,0,0"
+                VerticalAlignment="Top"
+                Width="127"
+                FontSize="15"
+                FontWeight="Bold"
+                />
+
+        <ComboBox   x:Name="ItemsComboBox"
+                    HorizontalAlignment="Left"
+                    Margin="141,96,0,0"
+                    VerticalAlignment="Top"
+                    Width="601"
+                    DisplayMemberPath="Name"
+                    SelectionChanged="ItemsComboBox_SelectionChanged">
+                    
+
+        </ComboBox>
+
 
     </Grid>
 

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Snacks Items" Height="900" Width="1000"
         WindowStartupLocation="CenterScreen">
+    
     <Grid Background="#FFCAE2A8">
 
         <Button Content="Exit" HorizontalAlignment="Left" Height="33" Margin="55,812,0,0" VerticalAlignment="Top" Width="81" Click="Exit" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
@@ -28,5 +29,6 @@
 
         <Button Content="Netx" HorizontalAlignment="Left" Height="28" Margin="780,828,0,0" VerticalAlignment="Top" Width="117" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold" Click="NextPage" RenderTransformOrigin="0.262,10.834" />
         <Button Content="Back" HorizontalAlignment="Left" Height="28" Margin="203,828,0,0" VerticalAlignment="Top" Width="117" Click="Back" Visibility="Visible" Background="#FF344C0E" Foreground="White" FontWeight="Bold"/>
+    
     </Grid>
 </Window>

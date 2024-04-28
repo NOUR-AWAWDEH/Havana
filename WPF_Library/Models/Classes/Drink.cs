@@ -26,7 +26,7 @@ namespace Library.Models.Classes
 
         public override string ToString()
         {
-            return base.ToString()+ $"{Volume}";
+            return base.ToString() + $"\t{Volume}";
         }
 
     }

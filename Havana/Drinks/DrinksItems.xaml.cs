@@ -87,6 +87,7 @@ namespace Havana.Drinks
             newOrderWindow.BackToOrderWindow(newOrderWindow);
             this.Close();
         }
+
         private void AddButt(object sender, RoutedEventArgs e)
         {
             int startPos = sizePage * currentPage;
@@ -119,9 +120,6 @@ namespace Havana.Drinks
                 }
             }
         }
-
-
-
 
         private void NextPage(object sender, RoutedEventArgs e)
         {

@@ -108,13 +108,20 @@ namespace Havana.Orders
 
         private void DeleteSelectedItemButt_Click(object sender, RoutedEventArgs e)
         {
-            // Method implementation
-            // Perform actions when the "Delete Selected Item" button is clicked
+            OrderDataGrid.Items.Remove(OrderDataGrid.SelectedItem);
+
         }
 
         private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (OrderDataGrid.SelectedItem != null)
+            {
+                DeleteSelectedItemButt.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DeleteSelectedItemButt.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -123,14 +130,7 @@ namespace Havana.Orders
         //{
         //    // Perform any necessary actions when the selection in the OrderDataGrid changes
         //    // For example, you may enable or disable buttons based on the selection status
-        //    if (OrderDataGrid.SelectedItem != null)
-        //    {
-        //        DeleteSelectedItemButt.Visibility = Visibility.Visible;
-        //    }
-        //    else
-        //    {
-        //        DeleteSelectedItemButt.Visibility = Visibility.Collapsed;
-        //    }
+        //    
         //}
 
         //private void OrderDataGridMouseDoubleClick(object sender, SelectionChangedEventArgs e)

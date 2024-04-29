@@ -6,23 +6,24 @@
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
         Title="NewOrder"
-        Height="800"
-        Width="1100"
+        Height="1000"
+        Width="800"
         ResizeMode="CanMinimize"
         Icon="../Resources/LOGO.ico"
         WindowStartupLocation="CenterScreen">
 
-    <Grid Height="800"
-          Width="1100"
+    <Grid Height="1000"
+          Width="800"
           Background="#FFCAE2A8">
 
 
         <Button Content="Back"
                 HorizontalAlignment="Left"
-                Margin="14,518,0,0"
+                Margin="14,869,0,0"
                 VerticalAlignment="Top"
-                Height="29"
-                Width="127"
+                Height="52"
+                Width="261"
+                FontSize="20"
                 Click="BackToHavana"
                 Visibility="Visible"
                 Foreground="White"
@@ -48,7 +49,7 @@
                   >
 
             <DataGrid.Columns>
-               
+
 
                 <DataGridTextColumn Header="ID"
                                     Binding="{Binding Id}"
@@ -76,13 +77,13 @@
                                     />
 
             </DataGrid.Columns>
-            
+
         </DataGrid>
 
         <Label Content="Snaks :"
                HorizontalAlignment="Left"
                Height="54" 
-               Margin="206,521,0,0"
+               Margin="14,512,0,0"
                VerticalAlignment="Top"
                Width="157"
                Background="#FFCAE2A8"
@@ -93,7 +94,7 @@
         <Label Content="Drinks :"
                HorizontalAlignment="Left"
                Height="54"
-               Margin="479,514,0,0"
+               Margin="479,512,0,0"
                VerticalAlignment="Top"
                Width="158"
                Background="#FFCAE2A8"
@@ -103,11 +104,12 @@
                RenderTransformOrigin="1.107,0.445"/>
 
         <Button Content="Snacks Items"
+                FontSize="20"
                 HorizontalAlignment="Left"
-                Margin="206,575,0,0"
+                Margin="14,571,0,0"
                 VerticalAlignment="Top"
                 Height="36"
-                Width="157"
+                Width="260"
                 Visibility="Visible"
                 Foreground="White"
                 FontWeight="Bold"
@@ -124,10 +126,12 @@
 
 
         <Button Content="Drinks Items"
+                FontSize="20"
                 HorizontalAlignment="Left"
-                Margin="479,570,0,0"
+                Margin="479,571,0,0"
                 VerticalAlignment="Top"
-                Height="36" Width="158"
+                Height="36" 
+                Width="261"
                 Click="DrinksItemsButt"
                 Visibility="Visible"
                 Foreground="White"
@@ -167,19 +171,19 @@
 
         <Image x:Name="DrinksImage"
                HorizontalAlignment="Left"
-               Height="126"
+               Height="174"
                Margin="479,616,0,0"
                VerticalAlignment="Top"
-               Width="158"
+               Width="263"
                Source="../Resources/Drinks.jpg"
                />
 
         <Image x:Name="SnacksImage"
                HorizontalAlignment="Left"
-               Height="109"
-               Margin="206,616,0,0"
+               Height="174"
+               Margin="14,616,0,0"
                VerticalAlignment="Top"
-               Width="157"
+               Width="261"
                Source="../Resources/FastFood.jpg"
                />
 
@@ -254,29 +258,12 @@
                    Foreground="#FF344C0E"
                    HorizontalAlignment="Left"
                    Height="28"
-                   Margin="14,741,0,0"
+                   Margin="14,930,0,0"
                    TextWrapping="Wrap"
                    Text="Ready"
                    VerticalAlignment="Top"
-                   Width="895"
+                   Width="728"
                    />
-
-        <Image  x:Name="OrderImage"
-                HorizontalAlignment="Left"
-                Height="281"
-                Margin="787,213,0,0"
-                VerticalAlignment="Top"
-                Width="292"
-                />
-
-        <Border BorderBrush="Black"
-                BorderThickness="1"
-                HorizontalAlignment="Left"
-                Height="284"
-                Margin="787,213,0,0"
-                VerticalAlignment="Top"
-                Width="290"
-                />
 
         <Label  x:Name="ItemsLable"
                 Content="Search Resualt :"
@@ -296,9 +283,30 @@
                     Width="601"
                     DisplayMemberPath="Name"
                     SelectionChanged="ItemsComboBox_SelectionChanged">
-                    
+
 
         </ComboBox>
+        <Button x:Name="Order"
+                Content="Order"
+                FontSize="20"
+                HorizontalAlignment="Left"
+                Margin="479,869,0,0"
+                VerticalAlignment="Top"
+                Height="52" 
+                Width="263"
+                Click="OrderButt"
+                Visibility="Visible"
+                Foreground="White"
+                FontWeight="Bold"
+                >
+
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
 
 
     </Grid>

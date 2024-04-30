@@ -9,6 +9,7 @@ using System.Windows.Controls.Primitives;
 using System.Xml.Linq;
 using System.Data;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace Library.Models.Classes
 {
@@ -19,86 +20,117 @@ namespace Library.Models.Classes
         
         public void InsertBuyerName(Buyer buyer)
         {
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            try 
             {
-                cnn.Open();
-                string sql = "insert into Buyer (name) values( @name)";
-                SqlCommand cmd = new SqlCommand(sql, cnn);
+                using (SqlConnection cnn = new SqlConnection(cnnString))
+                {
+                    cnn.Open();
+                    string sql = "insert into Buyer (name) values( @name)";
+                    SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                SqlParameter NameParameter = new SqlParameter("@name", buyer.Name);
-                cmd.Parameters.Add(NameParameter);
-                cmd.ExecuteReader();
-                cnn.Close();
+                    SqlParameter NameParameter = new SqlParameter("@name", buyer.Name);
+                    cmd.Parameters.Add(NameParameter);
+                    cmd.ExecuteReader();
+                    cnn.Close();
+                }
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         //TypOFDrink
         public List<TypeOfDrink> GetDrinksType()
         {
             List<TypeOfDrink> typeOfDrinks = new List<TypeOfDrink>();
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+
+            try
             {
-                cnn.Open();
-                string sql = "SELECT  id, name FROM TypeOfDrink";
-                SqlCommand cmd = new SqlCommand(sql, cnn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
-                    TypeOfDrink typeOfDrink = new TypeOfDrink(reader.GetInt32(0), reader.GetString(1));
-                    typeOfDrinks.Add(typeOfDrink);
-                }
+                    cnn.Open();
+                    string sql = "SELECT  id, name FROM TypeOfDrink";
+                    SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                cnn.Close();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        TypeOfDrink typeOfDrink = new TypeOfDrink(reader.GetInt32(0), reader.GetString(1));
+                        typeOfDrinks.Add(typeOfDrink);
+                    }
+
+                    cnn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return typeOfDrinks;
         }
+
 
         //Snacks Type
         public List<TypeOfSnack> GetSnacksType() 
         {
             List<TypeOfSnack> typeOfSnacks = new List<TypeOfSnack>();
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            try
             {
-                cnn.Open();
-                string sql = "SELECT  id, name FROM TypeOfSnack";
-                SqlCommand cmd = new SqlCommand(sql, cnn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
-                    TypeOfSnack typeOfSnack = new TypeOfSnack(reader.GetInt32(0), reader.GetString(1));
-                    typeOfSnacks.Add(typeOfSnack);
-                }
+                    cnn.Open();
+                    string sql = "SELECT  id, name FROM TypeOfSnack";
+                    SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                cnn.Close();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        TypeOfSnack typeOfSnack = new TypeOfSnack(reader.GetInt32(0), reader.GetString(1));
+                        typeOfSnacks.Add(typeOfSnack);
+                    }
+
+                    cnn.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+
             return typeOfSnacks;
-        }
-        
+        } 
 
         //Drinks : 
         public List<Drink> GetDrinks()
         {
             List<Drink> drinks = new List<Drink>();
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            try
             {
-                cnn.Open();
-                string Request = "select id, name, cost, volume from dbo.Drink";
-                SqlCommand cmd = new SqlCommand(Request, cnn);
-                SqlDataReader Reader = cmd.ExecuteReader();
-                if (Reader.HasRows)
+                using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
-                    while (Reader.Read())
+                    cnn.Open();
+                    string Request = "select id, name, cost, volume from dbo.Drink";
+                    SqlCommand cmd = new SqlCommand(Request, cnn);
+                    SqlDataReader Reader = cmd.ExecuteReader();
+                    if (Reader.HasRows)
                     {
-                        Drink drink = new Drink(Reader.GetInt32(0), Reader.GetString(1), Reader.GetDecimal(2), Reader.GetDouble(3));
-                        drinks.Add(drink);
+                        while (Reader.Read())
+                        {
+                            Drink drink = new Drink(Reader.GetInt32(0), Reader.GetString(1), Reader.GetDecimal(2), Reader.GetDouble(3));
+                            drinks.Add(drink);
+                        }
+                        Reader.Close();
                     }
-                    Reader.Close();
+                    cnn.Close();
                 }
-                cnn.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
             }
             return drinks;
         }
@@ -107,32 +139,41 @@ namespace Library.Models.Classes
         {
             int insertedId = 0;
 
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-
-                string insertDrinkSql = "INSERT INTO Drink (name, id_type_dr, cost, volume) " +
-                        "VALUES (@name, @id_type_dr, @cost, @volume); " +
-                        "SELECT @id = SCOPE_IDENTITY();";
-
-                using (SqlCommand command = new SqlCommand(insertDrinkSql, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@name", drink.Name);
-                    command.Parameters.AddWithValue("@id_type_dr", drink.TypeOfDrinkId);
-                    command.Parameters.AddWithValue("@cost", drink.Cost);
-                    command.Parameters.AddWithValue("@volume", drink.Volume);
+                    connection.Open();
 
-                    SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
-                    idParameter.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(idParameter);
+                    string insertDrinkSql = "INSERT INTO Drink (name, id_type_dr, cost, volume) " +
+                            "VALUES (@name, @id_type_dr, @cost, @volume); " +
+                            "SELECT @id = SCOPE_IDENTITY();";
 
-                    command.ExecuteNonQuery();
-
-                    if (idParameter.Value != DBNull.Value)
+                    using (SqlCommand command = new SqlCommand(insertDrinkSql, connection))
                     {
-                        insertedId = Convert.ToInt32(idParameter.Value);
+                        command.Parameters.AddWithValue("@name", drink.Name);
+                        command.Parameters.AddWithValue("@id_type_dr", drink.TypeOfDrinkId);
+                        command.Parameters.AddWithValue("@cost", drink.Cost);
+                        command.Parameters.AddWithValue("@volume", drink.Volume);
+
+                        SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
+                        idParameter.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(idParameter);
+
+                        command.ExecuteNonQuery();
+
+                        if (idParameter.Value != DBNull.Value)
+                        {
+                            insertedId = Convert.ToInt32(idParameter.Value);
+                        }
                     }
+                    connection.Close();
                 }
+
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error );
             }
 
             return insertedId;
@@ -140,105 +181,134 @@ namespace Library.Models.Classes
 
         public void DeleteDrink(int idDrink) 
         {
-            using (SqlConnection connection = new SqlConnection(cnnString)) 
+            try
             {
-                connection.Open();
-                string query = "DELETE  FROM Drink  WHERE Drink.id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-
-                    command.Parameters.AddWithValue("@id", idDrink);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    string query = "DELETE  FROM Drink  WHERE Drink.id = @id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
+
+                        command.Parameters.AddWithValue("@id", idDrink);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            command.ExecuteReader().Close();
+                            if (reader.Read())
+                            {
+                                command.ExecuteReader().Close();
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (Exception ex ) 
+            {
+                MessageBox.Show(ex.Message,"Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public void UpdateDrink(Drink drink)
         {
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try
             {
-                connection.Open();
-                string query = "UPDATE Drink SET Name = @Name, Cost = @Cost, Volume = @Volume, id_type_dr = @TypeOfDrinkId WHERE Id = @Id";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@Name", drink.Name);
-                    command.Parameters.AddWithValue("@Cost", drink.Cost);
-                    command.Parameters.AddWithValue("@Volume", drink.Volume);
-                    command.Parameters.AddWithValue("@TypeOfDrinkId", drink.TypeOfDrinkId);
-                    command.Parameters.AddWithValue("@Id", drink.Id);
+                    connection.Open();
+                    string query = "UPDATE Drink SET Name = @Name, Cost = @Cost, Volume = @Volume, id_type_dr = @TypeOfDrinkId WHERE Id = @Id";
 
-                    command.ExecuteNonQuery();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", drink.Name);
+                        command.Parameters.AddWithValue("@Cost", drink.Cost);
+                        command.Parameters.AddWithValue("@Volume", drink.Volume);
+                        command.Parameters.AddWithValue("@TypeOfDrinkId", drink.TypeOfDrinkId);
+                        command.Parameters.AddWithValue("@Id", drink.Id);
+
+                        command.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Erorr",MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public List<DrinkPhoto> GetDrinksPhotos()
         {
             List<DrinkPhoto> drinkPhotos = new List<DrinkPhoto>();
-            using (SqlConnection connection = new SqlConnection(cnnString))
+
+            try
             {
-                connection.Open();
-                string query = "Select DP.id, DP.photo ,D.Id, D.name, D.id_type_dr ,D.cost, D.volume From DrinkPhotos DP inner join Drink D on D.id = DP.id_Drink";
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    while (reader.Read())
+                    connection.Open();
+                    string query = "Select DP.id, DP.photo ,D.Id, D.name, D.id_type_dr ,D.cost, D.volume From DrinkPhotos DP inner join Drink D on D.id = DP.id_Drink";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        int DrinkPhotoId = reader.GetInt32(0);
-                        byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
-                        
-                        Image ImageSource = new Image();
-                        using (MemoryStream stream = new MemoryStream(photoData))
-                        { 
-                            ImageSource.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None,BitmapCacheOption.OnLoad);
+                        while (reader.Read())
+                        {
+                            int DrinkPhotoId = reader.GetInt32(0);
+                            byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
 
-                            int drinkId = reader.GetInt32(2);
-                            string drinkName = reader.GetString(3);
-                            int idTypeOFDrink = reader.GetInt32(4);
-                            decimal drinkCost = reader.GetDecimal(5);
-                            double drinkVolume = reader.GetDouble(6);
+                            Image ImageSource = new Image();
+                            using (MemoryStream stream = new MemoryStream(photoData))
+                            {
+                                ImageSource.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
-                            Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume, idTypeOFDrink);
-                            DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, ImageSource.Source, drink);
+                                int drinkId = reader.GetInt32(2);
+                                string drinkName = reader.GetString(3);
+                                int idTypeOFDrink = reader.GetInt32(4);
+                                decimal drinkCost = reader.GetDecimal(5);
+                                double drinkVolume = reader.GetDouble(6);
 
-                            drinkPhotos.Add(drinkPhoto);
+                                Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume, idTypeOFDrink);
+                                DrinkPhoto drinkPhoto = new DrinkPhoto(DrinkPhotoId, ImageSource.Source, drink);
+
+                                drinkPhotos.Add(drinkPhoto);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return drinkPhotos;
         }
         
         public void InsertDrinkPhoto(string filePath, int idDrink)
         {
-
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-
-                byte[] photoData = File.ReadAllBytes(filePath);
-
-                string query = "INSERT INTO DrinkPhotos (photo, id_Drink) VALUES (@photo, @id_Drink)";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
+                    connection.Open();
 
-                    command.Parameters.AddWithValue("@photo", photoData);
-                    command.Parameters.AddWithValue("@id_Drink", idDrink);
+                    byte[] photoData = File.ReadAllBytes(filePath);
 
-                    command.ExecuteNonQuery();
+                    string query = "INSERT INTO DrinkPhotos (photo, id_Drink) VALUES (@photo, @id_Drink)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        command.Parameters.AddWithValue("@photo", photoData);
+                        command.Parameters.AddWithValue("@id_Drink", idDrink);
+
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -247,27 +317,34 @@ namespace Library.Models.Classes
         {
             Drink drink = null;
 
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-                string query = "SELECT * FROM Drink WHERE Name = @selectedDrinkName";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@selectedDrinkName", selectedDrinkName);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    string query = "SELECT * FROM Drink WHERE Name = @selectedDrinkName";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@selectedDrinkName", selectedDrinkName);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int id = reader.GetInt32(reader.GetOrdinal("id"));
-                            string name = reader.GetString(reader.GetOrdinal("Name"));
-                            decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
-                            double volume = reader.GetDouble(reader.GetOrdinal("Volume"));
+                            if (reader.Read())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.GetString(reader.GetOrdinal("Name"));
+                                decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
+                                double volume = reader.GetDouble(reader.GetOrdinal("Volume"));
 
-                            drink = new Drink(id, name, cost, volume);
+                                drink = new Drink(id, name, cost, volume);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return drink;
@@ -279,22 +356,30 @@ namespace Library.Models.Classes
         public List<Snack> GetSnacks()
         {
             List<Snack> snacks = new List<Snack>();
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            try
             {
-                cnn.Open();
-                string request = "SELECT id, name, cost , weigth FROM dbo.Snack";
-                SqlCommand cmd = new SqlCommand(request, cnn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
-                    while (reader.Read())
+                    cnn.Open();
+                    string request = "SELECT id, name, cost , weigth FROM dbo.Snack";
+                    SqlCommand cmd = new SqlCommand(request, cnn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDouble(3));
-                        snacks.Add(snack);
+                        while (reader.Read())
+                        {
+                            Snack snack = new Snack(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2), reader.GetDouble(3));
+                            snacks.Add(snack);
+                        }
                     }
+                    cnn.Close();
                 }
-                cnn.Close();
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK);
+            }
+            
             return snacks;
         }
 
@@ -302,32 +387,39 @@ namespace Library.Models.Classes
         {
             int insertedId = 0;
 
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-
-                string insertSnackSql = "INSERT INTO Snack (name, id_type_sn, cost, weigth) " +
-                        "VALUES (@name, @id_type_sn, @cost, @weigth); " +
-                        "SELECT @id = SCOPE_IDENTITY();";
-
-                using (SqlCommand command = new SqlCommand(insertSnackSql, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@name", snack.Name);
-                    command.Parameters.AddWithValue("@id_type_sn", snack.TypeOfSnakId);
-                    command.Parameters.AddWithValue("@cost", snack.Cost);
-                    command.Parameters.AddWithValue("@weigth", snack.Weigth);
+                    connection.Open();
 
-                    SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
-                    idParameter.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(idParameter);
+                    string insertSnackSql = "INSERT INTO Snack (name, id_type_sn, cost, weigth) " +
+                            "VALUES (@name, @id_type_sn, @cost, @weigth); " +
+                            "SELECT @id = SCOPE_IDENTITY();";
 
-                    command.ExecuteNonQuery();
-
-                    if (idParameter.Value != DBNull.Value)
+                    using (SqlCommand command = new SqlCommand(insertSnackSql, connection))
                     {
-                        insertedId = Convert.ToInt32(idParameter.Value);
+                        command.Parameters.AddWithValue("@name", snack.Name);
+                        command.Parameters.AddWithValue("@id_type_sn", snack.TypeOfSnakId);
+                        command.Parameters.AddWithValue("@cost", snack.Cost);
+                        command.Parameters.AddWithValue("@weigth", snack.Weigth);
+
+                        SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
+                        idParameter.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(idParameter);
+
+                        command.ExecuteNonQuery();
+
+                        if (idParameter.Value != DBNull.Value)
+                        {
+                            insertedId = Convert.ToInt32(idParameter.Value);
+                        }
                     }
                 }
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return insertedId;
@@ -335,70 +427,91 @@ namespace Library.Models.Classes
 
         public void DeleteSnack(int idSnack)
         {
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-                string query = "DELETE  FROM Snack  WHERE Snack.id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-
-                    command.Parameters.AddWithValue("@id", idSnack);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    string query = "DELETE  FROM Snack  WHERE Snack.id = @id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
+
+                        command.Parameters.AddWithValue("@id", idSnack);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            command.ExecuteReader().Close();
+                            if (reader.Read())
+                            {
+                                command.ExecuteReader().Close();
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         public void UpdateSnack(Snack snack) 
         {
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-                string query = "UPDATE Snack SET Name = @Name, Cost = @Cost, Weigth = @Weigth, id_type_sn = @TypeOfSnackId WHERE Id = @Id";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@Name", snack.Name);
-                    command.Parameters.AddWithValue("@Cost", snack.Cost);
-                    command.Parameters.AddWithValue("@Weigth", snack.Weigth);
-                    command.Parameters.AddWithValue("@TypeOfSnackId", snack.TypeOfSnakId);
-                    command.Parameters.AddWithValue("@Id", snack.Id);
+                    connection.Open();
+                    string query = "UPDATE Snack SET Name = @Name, Cost = @Cost, Weigth = @Weigth, id_type_sn = @TypeOfSnackId WHERE Id = @Id";
 
-                    command.ExecuteNonQuery();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", snack.Name);
+                        command.Parameters.AddWithValue("@Cost", snack.Cost);
+                        command.Parameters.AddWithValue("@Weigth", snack.Weigth);
+                        command.Parameters.AddWithValue("@TypeOfSnackId", snack.TypeOfSnakId);
+                        command.Parameters.AddWithValue("@Id", snack.Id);
+
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
-        
-        
-        
+         
         public Snack GetSnack(int id)
         {
             Snack snack = null;
-            using (SqlConnection cnn = new SqlConnection(cnnString))
+            try 
             {
-                cnn.Open();
-                string request = "SELECT id, name, cost, weigth FROM dbo.Snack where id =@id";
-                SqlCommand cmd = new SqlCommand(request, cnn);
-                SqlParameter idParametr = new SqlParameter("id", id);
-                cmd.Parameters.Add(idParametr);
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
-                    reader.Read();
-                    int Id = reader.GetInt32(0);
-                    string name = reader.GetString(1);
-                    decimal cost = reader.GetDecimal(2);
-                    double weight = reader.GetDouble(3);
-                    snack = new Snack(Id, name, cost, weight);
+                    cnn.Open();
+                    string request = "SELECT id, name, cost, weigth FROM dbo.Snack where id =@id";
+                    SqlCommand cmd = new SqlCommand(request, cnn);
+                    SqlParameter idParametr = new SqlParameter("id", id);
+                    cmd.Parameters.Add(idParametr);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        int Id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        decimal cost = reader.GetDecimal(2);
+                        double weight = reader.GetDouble(3);
+                        snack = new Snack(Id, name, cost, weight);
 
+                    }
+                    cnn.Close();
                 }
-                cnn.Close( );
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return snack;
         }
@@ -406,35 +519,42 @@ namespace Library.Models.Classes
         public ImageSource GetSnackPhoto(int idSnack)
         {
             ImageSource imageSource = null;
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try
             {
-                connection.Open();
-
-
-                string query = "SELECT photo FROM SnackPhotos WHERE id_Snack = @id_Snack";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
+                    connection.Open();
 
-                    command.Parameters.AddWithValue("@id_Snack", idSnack);
-                    using (SqlDataReader reader = command.ExecuteReader())
+
+                    string query = "SELECT photo FROM SnackPhotos WHERE id_Snack = @id_Snack";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
-                        {
-                            byte[] photoData = (byte[])reader["photo"];
-                            using (MemoryStream stream = new MemoryStream(photoData))
-                            {
-                                BitmapImage bitmapImage = new BitmapImage();
-                                bitmapImage.BeginInit();
-                                bitmapImage.StreamSource = stream;
-                                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                                bitmapImage.EndInit();
 
-                                imageSource = bitmapImage;
+                        command.Parameters.AddWithValue("@id_Snack", idSnack);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                byte[] photoData = (byte[])reader["photo"];
+                                using (MemoryStream stream = new MemoryStream(photoData))
+                                {
+                                    BitmapImage bitmapImage = new BitmapImage();
+                                    bitmapImage.BeginInit();
+                                    bitmapImage.StreamSource = stream;
+                                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                                    bitmapImage.EndInit();
+
+                                    imageSource = bitmapImage;
+                                }
                             }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return imageSource;
@@ -443,90 +563,110 @@ namespace Library.Models.Classes
         public List<SnackPhoto> GetSnacksPhotos()
         {
             List<SnackPhoto> snackPhotos = new List<SnackPhoto>();
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try
             {
-                connection.Open();
-                string query = "Select SP.id, SP.photo ,S.id, S.name, S.id_type_sn ,S.cost, S.weigth From SnackPhotos SP inner join Snack S on S.id = SP.id_Snack";
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    while (reader.Read())
+                    connection.Open();
+                    string query = "Select SP.id, SP.photo ,S.id, S.name, S.id_type_sn ,S.cost, S.weigth From SnackPhotos SP inner join Snack S on S.id = SP.id_Snack";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        int SnackPhotoId = reader.GetInt32(0);
-                        byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
-
-                        Image ImageSource = new Image();
-                        using (MemoryStream stream = new MemoryStream(photoData))
+                        while (reader.Read())
                         {
-                            ImageSource.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                            int SnackPhotoId = reader.GetInt32(0);
+                            byte[] photoData = reader.GetFieldValue<byte[]>(reader.GetOrdinal("photo"));
 
-                            int snackId = reader.GetInt32(2);
-                            string snackName = reader.GetString(3);
-                            int idTypeOFSnack = reader.GetInt32(4);
-                            decimal snackCost = reader.GetDecimal(5);
-                            double snackWeigth = reader.GetDouble(6);
+                            Image ImageSource = new Image();
+                            using (MemoryStream stream = new MemoryStream(photoData))
+                            {
+                                ImageSource.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
-                            Snack snack = new Snack(snackId, snackName, snackCost, snackWeigth, idTypeOFSnack);
-                            SnackPhoto drinkPhoto = new SnackPhoto(SnackPhotoId, ImageSource.Source, snack);
+                                int snackId = reader.GetInt32(2);
+                                string snackName = reader.GetString(3);
+                                int idTypeOFSnack = reader.GetInt32(4);
+                                decimal snackCost = reader.GetDecimal(5);
+                                double snackWeigth = reader.GetDouble(6);
 
-                            snackPhotos.Add(drinkPhoto);
+                                Snack snack = new Snack(snackId, snackName, snackCost, snackWeigth, idTypeOFSnack);
+                                SnackPhoto drinkPhoto = new SnackPhoto(SnackPhotoId, ImageSource.Source, snack);
+
+                                snackPhotos.Add(drinkPhoto);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return snackPhotos;
         }
 
         public void InsertSnackPhoto(string filePath, int snackId)
         {
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try 
             {
-                connection.Open();
-
-                byte[] photoData = File.ReadAllBytes(filePath);
-
-                string query = "INSERT INTO SnackPhotos (photo, id_Snack) VALUES (@photo, @id_Snack)";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
+                    connection.Open();
+
+                    byte[] photoData = File.ReadAllBytes(filePath);
+
+                    string query = "INSERT INTO SnackPhotos (photo, id_Snack) VALUES (@photo, @id_Snack)";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
 
 
-                    command.Parameters.AddWithValue("@photo", photoData);
-                    command.Parameters.AddWithValue("@id_Snack", snackId);
+                        command.Parameters.AddWithValue("@photo", photoData);
+                        command.Parameters.AddWithValue("@id_Snack", snackId);
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close(); 
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
 
         }
 
         public Snack GetSnackByName(string selectedSnackName)
         {
             Snack snack = null;
-
-            using (SqlConnection connection = new SqlConnection(cnnString))
+            try
             {
-                connection.Open();
-                string query = "SELECT * FROM Snack WHERE Name = @selectedSnackName";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(cnnString))
                 {
-                    command.Parameters.AddWithValue("@selectedSnackName", selectedSnackName);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    string query = "SELECT * FROM Snack WHERE Name = @selectedSnackName";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@selectedSnackName", selectedSnackName);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int id = reader.GetInt32(reader.GetOrdinal("id"));
-                            string name = reader.GetString(reader.GetOrdinal("Name"));
-                            decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
-                            double weigth = reader.GetDouble(reader.GetOrdinal("Weigth"));
+                            if (reader.Read())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.GetString(reader.GetOrdinal("Name"));
+                                decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
+                                double weigth = reader.GetDouble(reader.GetOrdinal("Weigth"));
 
-                            snack = new Snack(id, name, cost, weigth);
+                                snack = new Snack(id, name, cost, weigth);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close ();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return snack;

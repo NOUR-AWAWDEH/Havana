@@ -19,12 +19,13 @@ namespace Havana.Snacks
         int currentPage = 0;
         int sizePage = 4;
 
-        DataAccess dataAccess = new DataAccess();
+        
         List<SnackPhoto> photos = null;
 
         public SnacksItems()
         {
             InitializeComponent();
+            DataAccess dataAccess = new DataAccess();
             photos = dataAccess.GetSnacksPhotos();
             ShowInfo(currentPage);
         }
@@ -121,6 +122,8 @@ namespace Havana.Snacks
                     NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
                     Snack snack = photos[i].Snack;
                     newOrderWindow.OrderDataGrid.Items.Add(snack);
+                    newOrderWindow.itemsAdded = true;
+                    newOrderWindow.ShowOrderButtons();
                     newOrderWindow.Show();
                     break; // Exit the loop once the button is found
                 }

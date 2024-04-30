@@ -46,6 +46,7 @@
                   Width="728"
                   SelectionMode="Single"
                   SelectionChanged="OrderDataGrid_SelectionChanged"
+                  MouseDoubleClick="OrderDataGrid_MouseDoubleClick"
                   >
 
             <DataGrid.Columns>
@@ -54,26 +55,31 @@
                 <DataGridTextColumn Header="ID"
                                     Binding="{Binding Id}"
                                     CanUserResize="True"
+                                    Width="35"
                                     />
 
                 <DataGridTextColumn Header="Name"
                                     Binding="{Binding Name}"
                                     CanUserResize="True"
+                                    Width="200"
                                     />
 
                 <DataGridTextColumn Header="Cost"
                                     Binding="{Binding Cost}"
                                     CanUserResize="True"
+                                    Width="70"
                                     />
 
                 <DataGridTextColumn Header="Weight"
                                     Binding="{Binding Weigth}"
                                     CanUserResize="True"
+                                    Width="70"
                                     />
 
                 <DataGridTextColumn Header="Volume"
                                     Binding="{Binding Volume}"
-                                    CanUserResize="True" 
+                                    CanUserResize="True"
+                                    Width="70"
                                     />
 
             </DataGrid.Columns>
@@ -198,36 +204,14 @@
                  Visibility="Visible" 
                  />
 
-        <Button x:Name="BuyerNameButton"
-                Content="Buyer Name"
-                HorizontalAlignment="Left"
-                Height="26"
-                Margin="14,169,0,0"
-                VerticalAlignment="Top"
-                Width="96"
-                Foreground="White"
-                FontWeight="Bold"
-                Visibility="Visible"
-                Click="BuyerNameButt" 
-                RenderTransformOrigin="0.5,0.5"
-                >
-
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
-                    <GradientStop Color="#FF344C0E" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
         <TextBox x:Name="BuyerNameTextBox"
                  HorizontalAlignment="Left"
                  Height="26" 
-                 Margin="125,169,0,0"
+                 Margin="141,169,0,0"
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
-                 Width="617" 
+                 Width="601" 
                  Visibility="Visible"
                  />
 
@@ -267,6 +251,7 @@
 
         <Label  x:Name="ItemsLable"
                 Content="Search Resualt :"
+                Foreground="#FF344C0E"
                 HorizontalAlignment="Left"
                 Height="28"
                 Margin="14,91,0,0"
@@ -283,19 +268,18 @@
                     Width="601"
                     DisplayMemberPath="Name"
                     SelectionChanged="ItemsComboBox_SelectionChanged">
-
-
         </ComboBox>
+        
         <Button x:Name="Order"
                 Content="Order"
                 FontSize="20"
+                Visibility="Hidden"
                 HorizontalAlignment="Left"
                 Margin="479,869,0,0"
                 VerticalAlignment="Top"
                 Height="52" 
                 Width="263"
                 Click="OrderButt"
-                Visibility="Visible"
                 Foreground="White"
                 FontWeight="Bold"
                 >
@@ -307,6 +291,15 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+        <Label x:Name="BuyerNameLLable"
+               FontSize="15"
+               Foreground="#FF344C0E"
+               FontWeight="Bold"
+               Content="Buyer Name :" 
+               HorizontalAlignment="Left"
+               Margin="14,169,0,0"
+               VerticalAlignment="Top"
+               Width="122"/>
 
 
     </Grid>

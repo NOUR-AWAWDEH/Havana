@@ -16,10 +16,10 @@ namespace Havana.Orders
         List<Drink> Drinks = new List<Drink>();
         List<Snack> Snacks = new List<Snack>();
         Buyer buyer = new Buyer();
-
+        public bool itemsAdded = false;
         public NewOrderWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         public void OpenWindow(Type windowType)
@@ -37,9 +37,18 @@ namespace Havana.Orders
             }
         }
 
+        
+
         private void OrderDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             DeleteSelectedItemButt.Visibility = OrderDataGrid.SelectedItem != null ? Visibility.Visible : Visibility.Collapsed;
+            if (OrderDataGrid.Items.Count == 0) 
+            {
+                itemsAdded = false;
+                ShowOrderButtons();
+            }
+            
         }
 
         private void ItemsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,10 +59,14 @@ namespace Havana.Orders
                 if (ItemsComboBox.SelectedValue is Drink selectedDrink)
                 {
                     OrderDataGrid.Items.Add(selectedDrink);
+                    itemsAdded = true;
+                    ShowOrderButtons();
                 }
                 else if (ItemsComboBox.SelectedValue is Snack selectedSnack)
                 {
                     OrderDataGrid.Items.Add(selectedSnack);
+                    itemsAdded = true;
+                    ShowOrderButtons();
                 }
             }
         }
@@ -69,27 +82,38 @@ namespace Havana.Orders
             OpenWindow(typeof(DrinksItems));
         }
 
-        //Buttons
-        public void BuyerNameButt(object sender, RoutedEventArgs e)
+        private void CheckBuyerName() 
         {
-            DataAccess dataAcces = new DataAccess();
-
             string name = BuyerNameTextBox.Text;
             if (!string.IsNullOrWhiteSpace(name))
             {
                 buyer.Name = name;
-                dataAcces.InsertBuyerName(buyer);
-                NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
-                newOrderWindow.Show();
-
+                dataAccess.InsertBuyerName(buyer);
+            }
+            else
+            {
+                OrderTextBlock.Text = "Please Add The Buyer Name First!!";
             }
         }
 
+        public void ShowOrderButtons()
+        {
+            if (itemsAdded is true)
+            {
+                Order.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Order.Visibility = Visibility.Collapsed; 
+            }
+        }
+
+        //Buttons       
         private void OrderButt(object sender, RoutedEventArgs e)
         {
-
+            CheckBuyerName();
         }
-        
+
         private void SearchButt(object sender, RoutedEventArgs e)
         {
             Drinks = dataAccess.GetDrinks();
@@ -143,5 +167,10 @@ namespace Havana.Orders
             this.Show();
         }
 
+        private void OrderDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+        
     }
 }

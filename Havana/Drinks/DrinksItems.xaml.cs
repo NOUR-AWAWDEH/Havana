@@ -115,10 +115,13 @@ namespace Havana.Drinks
                     NewOrderWindow newOrderWindow = Application.Current.Windows.OfType<NewOrderWindow>().FirstOrDefault();
                     Drink drink = photos[i].Drink;
                     newOrderWindow.OrderDataGrid.Items.Add(drink);
+                    newOrderWindow.itemsAdded = true;
+                    newOrderWindow.ShowOrderButtons();
                     newOrderWindow.Show();
-                    break; // Exit the loop once the button is found
+                    break;
                 }
             }
+            
         }
 
         private void NextPage(object sender, RoutedEventArgs e)

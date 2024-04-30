@@ -7,6 +7,7 @@ using Library.Models.Classes;
 using Havana.Main;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Havana.Orders
 {
@@ -84,16 +85,28 @@ namespace Havana.Orders
 
         private void CheckBuyerName() 
         {
-            string name = BuyerNameTextBox.Text;
-            if (!string.IsNullOrWhiteSpace(name))
+            //Exception ex = null;
+            try
             {
-                buyer.Name = name;
-                dataAccess.InsertBuyerName(buyer);
+                string name = BuyerNameTextBox.Text;
+                if (name != null && !string.IsNullOrWhiteSpace(name))
+                {
+                    buyer.Name = name;
+                    dataAccess.InsertBuyerName(buyer);
+                    OrderTextBlock.Text = name + " Has Been Added!! ";
+                }
+                else
+                {
+                    MessageBox.Show("Please Add The Buyer Name First!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+
             }
-            else
+            catch (Exception ex) 
             {
-                OrderTextBlock.Text = "Please Add The Buyer Name First!!";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         public void ShowOrderButtons()
@@ -111,7 +124,26 @@ namespace Havana.Orders
         //Buttons       
         private void OrderButt(object sender, RoutedEventArgs e)
         {
+            DateTime setDateTime = DateTime.Now;
             CheckBuyerName();
+            List<Drink> drinks = new List<Drink>();
+            List<Snack> snacks = new List<Snack>();
+
+            foreach (var item in OrderDataGrid.Items) 
+            {
+                if (item is Drink drink) 
+                {
+                    drinks.Add(drink);
+                }
+                if (item is Snack snack) 
+                {
+                    snacks.Add(snack);
+                }
+            }
+            
+           
+            Order newOrder = new Order(setDateTime, buyer, drinks, snacks);
+            
         }
 
         private void SearchButt(object sender, RoutedEventArgs e)

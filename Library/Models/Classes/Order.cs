@@ -14,16 +14,33 @@ namespace Library.Models.Classes
 
         public List<Snack> Snacks { get; set; }
 
-        public Order(DateTime orderDate, Buyer buyerName, List<Drink> drinks, List<Snack> snacks)
+        public decimal TotalCost {get;set;}
+
+        public Order() { }
+
+        public Order(DateTime orderDate, Buyer buyerName, List<Drink> drinks, List<Snack> snacks, decimal totalCost)
         {
             OrderDate = orderDate;
             BuyerName = buyerName;
             Drinks = drinks;
             Snacks = snacks;
+            TotalCost = totalCost;
         }
 
+        public decimal CalculateTotalCost() 
+        {
+             TotalCost = 0;
+            foreach (Drink drink in Drinks)
+            {
+                TotalCost += drink.Cost; 
+            }
+            foreach (Snack snack in Snacks) 
+            {
+                TotalCost += snack.Cost;
+            }
+            return TotalCost;
+        }
         
-
         public override string ToString()
         {
             return $"{OrderDate}\t{BuyerName}\t{Drinks}\t{Snacks}";

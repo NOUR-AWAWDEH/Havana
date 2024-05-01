@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
-        Title="Bill" Height="450" Width="800">
-    <Grid>
-        
+        Title="Bill" 
+        Height="800" 
+        Width="800"
+        WindowStartupLocation="CenterOwner">
+    <Grid Background=" #FFCAE2A8">
+        <TextBlock x:Name ="billTexBlok"
+                   
+                   Foreground="#FF344C0E"
+                   
+                   Margin="25,25,32,26"
+                   />
     </Grid>
 </Window>

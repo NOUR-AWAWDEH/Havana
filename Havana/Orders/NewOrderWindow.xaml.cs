@@ -85,7 +85,7 @@ namespace Havana.Orders
 
         private void CheckBuyerName() 
         {
-            //Exception ex = null;
+            
             try
             {
                 string name = BuyerNameTextBox.Text;
@@ -124,27 +124,38 @@ namespace Havana.Orders
         //Buttons       
         private void OrderButt(object sender, RoutedEventArgs e)
         {
-            DateTime setDateTime = DateTime.Now;
             CheckBuyerName();
+            Order newOrder = new Order();
+            DateTime setDateTime = DateTime.Now;
+            
             List<Drink> drinks = new List<Drink>();
             List<Snack> snacks = new List<Snack>();
 
-            foreach (var item in OrderDataGrid.Items) 
+            foreach (var item in OrderDataGrid.Items)
             {
-                if (item is Drink drink) 
+                if (item is Drink drink)
                 {
                     drinks.Add(drink);
                 }
-                if (item is Snack snack) 
+                if (item is Snack snack)
                 {
                     snacks.Add(snack);
                 }
             }
-            
-           
-            Order newOrder = new Order(setDateTime, buyer, drinks, snacks);
-            
+
+            newOrder.OrderDate = setDateTime;
+            newOrder.BuyerName = buyer;
+            newOrder.Drinks = drinks;
+            newOrder.Snacks = snacks;
+            newOrder.TotalCost = newOrder.CalculateTotalCost();
+            ReportGenerator report = new ReportGenerator();
+            report.CreateBill(newOrder);
+
+            Bill billWindow = new Bill(newOrder);
+            billWindow.Show();
         }
+
+
 
         private void SearchButt(object sender, RoutedEventArgs e)
         {

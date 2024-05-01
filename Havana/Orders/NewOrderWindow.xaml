@@ -61,25 +61,25 @@
                 <DataGridTextColumn Header="Name"
                                     Binding="{Binding Name}"
                                     CanUserResize="True"
-                                    Width="200"
+                                    Width="350"
                                     />
 
                 <DataGridTextColumn Header="Cost"
                                     Binding="{Binding Cost}"
                                     CanUserResize="True"
-                                    Width="70"
+                                    Width="80"
                                     />
 
                 <DataGridTextColumn Header="Weight"
                                     Binding="{Binding Weigth}"
                                     CanUserResize="True"
-                                    Width="70"
+                                    Width="80"
                                     />
 
                 <DataGridTextColumn Header="Volume"
                                     Binding="{Binding Volume}"
                                     CanUserResize="True"
-                                    Width="70"
+                                    Width="90*"
                                     />
 
             </DataGrid.Columns>

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Havana", "Havana\Havana.csproj", "{82D490A7-6BDA-49F6-9BBB-E8C5DDE0B7DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "WPF_Library\Library.csproj", "{54EC1B91-B017-4B7E-AF03-67DC3339569D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{54EC1B91-B017-4B7E-AF03-67DC3339569D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

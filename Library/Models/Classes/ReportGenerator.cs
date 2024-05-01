@@ -38,40 +38,41 @@ namespace Library.Models.Classes
 
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
-                    sw.WriteLine("--------------------------------------------------------------------------");
-                                  
+                    sw.WriteLine("-------------------------------------------------------------------");
+
                     sw.WriteLine($"{CenterText("Havana")}");
                     sw.WriteLine($"{CenterText("Address  99,99 , City Gomel")}");
                     sw.WriteLine($"{CenterText("Phone: +37525-222-2222")}");
-                    sw.WriteLine("--------------------------------------------------------------------------");
-                    sw.WriteLine($"Date:        {order.OrderDate}\n");
-                    sw.WriteLine($"Buyer Name:  {order.BuyerName}");
-                    sw.WriteLine("--------------------------------------------------------------------------");
-                    sw.WriteLine("Items                                                       Price");
-                    sw.WriteLine("--------------------------------------------------------------------------");
-                    
+                    sw.WriteLine("-------------------------------------------------------------------");
+                    sw.WriteLine($"Date:            {order.OrderDate}\n");
+                    sw.WriteLine($"Buyer Name:      {order.BuyerName}");
+                    sw.WriteLine("-------------------------------------------------------------------");
+                    sw.WriteLine($"Items{new string(' ',55)}Price");
+                    sw.WriteLine("-------------------------------------------------------------------");
+                    // ...
+
                     foreach (var drink in order.Drinks)
                     {
-                       
-                        string itemLine = $"{drink.Name,-60}"; 
-                        string priceLine = $"{currencySymbol}{drink.Cost.ToString("G29")}"; 
-                        sw.WriteLine($"{itemLine}{priceLine}");
+                        string itemLine = $"{drink.Name}";
+                        int remainingSpace = 60 - itemLine.Length;
+                        string priceLine = $"{currencySymbol}{drink.Cost.ToString("G29")}";
+                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}");
                     }
 
-                    
+                    // ...
+
                     foreach (var snack in order.Snacks)
                     {
-                
-                        string itemLine = $"{snack.Name,-60}"; 
-                        string priceLine = $"{currencySymbol}{snack.Cost.ToString("G29")}"; 
-                        sw.WriteLine($"{itemLine}{priceLine}");
+                        string itemLine = $"{snack.Name}";
+                        int remainingSpace = 60 - itemLine.Length;
+                        string priceLine = $"{currencySymbol}{snack.Cost.ToString("G29")}";
+                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}");
                     }
+                    // ...
 
-                  
-                    
-                    sw.WriteLine("--------------------------------------------------------------------------");
-                    sw.WriteLine($"Total: {currencySymbol,+57}{order.TotalCost.ToString("G29")}");
-                    sw.WriteLine("--------------------------------------------------------------------------");
+                    sw.WriteLine("-------------------------------------------------------------------");
+                    sw.WriteLine($"Total:{new string(' ',54)}{currencySymbol}{order.TotalCost.ToString("G29")}");
+                    sw.WriteLine("-------------------------------------------------------------------");
                 }
             }
             catch (Exception ex)
@@ -80,10 +81,10 @@ namespace Library.Models.Classes
             }
         }
 
-        // Helper method to center the text within the line
+       
         private string CenterText(string text)
         {
-            int totalWidth = 74; // Total width of the line
+            int totalWidth = 68; // Total width of the line
             int textWidth = text.Length;
             int leftIndent = (totalWidth - textWidth) / 2;
             string centeredText = text.PadLeft(leftIndent + textWidth).PadRight(totalWidth);

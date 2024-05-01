@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,14 +22,15 @@ namespace Havana.Orders
     /// </summary>
     public partial class Bill : Window
     {
-        
+        public Order Order = null;
         public Bill(Order order)
         {
             InitializeComponent();
-            PrintBill(order);
+            ShowTheBill(order);
+            Order = order;
         }
 
-        public void PrintBill(Order order)
+        private void ShowTheBill(Order order)
         {
             string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bills");
             Directory.CreateDirectory(folderPath);
@@ -37,16 +39,44 @@ namespace Havana.Orders
 
             try
             {
-                using (StreamReader sr = File.OpenText(fileName))
-                {
-                    string content = sr.ReadToEnd();
-                    billTexBlok.Text = content;
-                }
+                string content = File.ReadAllText(fileName);
+                BillTextBlock.Text = content;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void PrintBill(Order order)
+        {
+            string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bills");
+            Directory.CreateDirectory(folderPath);
+
+            string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.OrderDate:yyyyMMdd_HHmmss}.txt");
+
+            try
+            {
+                string content = File.ReadAllText(fileName);
+                BillTextBlock.Text = content;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        
+
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            PrintBill(Order);
         }
     }
 }

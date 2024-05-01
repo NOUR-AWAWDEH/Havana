@@ -6,15 +6,38 @@
         xmlns:local="clr-namespace:Havana.Orders"
         mc:Ignorable="d"
         Title="Bill" 
-        Height="800" 
-        Width="800"
+        Height="1000" 
+        Width="1000"
         WindowStartupLocation="CenterOwner">
     <Grid Background=" #FFCAE2A8">
-        <TextBlock x:Name ="billTexBlok"
-                   
-                   Foreground="#FF344C0E"
-                   
-                   Margin="25,25,32,26"
-                   />
+        <Button 
+                Content="Exit"
+                FontWeight="Bold"
+                Background="#FF344C0E"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                Margin="31,910,0,0"
+                VerticalAlignment="Top"
+                Height="35"
+                Width="123" 
+                Click="ExitButton_Click"
+                />
+        <Button Content="Print"
+                FontWeight="Bold"
+                Background="#FF344C0E"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                Margin="804,910,0,0"
+                VerticalAlignment="Top"
+                Height="35"
+                Width="123" 
+                Click="PrintButton_Click"
+                />
+        <TextBlock  x:Name="BillTextBlock"
+                    HorizontalAlignment="Left"
+                    Height="853"
+                    Margin="31,28,0,0"
+                    VerticalAlignment="Top"
+                    Width="896"/>
     </Grid>
 </Window>

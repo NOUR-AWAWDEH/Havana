@@ -22,10 +22,7 @@ namespace Library.Models.Classes
             Snacks = snacks;
         }
 
-        public  void PrintOrder() 
-        {
-            
-        }
+        
 
         public override string ToString()
         {

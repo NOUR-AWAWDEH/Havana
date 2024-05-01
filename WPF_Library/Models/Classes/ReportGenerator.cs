@@ -1,29 +1,25 @@
-﻿using System;
+﻿using Library.Models.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ReportGenerator<T>
+namespace Library.Models.Classes 
 {
-    public List<T> Data { get; set; }
-
-    public ReportGenerator(List<T> data)
+    public class ReportGenerator
     {
-        Data = data;
-    }
+        public List<Order> OrderList { get; set; }
 
-    public void GenerateSummaryReport()
-    {
-        /*
-        int sum = Data.Sum();
-        string shortestString = Data.Min();
-        decimal average = Data.Average();
-        double maximum = Data.Max();
+        public ReportGenerator(List<Order> orderList)
+        {
+            this.OrderList = orderList;
+
+        }
+
+        public void GenerateSummaryReport()
+        {
+
+        }
+
         
-            Console.WriteLine($"Sum: {sum}");
-            Console.WriteLine($"Shortest String: {shortestString}");
-            Console.WriteLine($"Average: {average}");
-            Console.WriteLine($"Maximum: {maximum}");
-        */
-
     }
 }

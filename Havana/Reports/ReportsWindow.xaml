@@ -5,11 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Havana.Reports"
         mc:Ignorable="d"
-        Title="ReportsWindow" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen" Icon="../Resources/LOGO.ico">
-    <Grid>
+        Title="ReportsWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/LOGO.ico">
+    <Grid Background="#FFCAE2A8">
 
-        <Button Content="Back Home" HorizontalAlignment="Left" Margin="38,365,0,0" VerticalAlignment="Top" Height="32" Width="104" Click="BackToHavana" Visibility="Visible" Foreground="White" FontWeight="Bold">
+        <Button Content="Back Home"
+                HorizontalAlignment="Left"
+                Margin="38,365,0,0"
+                VerticalAlignment="Top"
+                Height="32"
+                Width="104"
+                Click="BackToHavana"
+                Visibility="Visible"
+                Foreground="White"
+                FontWeight="Bold"
+                >
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="#FF455D1D" Offset="0.021"/>
@@ -18,5 +31,7 @@
             </Button.Background>
         </Button>
 
+        
+        
     </Grid>
 </Window>

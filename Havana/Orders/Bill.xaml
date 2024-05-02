@@ -22,6 +22,7 @@
                 Width="123" 
                 Click="ExitButton_Click"
                 />
+        
         <Button Content="Print"
                 FontWeight="Bold"
                 Background="#FF344C0E"
@@ -33,11 +34,14 @@
                 Width="123" 
                 Click="PrintButton_Click"
                 />
+        
         <TextBlock  x:Name="BillTextBlock"
                     HorizontalAlignment="Left"
                     Height="853"
                     Margin="31,28,0,0"
                     VerticalAlignment="Top"
-                    Width="896"/>
+                    Width="896"
+                    />
+        
     </Grid>
 </Window>

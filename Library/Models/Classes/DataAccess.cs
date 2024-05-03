@@ -15,12 +15,12 @@ namespace Library.Models.Classes
 {
     public class DataAccess
     {
-        
+
         public readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
-        
+
         public void InsertBuyerName(Buyer buyer)
         {
-            try 
+            try
             {
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
@@ -34,11 +34,11 @@ namespace Library.Models.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
 
         //TypOFDrink
@@ -74,7 +74,7 @@ namespace Library.Models.Classes
 
 
         //Snacks Type
-        public List<TypeOfSnack> GetSnacksType() 
+        public List<TypeOfSnack> GetSnacksType()
         {
             List<TypeOfSnack> typeOfSnacks = new List<TypeOfSnack>();
             try
@@ -98,11 +98,11 @@ namespace Library.Models.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return typeOfSnacks;
-        } 
+        }
 
         //Drinks : 
         public List<Drink> GetDrinks()
@@ -128,9 +128,9 @@ namespace Library.Models.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return drinks;
         }
@@ -139,7 +139,7 @@ namespace Library.Models.Classes
         {
             int insertedId = 0;
 
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -171,15 +171,15 @@ namespace Library.Models.Classes
                 }
 
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error );
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return insertedId;
         }
 
-        public void DeleteDrink(int idDrink) 
+        public void DeleteDrink(int idDrink)
         {
             try
             {
@@ -202,9 +202,9 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex ) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -229,9 +229,9 @@ namespace Library.Models.Classes
                     }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erorr",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -276,16 +276,16 @@ namespace Library.Models.Classes
                 }
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return drinkPhotos;
         }
-        
+
         public void InsertDrinkPhoto(string filePath, int idDrink)
         {
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -306,18 +306,18 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
-        
+
         public Drink GetDrinkByName(string selectedDrinkName)
         {
             Drink drink = null;
 
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -342,7 +342,7 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -375,11 +375,11 @@ namespace Library.Models.Classes
                     cnn.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK);
             }
-            
+
             return snacks;
         }
 
@@ -387,7 +387,7 @@ namespace Library.Models.Classes
         {
             int insertedId = 0;
 
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -417,7 +417,7 @@ namespace Library.Models.Classes
                     }
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -427,7 +427,7 @@ namespace Library.Models.Classes
 
         public void DeleteSnack(int idSnack)
         {
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -447,16 +447,17 @@ namespace Library.Models.Classes
                     }
                     connection.Close();
                 }
-            }catch (Exception ex) 
-            {
-                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
-        public void UpdateSnack(Snack snack) 
+        public void UpdateSnack(Snack snack)
         {
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -476,17 +477,17 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
-         
+
         public Snack GetSnack(int id)
         {
             Snack snack = null;
-            try 
+            try
             {
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
@@ -509,13 +510,13 @@ namespace Library.Models.Classes
                     cnn.Close();
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return snack;
         }
-        
+
         public ImageSource GetSnackPhoto(int idSnack)
         {
             ImageSource imageSource = null;
@@ -552,7 +553,7 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -598,7 +599,8 @@ namespace Library.Models.Classes
                     }
                     connection.Close();
                 }
-            }catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -607,7 +609,7 @@ namespace Library.Models.Classes
 
         public void InsertSnackPhoto(string filePath, int snackId)
         {
-            try 
+            try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
@@ -628,11 +630,11 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
 
         }
 
@@ -664,7 +666,7 @@ namespace Library.Models.Classes
                     connection.Close();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -675,7 +677,9 @@ namespace Library.Models.Classes
         public List<Order> GetOrderList()
         {
             List<Order> ordersList = new List<Order>();
-            Buyer buyer = null;
+            Drink drink = null;
+            Snack snack = null;
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
@@ -683,10 +687,10 @@ namespace Library.Models.Classes
                     connection.Open();
                     string query = "SELECT O.id, " +
                                    "O.DateTime, " +
-                                   "B.name " +
-                                   "D.name " +
-                                   "Ld.count " +
-                                   "S.name " +
+                                   "B.name, " +
+                                   "D.name, " +
+                                   "LD.count, " +
+                                   "S.name, " +
                                    "LS.count " +
                                    "FROM Orders O " +
                                    "INNER JOIN Buyer B ON O.id_buyer = B.id " +
@@ -698,22 +702,34 @@ namespace Library.Models.Classes
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            Order order = new Order();
+                            order.Id = reader.GetInt32(0);
+                            order.DateTime = reader.GetDateTime(1);
+                            order.BuyerName = new Buyer();
+                            order.BuyerName.Name = reader.GetString(2);
+                            order.DrinksList = new ListOfDrinks();
+                            order.DrinksList.Drinks = new List<Drink>();
+                            foreach (Drink dr in order.DrinksList.Drinks) 
                             {
-                                Order order = new Order
-                                {
-                                    Id = reader.GetInt32(0),
-                                    DateTime = reader.GetDateTime(1),
-                                    buyer.Name = reader.GetString(2),
-                                    Drinks = reader.GetString(3),
-                                    Coun tOfDrinks = reader.GetInt32(4),
-                                    SnackName = reader.GetString(5),
-                                    CountOfSnacks = reader.GetInt32(6)
-                                };
-                                ordersList.Add(order);
+                                dr.Name = reader.GetString(3);
+                                order.DrinksList.Drinks.Add(dr);
+                                order.DrinksList.Count++;
                             }
+                            
+                            order.DrinksList.Count = reader.GetInt32(4);
+                            order.SnacksList = new ListOfSnacks();
+                            order.SnacksList.Snacks = new List<Snack>();
+
+                            foreach (Snack sn in order.SnacksList.Snacks)
+                            {
+                                sn.Name = reader.GetString(3);
+                                order.SnacksList.Snacks.Add(sn);
+                                order.SnacksList.Count++;
+                            }
+                            order.SnacksList.Count = reader.GetInt32(6);
+                            ordersList.Add(order);
                         }
                         reader.Close();
                     }
@@ -726,6 +742,6 @@ namespace Library.Models.Classes
                 return null;
             }
         }
-    }
 
+    }
 }

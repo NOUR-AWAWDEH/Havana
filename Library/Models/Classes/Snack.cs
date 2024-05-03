@@ -24,6 +24,8 @@ namespace Library.Models.Classes
             this.TypeOfSnakId = typeOfSnackId;
 
         }
+
+        
         public override string ToString()
         {
             return base.ToString() + $"\t{Weigth}" ;

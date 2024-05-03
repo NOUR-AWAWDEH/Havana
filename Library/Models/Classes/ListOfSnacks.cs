@@ -20,6 +20,8 @@ namespace Library.Models.Classes
 
         }
 
+        public ListOfSnacks() { }
+
         public override string ToString() 
         {
             return $"{Id}\t{Snacks}\t{Count}";

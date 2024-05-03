@@ -24,6 +24,8 @@ namespace Library.Models.Classes
             TypeOfDrinkId = typeOfDrinkId;
         }
 
+        
+
         public override string ToString()
         {
             return base.ToString() + $"\t{Volume}";

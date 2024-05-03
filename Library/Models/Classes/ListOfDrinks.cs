@@ -15,6 +15,7 @@ namespace Library.Models.Classes
 
         public int Count { get;set;}
 
+        
         public ListOfDrinks(int id, List<Drink> drinks, int Count) 
         {
             this.Id = id;
@@ -22,7 +23,9 @@ namespace Library.Models.Classes
             this.Count = Count;
 
         }
-        
+
+        public ListOfDrinks() { }
+
         public override string ToString() 
         {
             return $"{Id}\t{Drinks}\t{Count}";

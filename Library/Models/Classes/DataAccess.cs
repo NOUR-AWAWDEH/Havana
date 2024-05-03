@@ -671,5 +671,61 @@ namespace Library.Models.Classes
 
             return snack;
         }
+
+        public List<Order> GetOrderList()
+        {
+            List<Order> ordersList = new List<Order>();
+            Buyer buyer = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(cnnString))
+                {
+                    connection.Open();
+                    string query = "SELECT O.id, " +
+                                   "O.DateTime, " +
+                                   "B.name " +
+                                   "D.name " +
+                                   "Ld.count " +
+                                   "S.name " +
+                                   "LS.count " +
+                                   "FROM Orders O " +
+                                   "INNER JOIN Buyer B ON O.id_buyer = B.id " +
+                                   "INNER JOIN ListOfDrinks LD ON O.id = LD.id_order " +
+                                   "INNER JOIN Drink D ON D.id = LD.id_drink " +
+                                   "INNER JOIN ListOfSnacks LS ON O.id = LS.id_order " +
+                                   "INNER JOIN Snack S ON S.id = LS.id_snacks";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Order order = new Order
+                                {
+                                    Id = reader.GetInt32(0),
+                                    DateTime = reader.GetDateTime(1),
+                                    buyer.Name = reader.GetString(2),
+                                    Drinks = reader.GetString(3),
+                                    Coun tOfDrinks = reader.GetInt32(4),
+                                    SnackName = reader.GetString(5),
+                                    CountOfSnacks = reader.GetInt32(6)
+                                };
+                                ordersList.Add(order);
+                            }
+                        }
+                        reader.Close();
+                    }
+                }
+                return ordersList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
+
 }

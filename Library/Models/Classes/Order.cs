@@ -1,49 +1,78 @@
-﻿using Library.Models.Interfaces.Drinks;
+﻿
 using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 
 namespace Library.Models.Classes
 {
     public class Order
     {
-        public DateTime OrderDate { get; set; }
+        public int Id { get; set; } 
+        public DateTime DateTime { get; set; }
 
         public Buyer BuyerName { get; set; }
 
-        public List<Drink> Drinks { get; set; }
+        public ListOfDrinks DrinksList { get; set; }
 
-        public List<Snack> Snacks { get; set; }
+        public ListOfSnacks SnacksList { get; set; }
 
         public decimal TotalCost {get;set;}
 
         public Order() { }
 
-        public Order(DateTime orderDate, Buyer buyerName, List<Drink> drinks, List<Snack> snacks, decimal totalCost)
+        public Order(int id,DateTime dateTime, Buyer buyerName, ListOfDrinks drinksList, ListOfSnacks snacksList, decimal totalCost)
         {
-            OrderDate = orderDate;
+            Id = id;
+            DateTime = dateTime;
             BuyerName = buyerName;
-            Drinks = drinks;
-            Snacks = snacks;
+            DrinksList = drinksList;
+            SnacksList = snacksList;
             TotalCost = totalCost;
+        }
+
+
+
+        public int CalculateCoutOfSnacks() 
+        {
+            SnacksList.Count = 0;
+
+            foreach (Snack snack in SnacksList.Snacks)
+            {
+                SnacksList.Count++;
+            }
+            return SnacksList.Count;
+        }
+
+        public int CalculateCoutOfDrinks()
+        {
+            DrinksList.Count = 0;
+
+            foreach (Drink drink in DrinksList.Drinks)
+            {
+                DrinksList.Count++;
+            }
+            return DrinksList.Count;
         }
 
         public decimal CalculateTotalCost() 
         {
              TotalCost = 0;
-            foreach (Drink drink in Drinks)
+            foreach (Drink drink in DrinksList.Drinks)
             {
-                TotalCost += drink.Cost; 
+                TotalCost += drink.Cost;
+                 
             }
-            foreach (Snack snack in Snacks) 
+            foreach (Snack snack in SnacksList.Snacks) 
             {
                 TotalCost += snack.Cost;
+                
             }
             return TotalCost;
         }
         
         public override string ToString()
         {
-            return $"{OrderDate}\t{BuyerName}\t{Drinks}\t{Snacks}";
+            return $"{Id}\t{DateTime}\t{BuyerName}\t{DrinksList}\t{SnacksList}\t{TotalCost}";
         }
     }
 }

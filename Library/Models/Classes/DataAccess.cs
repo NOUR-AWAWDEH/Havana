@@ -14,6 +14,7 @@ using static Library.Models.Classes.DataAccess;
 using System.CodeDom.Compiler;
 using System.Collections;
 using System.Security.Cryptography;
+using System.Data.Common;
 
 namespace Library.Models.Classes
 {
@@ -22,28 +23,39 @@ namespace Library.Models.Classes
 
         public readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
 
-        public void InsertBuyer(Buyer buyer)
+        public int InsertBuyer(Buyer buyer)
         {
+            int insertedId = 0;
             try
             {
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
                     cnn.Open();
 
-                    string sql = "INSERT INTO Buyer (name) VALUES (@name);";
+                    string sql = "INSERT INTO Buyer (name) VALUES (@name) SELECT @id = SCOPE_IDENTITY() ";
                     SqlCommand cmd = new SqlCommand(sql, cnn);
 
+                    
                     cmd.Parameters.AddWithValue("@name", buyer.Name);
 
-                    cmd.ExecuteNonQuery();
+                    SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
+                    idParameter.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(idParameter);
 
+                    cmd.ExecuteNonQuery();
+                    if (idParameter.Value != DBNull.Value)
+                    {
+                        insertedId = Convert.ToInt32(idParameter.Value);
+                    }
                     cnn.Close();
                 }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            return insertedId;
         }
 
 

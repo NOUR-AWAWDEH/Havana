@@ -92,8 +92,9 @@ namespace Havana.Orders
                 string name = BuyerNameTextBox.Text;
                 if (name != null && !string.IsNullOrWhiteSpace(name))
                 {
+                    buyer.Id = -1;
                     buyer.Name = name;
-                    dataAccess.InsertBuyer(buyer);
+                    buyer.Id = dataAccess.InsertBuyer(buyer);
                     OrderTextBlock.Text = name + " Has Been Added!! ";
                 }
                 else
@@ -156,7 +157,7 @@ namespace Havana.Orders
             newOrder.Id = -1;
             newOrder.Name = "Table_1";
             newOrder.DateTime = setDateTime;
-            newOrder.BuyerName = buyer;
+            newOrder.BuyerName = buyer; 
             listOfDrinks.Drinks = drinks;
             listOfSnacks.Snacks = snacks;
             newOrder.DrinksList = listOfDrinks;
@@ -165,17 +166,17 @@ namespace Havana.Orders
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);
 
-            try
-            {
+            //try
+            //{
                 dataAccess.InsertOrder(newOrder);
                 Bill billWindow = new Bill(newOrder);
                 billWindow.Show();
-            }
-            catch (SqlException ex)
-            {
+            //}
+            //catch (SqlException ex)
+            //{
                
-                MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
-            }
+            //    MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
+            //}
         }
 
 

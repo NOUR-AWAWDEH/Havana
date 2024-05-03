@@ -128,25 +128,25 @@ namespace Havana.Orders
             Order newOrder = new Order();
             DateTime setDateTime = DateTime.Now;
             
-            List<Drink> drinks = new List<Drink>();
-            List<Snack> snacks = new List<Snack>();
+            ListOfDrinks listOfDrinks = new ListOfDrinks();
+            ListOfSnacks listOfSnacks = new ListOfSnacks();
 
             foreach (var item in OrderDataGrid.Items)
             {
                 if (item is Drink drink)
                 {
-                    drinks.Add(drink);
+                    listOfDrinks.Drinks.Add(drink);
                 }
                 if (item is Snack snack)
                 {
-                    snacks.Add(snack);
+                    listOfSnacks.Snacks.Add(snack);
                 }
             }
 
-            newOrder.OrderDate = setDateTime;
+            newOrder.DateTime = setDateTime;
             newOrder.BuyerName = buyer;
-            newOrder.Drinks = drinks;
-            newOrder.Snacks = snacks;
+            newOrder.DrinksList = listOfDrinks;
+            newOrder.SnacksList = listOfSnacks;
             newOrder.TotalCost = newOrder.CalculateTotalCost();
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);

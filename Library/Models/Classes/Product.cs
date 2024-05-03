@@ -23,7 +23,7 @@ namespace Library.Models.Classes
        
         public virtual new string ToString()
         {
-            return $"{Id}\t{Name}\t{Cost}";
+            return $"{Id}{Name}{Cost}";
         }
     }
 }

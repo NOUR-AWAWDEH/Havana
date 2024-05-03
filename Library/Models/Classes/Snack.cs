@@ -28,7 +28,7 @@ namespace Library.Models.Classes
         
         public override string ToString()
         {
-            return base.ToString() + $"\t{Weigth}" ;
+            return base.ToString() + $"{Weigth}" ;
         }
 
     }

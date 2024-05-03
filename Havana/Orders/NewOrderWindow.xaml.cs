@@ -113,7 +113,7 @@ namespace Havana.Orders
 
         public void ShowOrderButtons()
         {
-            if (itemsAdded is true)
+            if (itemsAdded is true && BuyerNameTextBox.Text != null)
             {
                 Order.Visibility = Visibility.Visible;
             }
@@ -134,8 +134,7 @@ namespace Havana.Orders
             ListOfSnacks listOfSnacks = new ListOfSnacks();
             List<Drink> drinks = new List<Drink>();
             List<Snack> snacks = new List<Snack>();
-            listOfDrinks.Id = -1;
-            listOfSnacks.Id = -1;
+            
             newOrder.Id = -1;
             
             foreach (var item in OrderDataGrid.Items)
@@ -153,6 +152,16 @@ namespace Havana.Orders
                 }
             }
 
+            if (listOfDrinks != null) 
+            {
+                listOfDrinks.Id = -1;
+            }
+
+            if (listOfSnacks != null)
+            { 
+                listOfSnacks.Id = -1;
+            }
+
             //Sing Order
             newOrder.Id = -1;
             newOrder.Name = "Table_1";
@@ -166,17 +175,17 @@ namespace Havana.Orders
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);
 
-            //try
-            //{
+            try
+            {
                 dataAccess.InsertOrder(newOrder);
                 Bill billWindow = new Bill(newOrder);
                 billWindow.Show();
-            //}
-            //catch (SqlException ex)
-            //{
-               
-            //    MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
-            //}
+            }
+            catch (SqlException ex)
+            {
+
+                MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
+            }
         }
 
 

@@ -777,29 +777,36 @@ namespace Library.Models.Classes
 
                     order.Id = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    foreach (Drink drink in order.DrinksList.Drinks)
+                    if (order.DrinksList.Drinks != null) 
                     {
-                        string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @Count);";
-                        using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
+                        foreach (Drink drink in order.DrinksList.Drinks)
                         {
-                            drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
-                            drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
-                            drinkCmd.Parameters.AddWithValue("@Count", order.DrinksList.Count);
-                            drinkCmd.ExecuteNonQuery();
+                            string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @Count);";
+                            using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
+                            {
+                                drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                                drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
+                                drinkCmd.Parameters.AddWithValue("@Count", order.DrinksList.Count);
+                                drinkCmd.ExecuteNonQuery();
+                            }
                         }
                     }
 
-                    foreach (Snack snack in order.SnacksList.Snacks)
+                    if (order.SnacksList.Snacks != null) 
                     {
-                        string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snack, count) VALUES (@OrderId, @SnackId, @Count);";
-                        using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
+                        foreach (Snack snack in order.SnacksList.Snacks)
                         {
-                            snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
-                            snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
-                            snackCmd.Parameters.AddWithValue("@Count", order.SnacksList.Count);
-                            snackCmd.ExecuteNonQuery();
+                            string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snack, count) VALUES (@OrderId, @SnackId, @Count);";
+                            using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
+                            {
+                                snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                                snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
+                                snackCmd.Parameters.AddWithValue("@Count", order.SnacksList.Count);
+                                snackCmd.ExecuteNonQuery();
+                            }
                         }
                     }
+                    
                 }
             }
         }

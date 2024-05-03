@@ -52,6 +52,7 @@ namespace Library.Models.Classes
             foreach (Drink drink in DrinksList.Drinks)
             {
                 DrinksList.Count++;
+
             }
             return DrinksList.Count;
         }
@@ -65,6 +66,7 @@ namespace Library.Models.Classes
                 foreach (Drink drink in DrinksList.Drinks)
                 {
                     TotalCost += drink.Cost;
+                    
                 }
             }
 
@@ -81,7 +83,7 @@ namespace Library.Models.Classes
 
         public override string ToString()
         {
-            return $"{Id}\t{Name}\t{DateTime}\t{BuyerName}\t{DrinksList}\t{SnacksList}\t{TotalCost}";
+            return $"{Id}{Name}{DateTime}{BuyerName}{DrinksList}{SnacksList}{TotalCost}";
         }
     }
 }

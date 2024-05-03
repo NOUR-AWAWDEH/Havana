@@ -38,43 +38,52 @@ namespace Library.Models.Classes
 
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
-                    sw.WriteLine("-------------------------------------------------------------------");
+                    // Assuming sw is the output stream or writer
 
-                    sw.WriteLine($"{CenterText("Havana")}");
-                    sw.WriteLine($"{CenterText("Address  99,99 , City Gomel")}");
-                    sw.WriteLine($"{CenterText("Phone: +37525-222-2222")}");
-                    sw.WriteLine("-------------------------------------------------------------------");
-                    sw.WriteLine($"Date:            {order.DateTime}\n");
-                    sw.WriteLine($"Buyer Name:      {order.BuyerName}");
-                    sw.WriteLine("-------------------------------------------------------------------");
-                    sw.WriteLine($"Items{new string(' ',55)}Price{new string(' ',55)}Count");
-                    sw.WriteLine("-------------------------------------------------------------------");
-                    // ...
+                    // Calculate the maximum width of the snack names
+                    int maxWidth = 60;
+                    
 
-                    foreach (var drink in order.DrinksList.Drinks)
+                    sw.WriteLine("".PadRight(80, '-'));
+                    sw.WriteLine($"{"".PadRight(34)}Havana");
+                    sw.WriteLine($"{"".PadRight(24)}Address 99,99 , City Gomel");
+                    sw.WriteLine($"{"".PadRight(26)}Phone: +37525-222-2222");
+                    sw.WriteLine("".PadRight(80, '-'));
+
+                    sw.WriteLine($"Date: {DateTime.Now.ToString("M/d/yyyy h:mm:ss tt")}");
+                    sw.WriteLine($"Buyer Name: {order.BuyerName.Name}");
+                    sw.WriteLine("".PadRight(80, '-'));
+
+                    sw.WriteLine("Items".PadRight(60, ' ') + "Price".PadRight(12,' ') + "Count");
+                    sw.WriteLine("".PadRight(80, '-'));
+
+                    if (order.DrinksList.Drinks != null && order.DrinksList.Drinks.Any())
                     {
-                        string itemLine = $"{drink.Name}";
-                        int remainingSpace = 60 - itemLine.Length;
-                        string priceLine = $"{currencySymbol}{drink.Cost.ToString("G29")}";
-                        string countOfItems = $"{order.DrinksList.Count}";
-                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{countOfItems}");
+                        foreach (Drink drink in order.DrinksList.Drinks)
+                        {
+                            string itemLine = $"{drink.Name.ToLower()}";
+                            int remainingSpace = maxWidth - itemLine.Length;
+                            string priceLine = $"{currencySymbol}{drink.Cost.ToString("G29")}".PadRight(12, ' ');
+                            string countOfItems = $"{order.DrinksList.Count}";
+                            sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{new string(' ', 8)}{countOfItems}");
+                        }
                     }
 
-                    // ...
-
-                    foreach (var snack in order.SnacksList.Snacks)
+                    if (order.SnacksList.Snacks != null && order.SnacksList.Snacks.Any())
                     {
-                        string itemLine = $"{snack.Name}";
-                        int remainingSpace = 60 - itemLine.Length;
-                        string priceLine = $"{currencySymbol}{snack.Cost.ToString("G29")}";
-                        string countOfItems = $"{order.SnacksList.Count}";
-                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{countOfItems}");
+                        foreach (Snack snack in order.SnacksList.Snacks)
+                        {
+                            string itemLine = $"{snack.Name.ToLower()}";
+                            int remainingSpace = maxWidth - itemLine.Length;
+                            string priceLine = $"{currencySymbol}{snack.Cost.ToString("G29")}".PadRight(12);
+                            string countOfItems = $"{order.SnacksList.Count}";
+                            sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{new string(' ', 8)}{countOfItems}");
+                        }
                     }
-                    // ...
 
-                    sw.WriteLine("-------------------------------------------------------------------");
-                    sw.WriteLine($"Total:{new string(' ',54)}{currencySymbol}{order.TotalCost.ToString("G29")}");
-                    sw.WriteLine("-------------------------------------------------------------------");
+                    sw.WriteLine("".PadRight(80, '-'));
+                    sw.WriteLine("Total:".PadRight(maxWidth) + $"{currencySymbol}{order.TotalCost.ToString("0.##")}");
+                    sw.WriteLine("".PadRight(80, '-'));
                 }
             }
             catch (Exception ex)
@@ -83,10 +92,9 @@ namespace Library.Models.Classes
             }
         }
 
-       
         private string CenterText(string text)
         {
-            int totalWidth = 68; // Total width of the line
+            int totalWidth = 82; // Total width of the line
             int textWidth = text.Length;
             int leftIndent = (totalWidth - textWidth) / 2;
             string centeredText = text.PadLeft(leftIndent + textWidth).PadRight(totalWidth);

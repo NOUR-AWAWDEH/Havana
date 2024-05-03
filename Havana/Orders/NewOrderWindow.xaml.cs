@@ -8,6 +8,7 @@ using Havana.Main;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Havana.Orders
 {
@@ -134,7 +135,8 @@ namespace Havana.Orders
             List<Snack> snacks = new List<Snack>();
             listOfDrinks.Id = -1;
             listOfSnacks.Id = -1;
-
+            newOrder.Id = -1;
+            
             foreach (var item in OrderDataGrid.Items)
             {
                 if (item is Drink drink)
@@ -150,6 +152,9 @@ namespace Havana.Orders
                 }
             }
 
+            //Sing Order
+            newOrder.Id = -1;
+            newOrder.Name = "Table_1";
             newOrder.DateTime = setDateTime;
             newOrder.BuyerName = buyer;
             listOfDrinks.Drinks = drinks;
@@ -159,9 +164,18 @@ namespace Havana.Orders
             newOrder.TotalCost = newOrder.CalculateTotalCost();
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);
-            dataAccess.InsertOrder(newOrder);
-            Bill billWindow = new Bill(newOrder);
-            billWindow.Show();
+
+            try
+            {
+                dataAccess.InsertOrder(newOrder);
+                Bill billWindow = new Bill(newOrder);
+                billWindow.Show();
+            }
+            catch (SqlException ex)
+            {
+               
+                MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
+            }
         }
 
 

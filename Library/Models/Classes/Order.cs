@@ -81,7 +81,7 @@ namespace Library.Models.Classes
 
         public override string ToString()
         {
-            return $"{Id}\t{DateTime}\t{BuyerName}\t{DrinksList}\t{SnacksList}\t{TotalCost}";
+            return $"{Id}\t{Name}\t{DateTime}\t{BuyerName}\t{DrinksList}\t{SnacksList}\t{TotalCost}";
         }
     }
 }

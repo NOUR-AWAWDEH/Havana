@@ -29,14 +29,13 @@ namespace Library.Models.Classes
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
                     cnn.Open();
-                    string sql = "INSERT INTO Buyer (name) VALUES (@name); SELECT SCOPE_IDENTITY();";
+
+                    string sql = "INSERT INTO Buyer (name) VALUES (@name);";
                     SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                    SqlParameter nameParameter = new SqlParameter("@name", buyer.Name);
-                    cmd.Parameters.Add(nameParameter);
+                    cmd.Parameters.AddWithValue("@name", buyer.Name);
 
-                    // Execute the query and retrieve the generated ID using ExecuteScalar()
-                    int newId = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
 
                     cnn.Close();
                 }
@@ -766,7 +765,6 @@ namespace Library.Models.Classes
 
                     order.Id = Convert.ToInt32(cmd.ExecuteScalar());
 
-
                     foreach (Drink drink in order.DrinksList.Drinks)
                     {
                         string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @Count);";
@@ -781,7 +779,7 @@ namespace Library.Models.Classes
 
                     foreach (Snack snack in order.SnacksList.Snacks)
                     {
-                        string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snacks, count) VALUES (@OrderId, @SnackId, @Count);";
+                        string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snack, count) VALUES (@OrderId, @SnackId, @Count);";
                         using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
                         {
                             snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
@@ -794,7 +792,7 @@ namespace Library.Models.Classes
             }
         }
 
-        
+
 
     }
 }

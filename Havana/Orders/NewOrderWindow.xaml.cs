@@ -14,8 +14,8 @@ namespace Havana.Orders
     public partial class NewOrderWindow : Window
     {
         DataAccess dataAccess = new DataAccess();
-        List<Drink> Drinks = new List<Drink>();
-        List<Snack> Snacks = new List<Snack>();
+        ListOfDrinks DrinksList = new ListOfDrinks();
+        ListOfSnacks SnacksList = new ListOfSnacks();
         Buyer buyer = new Buyer();
         public bool itemsAdded = false;
         public NewOrderWindow()
@@ -92,13 +92,13 @@ namespace Havana.Orders
                 if (name != null && !string.IsNullOrWhiteSpace(name))
                 {
                     buyer.Name = name;
-                    dataAccess.InsertBuyerName(buyer);
+                    dataAccess.InsertBuyer(buyer);
                     OrderTextBlock.Text = name + " Has Been Added!! ";
                 }
                 else
                 {
                     MessageBox.Show("Please Add The Buyer Name First!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                    
                 }
 
             }
@@ -130,27 +130,36 @@ namespace Havana.Orders
             
             ListOfDrinks listOfDrinks = new ListOfDrinks();
             ListOfSnacks listOfSnacks = new ListOfSnacks();
+            List<Drink> drinks = new List<Drink>();
+            List<Snack> snacks = new List<Snack>();
+            listOfDrinks.Id = -1;
+            listOfSnacks.Id = -1;
 
             foreach (var item in OrderDataGrid.Items)
             {
                 if (item is Drink drink)
                 {
-                    listOfDrinks.Drinks.Add(drink);
+                    drinks.Add(drink); 
+                    listOfDrinks.Count++;
                 }
                 if (item is Snack snack)
                 {
-                    listOfSnacks.Snacks.Add(snack);
+                    
+                    snacks.Add(snack);
+                    listOfSnacks.Count++;
                 }
             }
 
             newOrder.DateTime = setDateTime;
             newOrder.BuyerName = buyer;
+            listOfDrinks.Drinks = drinks;
+            listOfSnacks.Snacks = snacks;
             newOrder.DrinksList = listOfDrinks;
             newOrder.SnacksList = listOfSnacks;
             newOrder.TotalCost = newOrder.CalculateTotalCost();
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);
-
+            dataAccess.InsertOrder(newOrder);
             Bill billWindow = new Bill(newOrder);
             billWindow.Show();
         }
@@ -159,12 +168,12 @@ namespace Havana.Orders
 
         private void SearchButt(object sender, RoutedEventArgs e)
         {
-            Drinks = dataAccess.GetDrinks();
+            DrinksList.Drinks = dataAccess.GetDrinks();
             ItemsComboBox.Items.Clear();
 
             string searchTerm = SearchTextBox.Text.ToLower();
 
-            foreach (Drink drink in Drinks)
+            foreach (Drink drink in DrinksList.Drinks)
             {
                 if (drink.Name.ToLower().StartsWith(searchTerm) || drink.Cost.ToString().ToLower().StartsWith(searchTerm))
                 {
@@ -174,8 +183,8 @@ namespace Havana.Orders
                 }
             }
 
-            Snacks = dataAccess.GetSnacks();
-            foreach (Snack snack in Snacks)
+            SnacksList.Snacks = dataAccess.GetSnacks();
+            foreach (Snack snack in SnacksList.Snacks)
             {
                 if (snack.Name.ToLower().StartsWith(searchTerm) || snack.Cost.ToString().ToLower().StartsWith(searchTerm))
                 {
@@ -212,7 +221,7 @@ namespace Havana.Orders
 
         private void OrderDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            e.Handled = true;
+           
         }
         
     }

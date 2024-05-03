@@ -35,7 +35,7 @@ namespace Havana.Orders
             string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bills");
             Directory.CreateDirectory(folderPath);
 
-            string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.OrderDate:yyyyMMdd_HHmmss}.txt");
+            string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
 
             try
             {
@@ -53,7 +53,7 @@ namespace Havana.Orders
             string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bills");
             Directory.CreateDirectory(folderPath);
 
-            string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.OrderDate:yyyyMMdd_HHmmss}.txt");
+            string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
 
             try
             {

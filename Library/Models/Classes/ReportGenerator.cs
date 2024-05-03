@@ -30,7 +30,7 @@ namespace Library.Models.Classes
             string currencySymbol = "BYN ";
             try
             {
-                string fileName = Path.Combine(folderPath, $"Bill_{order.OrderDate:yyyyMMdd_HHmmss}.txt");
+                string fileName = Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
@@ -44,29 +44,31 @@ namespace Library.Models.Classes
                     sw.WriteLine($"{CenterText("Address  99,99 , City Gomel")}");
                     sw.WriteLine($"{CenterText("Phone: +37525-222-2222")}");
                     sw.WriteLine("-------------------------------------------------------------------");
-                    sw.WriteLine($"Date:            {order.OrderDate}\n");
+                    sw.WriteLine($"Date:            {order.DateTime}\n");
                     sw.WriteLine($"Buyer Name:      {order.BuyerName}");
                     sw.WriteLine("-------------------------------------------------------------------");
-                    sw.WriteLine($"Items{new string(' ',55)}Price");
+                    sw.WriteLine($"Items{new string(' ',55)}Price{new string(' ',55)}Count");
                     sw.WriteLine("-------------------------------------------------------------------");
                     // ...
 
-                    foreach (var drink in order.Drinks)
+                    foreach (var drink in order.DrinksList.Drinks)
                     {
                         string itemLine = $"{drink.Name}";
                         int remainingSpace = 60 - itemLine.Length;
                         string priceLine = $"{currencySymbol}{drink.Cost.ToString("G29")}";
-                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}");
+                        string countOfItems = $"{order.DrinksList.Count}";
+                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{countOfItems}");
                     }
 
                     // ...
 
-                    foreach (var snack in order.Snacks)
+                    foreach (var snack in order.SnacksList.Snacks)
                     {
                         string itemLine = $"{snack.Name}";
                         int remainingSpace = 60 - itemLine.Length;
                         string priceLine = $"{currencySymbol}{snack.Cost.ToString("G29")}";
-                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}");
+                        string countOfItems = $"{order.SnacksList.Count}";
+                        sw.WriteLine($"{itemLine}{new string(' ', remainingSpace)}{priceLine}{countOfItems}");
                     }
                     // ...
 
@@ -99,22 +101,22 @@ namespace Library.Models.Classes
 
             foreach (var order in orderList)
             {
-                string fileName = Path.Combine(folderPath, $"Bill_{order.OrderDate:yyyyMMdd_HHmmss}.txt");
+                string fileName = Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
 
                 try
                 {
                     using (StreamWriter sw = File.CreateText(fileName))
                     {
                         // Write the order details to the file
-                        sw.WriteLine($"Order Date: {order.OrderDate}");
+                        sw.WriteLine($"Order Date: {order.DateTime}");
                         sw.WriteLine($"Buyer Name: {order.BuyerName}");
                         sw.WriteLine("Drinks:");
-                        foreach (var drink in order.Drinks)
+                        foreach (var drink in order.DrinksList.Drinks)
                         {
                             sw.WriteLine($"{drink.Name} - {drink.Cost}");
                         }
                         sw.WriteLine("Snacks:");
-                        foreach (var snack in order.Snacks)
+                        foreach (var snack in order.SnacksList.Snacks)
                         {
                             sw.WriteLine($"{snack.Name} - {snack.Cost}");
                         }

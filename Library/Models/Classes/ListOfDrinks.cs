@@ -16,10 +16,10 @@ namespace Library.Models.Classes
         public int Count { get;set;}
 
         
-        public ListOfDrinks(int id, List<Drink> drinks, int Count) 
+        public ListOfDrinks(int id, int Count) 
         {
             this.Id = id;
-            this.Drinks = drinks;
+            this.Drinks = new List<Drink>();
             this.Count = Count;
 
         }

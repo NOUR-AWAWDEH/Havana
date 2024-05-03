@@ -12,10 +12,10 @@ namespace Library.Models.Classes
         public List<Snack> Snacks { get; set; }
         public int Count { get; set; }
 
-        public ListOfSnacks(int id , List<Snack> snacks, int count) 
+        public ListOfSnacks(int id ,int count) 
         {
             this.Id = id;
-            this.Snacks = snacks;
+            this.Snacks = new List<Snack>();
             this.Count = count;
 
         }

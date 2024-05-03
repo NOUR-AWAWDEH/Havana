@@ -10,6 +10,10 @@ using System.Xml.Linq;
 using System.Data;
 using System.Windows.Controls;
 using System.Windows;
+using static Library.Models.Classes.DataAccess;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.Security.Cryptography;
 
 namespace Library.Models.Classes
 {
@@ -18,28 +22,31 @@ namespace Library.Models.Classes
 
         public readonly string cnnString = ConfigurationManager.ConnectionStrings["Havana.Properties.Settings.HavanaConnectionString"].ConnectionString;
 
-        public void InsertBuyerName(Buyer buyer)
+        public void InsertBuyer(Buyer buyer)
         {
             try
             {
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
                     cnn.Open();
-                    string sql = "insert into Buyer (name) values( @name)";
+                    string sql = "INSERT INTO Buyer (name) VALUES (@name); SELECT SCOPE_IDENTITY();";
                     SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                    SqlParameter NameParameter = new SqlParameter("@name", buyer.Name);
-                    cmd.Parameters.Add(NameParameter);
-                    cmd.ExecuteReader();
+                    SqlParameter nameParameter = new SqlParameter("@name", buyer.Name);
+                    cmd.Parameters.Add(nameParameter);
+
+                    // Execute the query and retrieve the generated ID using ExecuteScalar()
+                    int newId = Convert.ToInt32(cmd.ExecuteScalar());
+
                     cnn.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erorr", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
+
 
         //TypOFDrink
         public List<TypeOfDrink> GetDrinksType()
@@ -674,6 +681,7 @@ namespace Library.Models.Classes
             return snack;
         }
 
+        //Order
         public List<Order> GetOrderList()
         {
             List<Order> ordersList = new List<Order>();
@@ -742,6 +750,51 @@ namespace Library.Models.Classes
                 return null;
             }
         }
+
+        public void InsertOrder(Order order)
+        {
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+                string query = "INSERT INTO Orders (name, DateTime, id_buyer) VALUES (@Name, @DateTime, @BuyerId); SELECT SCOPE_IDENTITY();";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Name", order.Name); // Set the 'name' column value
+                    cmd.Parameters.AddWithValue("@DateTime", order.DateTime);
+                    cmd.Parameters.AddWithValue("@BuyerId", order.BuyerName.Id);
+
+                    order.Id = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+                    foreach (Drink drink in order.DrinksList.Drinks)
+                    {
+                        string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @Count);";
+                        using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
+                        {
+                            drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                            drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
+                            drinkCmd.Parameters.AddWithValue("@Count", order.DrinksList.Count);
+                            drinkCmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    foreach (Snack snack in order.SnacksList.Snacks)
+                    {
+                        string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snacks, count) VALUES (@OrderId, @SnackId, @Count);";
+                        using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
+                        {
+                            snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                            snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
+                            snackCmd.Parameters.AddWithValue("@Count", order.SnacksList.Count);
+                            snackCmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
+
+        
 
     }
 }

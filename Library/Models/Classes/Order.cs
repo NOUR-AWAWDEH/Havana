@@ -8,6 +8,7 @@ namespace Library.Models.Classes
     public class Order
     {
         public int Id { get; set; } 
+        public string Name { get; set; }
         public DateTime DateTime { get; set; }
 
         public Buyer BuyerName { get; set; }
@@ -20,9 +21,10 @@ namespace Library.Models.Classes
 
         public Order() { }
 
-        public Order(int id,DateTime dateTime, Buyer buyerName, ListOfDrinks drinksList, ListOfSnacks snacksList, decimal totalCost)
+        public Order(int id,DateTime dateTime, Buyer buyerName, ListOfDrinks drinksList, ListOfSnacks snacksList, decimal totalCost,string name)
         {
             Id = id;
+            Name = name;
             DateTime = dateTime;
             BuyerName = buyerName;
             DrinksList = drinksList;
@@ -54,22 +56,29 @@ namespace Library.Models.Classes
             return DrinksList.Count;
         }
 
-        public decimal CalculateTotalCost() 
+        public decimal CalculateTotalCost()
         {
-             TotalCost = 0;
-            foreach (Drink drink in DrinksList.Drinks)
+            TotalCost = 0;
+
+            if (DrinksList != null && DrinksList.Drinks != null)
             {
-                TotalCost += drink.Cost;
-                 
+                foreach (Drink drink in DrinksList.Drinks)
+                {
+                    TotalCost += drink.Cost;
+                }
             }
-            foreach (Snack snack in SnacksList.Snacks) 
+
+            if (SnacksList != null && SnacksList.Snacks != null)
             {
-                TotalCost += snack.Cost;
-                
+                foreach (Snack snack in SnacksList.Snacks)
+                {
+                    TotalCost += snack.Cost;
+                }
             }
+
             return TotalCost;
         }
-        
+
         public override string ToString()
         {
             return $"{Id}\t{DateTime}\t{BuyerName}\t{DrinksList}\t{SnacksList}\t{TotalCost}";

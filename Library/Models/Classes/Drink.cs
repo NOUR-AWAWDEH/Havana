@@ -11,11 +11,13 @@ namespace Library.Models.Classes
         public double Volume { get; set; }
 
         public int TypeOfDrinkId { get;set;}
-       
+
+        public int Count { get; set; } 
+
+
         public Drink(int id, string name, decimal cost, double volume ) : base(id, name, cost)
         {
             Volume = volume;
-            
         }
 
         public Drink(int id, string name, decimal cost, double volume, int typeOfDrinkId) : base(id, name, cost)
@@ -25,6 +27,11 @@ namespace Library.Models.Classes
         }
 
         
+        public Drink(int id, string name, int countofDrinks, decimal cost, double volume) : base(id, name, cost)
+        {
+            Volume = volume;
+            this.Count = countofDrinks;  
+        }
 
         public override string ToString()
         {

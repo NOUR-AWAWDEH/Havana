@@ -12,6 +12,8 @@ namespace Library.Models.Classes
 
         public int TypeOfSnakId { get; set; }
 
+        public int Count { get; set; }
+
         public Snack(int id, string name, decimal cost, double weigth) : base(id, name, cost)
         {
             this.Weigth = weigth;
@@ -24,8 +26,13 @@ namespace Library.Models.Classes
             this.TypeOfSnakId = typeOfSnackId;
 
         }
+        public Snack(int id, string name, decimal cost, int count, double weigth) : base(id, name, cost)
+        {
+            this.Weigth = weigth;
+            this.Count = count;
 
-        
+        }
+
         public override string ToString()
         {
             return base.ToString() + $"{Weigth}" ;

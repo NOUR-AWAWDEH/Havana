@@ -67,11 +67,14 @@ namespace Havana.Orders
                 else if (ItemsComboBox.SelectedValue is Snack selectedSnack)
                 {
                     OrderDataGrid.Items.Add(selectedSnack);
+                    
                     itemsAdded = true;
                     ShowOrderButtons();
                 }
             }
         }
+
+        
 
         //ItemsButt
         private void SnaksItemsButt(object sender, RoutedEventArgs e)
@@ -134,21 +137,36 @@ namespace Havana.Orders
             ListOfSnacks listOfSnacks = new ListOfSnacks();
             List<Drink> drinks = new List<Drink>();
             List<Snack> snacks = new List<Snack>();
-            
+
             newOrder.Id = -1;
-            
+
             foreach (var item in OrderDataGrid.Items)
             {
                 if (item is Drink drink)
                 {
-                    drinks.Add(drink); 
-                    listOfDrinks.Count++;
+                    Drink existingDrink = drinks.FirstOrDefault(d => d.Id == drink.Id);
+                    if (existingDrink != null)
+                    {
+                        existingDrink.Count++;
+                    }
+                    else
+                    {
+                        drink.Count++;
+                        drinks.Add(drink);
+                    }
                 }
-                if (item is Snack snack)
+                else if (item is Snack snack)
                 {
-                    
-                    snacks.Add(snack);
-                    listOfSnacks.Count++;
+                    Snack existingSnack = snacks.FirstOrDefault(s => s.Id == snack.Id);
+                    if (existingSnack != null)
+                    {
+                        existingSnack.Count++;
+                    }
+                    else
+                    {
+                        snack.Count++;
+                        snacks.Add(snack);
+                    }
                 }
             }
 

@@ -9,10 +9,9 @@ namespace Library.Models.Classes
 {
     public class ListOfDrinks
     {
-        public int Id {get;set;}
+        public int Id { get; set; }
 
-        public List<Drink> Drinks { get;set;}
-
+        public List<Drink> Drinks { get; set; }
         public int Count { get;set;}
 
         

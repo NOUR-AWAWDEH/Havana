@@ -42,6 +42,7 @@ namespace Library.Models.Classes
             {
                 SnacksList.Count++;
             }
+
             return SnacksList.Count;
         }
 
@@ -54,6 +55,7 @@ namespace Library.Models.Classes
                 DrinksList.Count++;
 
             }
+
             return DrinksList.Count;
         }
 
@@ -65,8 +67,7 @@ namespace Library.Models.Classes
             {
                 foreach (Drink drink in DrinksList.Drinks)
                 {
-                    TotalCost += drink.Cost;
-                    
+                    TotalCost += drink.Cost * drink.Count;
                 }
             }
 
@@ -74,7 +75,7 @@ namespace Library.Models.Classes
             {
                 foreach (Snack snack in SnacksList.Snacks)
                 {
-                    TotalCost += snack.Cost;
+                    TotalCost += snack.Cost * snack.Count;
                 }
             }
 
@@ -85,5 +86,6 @@ namespace Library.Models.Classes
         {
             return $"{Id}{Name}{DateTime}{BuyerName}{DrinksList}{SnacksList}{TotalCost}";
         }
+
     }
 }

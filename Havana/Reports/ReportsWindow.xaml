@@ -30,8 +30,28 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+        
+        <Button x:Name="BringAllOrders"
+                Content="Bring All Orders"
+                HorizontalAlignment="Left"
+                Margin="38,265,0,0"
+                VerticalAlignment="Top"
+                Height="46"
+                Width="141"
+                Click="BringAllOrders_Click"
+                Visibility="Visible"
+                Foreground="White"
+                FontWeight="Bold"
+                >
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF455D1D" Offset="0.021"/>
+                    <GradientStop Color="#FF344C0E" Offset="1"/>
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
 
-        
-        
+
+
     </Grid>
 </Window>

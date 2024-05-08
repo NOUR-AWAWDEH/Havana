@@ -1,0 +1,50 @@
+﻿<Window x:Class="Havana.Reports.AllOrders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Havana.Reports"
+        mc:Ignorable="d"
+        Title="AllOrders" 
+        Height="1000" 
+        Width="1000"
+        WindowStartupLocation="CenterOwner">
+    <Grid Background=" #FFCAE2A8">
+        <Button 
+                Content="Exit"
+                FontWeight="Bold"
+                Background="#FF344C0E"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                Margin="31,910,0,0"
+                VerticalAlignment="Top"
+                Height="35"
+                Width="123" 
+                Click="ExitButton_Click"
+                />
+        
+        <Button Content="Print"
+                FontWeight="Bold"
+                Background="#FF344C0E"
+                Foreground="White"
+                HorizontalAlignment="Left"
+                Margin="804,910,0,0"
+                VerticalAlignment="Top"
+                Height="35"
+                Width="123" 
+                Click="PrintButton_Click"
+                />
+        
+        <TextBlock  x:Name="BillTextBlock"
+                    HorizontalAlignment="Left"
+                    Height="853"
+                    FontSize="11"
+                    FontFamily="Consolas"
+                    FontWeight="Regular"
+                    Margin="31,28,0,0"
+                    VerticalAlignment="Top"
+                    Width="896"
+                    />
+        
+    </Grid>
+</Window>

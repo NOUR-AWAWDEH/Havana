@@ -15,6 +15,7 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Security.Cryptography;
 using System.Data.Common;
+using System.Reflection;
 
 namespace Library.Models.Classes
 {
@@ -696,27 +697,34 @@ namespace Library.Models.Classes
         public List<Order> GetOrderList()
         {
             List<Order> ordersList = new List<Order>();
-            Drink drink = null;
-            Snack snack = null;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
                     connection.Open();
-                    string query = "SELECT O.id, " +
-                                   "O.DateTime, " +
-                                   "B.name, " +
-                                   "D.name, " +
-                                   "LD.count, " +
-                                   "S.name, " +
-                                   "LS.count " +
-                                   "FROM Orders O " +
-                                   "INNER JOIN Buyer B ON O.id_buyer = B.id " +
-                                   "INNER JOIN ListOfDrinks LD ON O.id = LD.id_order " +
-                                   "INNER JOIN Drink D ON D.id = LD.id_drink " +
-                                   "INNER JOIN ListOfSnacks LS ON O.id = LS.id_order " +
-                                   "INNER JOIN Snack S ON S.id = LS.id_snacks";
+                    string query = "SELECT " +
+                                    "O.id, " +
+                                    "O.DateTime, " +
+                                    "B.name, " +
+                                    "D.id, " +
+                                    "D.name, " +
+                                    "D.cost, " +
+                                    "D.volume, " +
+                                    "LD.count, " +
+                                    "S.id, " +
+                                    "S.name, " +
+                                    "S.cost, " +
+                                    "S.weigth, " +
+                                    "LS.count " +
+                                    "FROM Orders O " +
+                                    "INNER JOIN Buyer B ON O.id_buyer = B.id " +
+                                    "INNER JOIN ListOfDrinks LD ON O.id = LD.id_order " +
+                                    "INNER JOIN Drink D ON D.id = LD.id_drink " +
+                                    "INNER JOIN ListOfSnacks LS ON O.id = LS.id_order " +
+                                    "INNER JOIN Snack S ON S.id = LS.id_snack";
+
+
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -728,26 +736,31 @@ namespace Library.Models.Classes
                             order.DateTime = reader.GetDateTime(1);
                             order.BuyerName = new Buyer();
                             order.BuyerName.Name = reader.GetString(2);
+
                             order.DrinksList = new ListOfDrinks();
                             order.DrinksList.Drinks = new List<Drink>();
-                            foreach (Drink dr in order.DrinksList.Drinks) 
-                            {
-                                dr.Name = reader.GetString(3);
-                                order.DrinksList.Drinks.Add(dr);
-                                order.DrinksList.Count++;
-                            }
-                            
-                            order.DrinksList.Count = reader.GetInt32(4);
+
+                            int id = reader.GetInt32(3); 
+                            string name = reader.GetString(4); 
+                            decimal cost = reader.GetDecimal(5); 
+                            double volume = reader.GetDouble(6); 
+
+                            Drink drink = new Drink(id, name, cost, volume);
+                            order.DrinksList.Drinks.Add(drink);
+                            order.DrinksList.Count = reader.GetInt32(7);
+
                             order.SnacksList = new ListOfSnacks();
                             order.SnacksList.Snacks = new List<Snack>();
 
-                            foreach (Snack sn in order.SnacksList.Snacks)
-                            {
-                                sn.Name = reader.GetString(3);
-                                order.SnacksList.Snacks.Add(sn);
-                                order.SnacksList.Count++;
-                            }
-                            order.SnacksList.Count = reader.GetInt32(6);
+                            int snackId = reader.GetInt32(8); 
+                            string snackName = reader.GetString(9); 
+                            decimal snackCost = reader.GetDecimal(10); 
+                            double weigth = reader.GetDouble(11); 
+
+                            Snack snack = new Snack(snackId, snackName, snackCost, weigth);
+                            order.SnacksList.Snacks.Add(snack);
+                            order.SnacksList.Count = reader.GetInt32(12);
+
                             ordersList.Add(order);
                         }
                         reader.Close();

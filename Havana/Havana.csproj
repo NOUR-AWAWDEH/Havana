@@ -73,6 +73,9 @@
     <Compile Include="Orders\Bill.xaml.cs">
       <DependentUpon>Bill.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reports\AllOrders.xaml.cs">
+      <DependentUpon>AllOrders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ReportsWindow.xaml.cs">
       <DependentUpon>ReportsWindow.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
     <Page Include="Orders\Bill.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reports\AllOrders.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Snacks\SnaksItems.xaml">
       <SubType>Designer</SubType>

@@ -15,7 +15,8 @@ namespace Library.Models.Classes
     {
         public List<Order> OrderList { get; set; }
 
-        public ReportGenerator() { }    
+        public ReportGenerator() { } 
+        
         public ReportGenerator(List<Order> orderList)
         {
             this.OrderList = orderList;
@@ -87,6 +88,77 @@ namespace Library.Models.Classes
             }
         }
 
-       
+        public void SummeryBills(List<Order> orders)
+        {
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SummaryReports");
+            Directory.CreateDirectory(folderPath);
+
+            try
+            {
+                string fileName = Path.Combine(folderPath, $"SummaryReport_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
+                using (StreamWriter sw = File.CreateText(fileName))
+                {
+                    sw.WriteLine("Summary Report");
+                    sw.WriteLine("===============");
+                    sw.WriteLine();
+
+                    decimal totalCost = 0;
+
+                    foreach (Order order in orders)
+                    {
+                        sw.WriteLine($"Order ID: {order.Id}");
+                        sw.WriteLine($"Buyer Name: {order.BuyerName.Name}");
+                        sw.WriteLine($"Date: {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
+                        sw.WriteLine();
+
+                        decimal orderCost = 0;
+
+                        if (order.DrinksList.Drinks != null && order.DrinksList.Drinks.Any())
+                        {
+                            sw.WriteLine("Drinks:");
+                            foreach (Drink drink in order.DrinksList.Drinks)
+                            {
+                                decimal drinkTotalCost = drink.Cost * drink.Count;
+                                orderCost += drinkTotalCost;
+                                sw.WriteLine($"- {drink.Name}: {drink.Count} x {drink.Cost.ToString("0.0#")} = {drinkTotalCost.ToString("0.####")}");
+                            }
+                            sw.WriteLine();
+                        }
+
+                        if (order.SnacksList.Snacks != null && order.SnacksList.Snacks.Any())
+                        {
+                            sw.WriteLine("Snacks:");
+                            foreach (Snack snack in order.SnacksList.Snacks)
+                            {
+                                decimal snackTotalCost = snack.Cost * snack.Count;
+                                orderCost += snackTotalCost;
+                                sw.WriteLine($"- {snack.Name}: {snack.Count} x {snack.Cost.ToString("0.0#")} = {snackTotalCost.ToString("0.####")}");
+                            }
+                            sw.WriteLine();
+                        }
+
+                        sw.WriteLine($"Order Total Cost: {orderCost.ToString("0.####")}");
+                        sw.WriteLine();
+                        sw.WriteLine("=======================================");
+                        sw.WriteLine();
+
+                        totalCost += orderCost;
+                    }
+
+                    sw.WriteLine($"Summary Total Cost: {totalCost.ToString("0.####")}");
+                }
+
+                MessageBox.Show("Summary report generated successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error generating summary report: {ex.Message}");
+            }
+        }
     }
 }

@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using Havana.Main;
+using Havana.Orders;
+using Library.Models.Classes;
 
 namespace Havana.Reports
 {
@@ -21,6 +25,27 @@ namespace Havana.Reports
             {
                 this.Visibility = Visibility.Hidden;
                 mainWindow.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BringAllOrders_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                DataAccess dataAccess = new DataAccess();
+                List<Order> orders = dataAccess.GetOrderList();
+                ReportGenerator report = new ReportGenerator();
+                report.SummeryBills(orders);
+
+                AllOrders allOrders = new AllOrders(orders);
+                allOrders.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                allOrders.Show();
+            }
+            catch (SqlException ex)
+            {
+
+                MessageBox.Show("Failed to Bring the orders From the  the database: " + ex.Message);
             }
         }
     }

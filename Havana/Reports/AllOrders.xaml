@@ -9,7 +9,7 @@
         Height="1000" 
         Width="1000"
         WindowStartupLocation="CenterOwner">
-    <Grid Background=" #FFCAE2A8">
+    <Grid >
         <Button 
                 Content="Exit"
                 FontWeight="Bold"
@@ -22,7 +22,7 @@
                 Width="123" 
                 Click="ExitButton_Click"
                 />
-        
+
         <Button Content="Print"
                 FontWeight="Bold"
                 Background="#FF344C0E"
@@ -34,17 +34,23 @@
                 Width="123" 
                 Click="PrintButton_Click"
                 />
-        
-        <TextBlock  x:Name="BillTextBlock"
-                    HorizontalAlignment="Left"
-                    Height="853"
-                    FontSize="11"
-                    FontFamily="Consolas"
-                    FontWeight="Regular"
-                    Margin="31,28,0,0"
-                    VerticalAlignment="Top"
-                    Width="896"
-                    />
-        
+
+
+        <ScrollViewer HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      Height="853"
+                      Width="896"
+                      Margin="0,10,0,0">
+            
+            <TextBlock x:Name="BillTextBlock"
+                       HorizontalAlignment="Left"
+                       FontSize="15"
+                       FontFamily="Consolas"
+                       FontWeight="Regular"
+                       Margin="31,28,0,0"
+                       TextWrapping="Wrap"/>
+            
+        </ScrollViewer>
+
     </Grid>
 </Window>

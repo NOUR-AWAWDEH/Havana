@@ -34,7 +34,7 @@ namespace Havana.Reports
             try
             {
                 DataAccess dataAccess = new DataAccess();
-                List<Order> orders = dataAccess.GetOrderList();
+                List<Order> orders = dataAccess.GetAllOrders();
                 ReportGenerator report = new ReportGenerator();
                 report.SummeryBills(orders);
 

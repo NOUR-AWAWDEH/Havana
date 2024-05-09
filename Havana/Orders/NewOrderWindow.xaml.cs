@@ -151,7 +151,7 @@ namespace Havana.Orders
                     }
                     else
                     {
-                        drink.Count++;
+                        drink.Count = 1;
                         drinks.Add(drink);
                     }
                 }
@@ -164,7 +164,7 @@ namespace Havana.Orders
                     }
                     else
                     {
-                        snack.Count++;
+                        snack.Count = 1;
                         snacks.Add(snack);
                     }
                 }
@@ -187,8 +187,10 @@ namespace Havana.Orders
             newOrder.BuyerName = buyer; 
             listOfDrinks.Drinks = drinks;
             listOfSnacks.Snacks = snacks;
+            listOfDrinks.Count = drinks.Count;
+            listOfSnacks.Count = snacks.Count;    
             newOrder.DrinksList = listOfDrinks;
-            newOrder.SnacksList = listOfSnacks;
+            newOrder.SnacksList = listOfSnacks; 
             newOrder.TotalCost = newOrder.CalculateTotalCost();
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);
@@ -197,11 +199,12 @@ namespace Havana.Orders
             {
                 dataAccess.InsertOrder(newOrder);
                 Bill billWindow = new Bill(newOrder);
+                billWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 billWindow.Show();
+                newOrder = null;
             }
             catch (SqlException ex)
             {
-
                 MessageBox.Show("Failed to insert the order into the database: " + ex.Message);
             }
         }

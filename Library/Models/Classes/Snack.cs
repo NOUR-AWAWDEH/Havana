@@ -26,7 +26,7 @@ namespace Library.Models.Classes
             this.TypeOfSnakId = typeOfSnackId;
 
         }
-        public Snack(int id, string name, decimal cost, int count, double weigth) : base(id, name, cost)
+        public Snack(int id, string name,int count, decimal cost, double weigth) : base(id, name, cost)
         {
             this.Weigth = weigth;
             this.Count = count;

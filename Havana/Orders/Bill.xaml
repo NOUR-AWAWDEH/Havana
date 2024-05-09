@@ -9,7 +9,7 @@
         Height="1000" 
         Width="1000"
         WindowStartupLocation="CenterOwner">
-    <Grid Background=" #FFCAE2A8">
+    <Grid >
         <Button 
                 Content="Exit"
                 FontWeight="Bold"
@@ -38,7 +38,7 @@
         <TextBlock  x:Name="BillTextBlock"
                     HorizontalAlignment="Left"
                     Height="853"
-                    FontSize="11"
+                    FontSize="15"
                     FontFamily="Consolas"
                     FontWeight="Regular"
                     Margin="31,28,0,0"

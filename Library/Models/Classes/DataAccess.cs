@@ -16,6 +16,7 @@ using System.Collections;
 using System.Security.Cryptography;
 using System.Data.Common;
 using System.Reflection;
+using System.Linq;
 
 namespace Library.Models.Classes
 {
@@ -36,7 +37,7 @@ namespace Library.Models.Classes
                     string sql = "INSERT INTO Buyer (name) VALUES (@name) SELECT @id = SCOPE_IDENTITY() ";
                     SqlCommand cmd = new SqlCommand(sql, cnn);
 
-                    
+
                     cmd.Parameters.AddWithValue("@name", buyer.Name);
 
                     SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
@@ -50,7 +51,7 @@ namespace Library.Models.Classes
                     }
                     cnn.Close();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -694,135 +695,475 @@ namespace Library.Models.Classes
         }
 
         //Order
-        public List<Order> GetOrderList()
-        {
-            List<Order> ordersList = new List<Order>();
+        //Order
+        //public List<Order> GetOrderList()
+        //{
+        //    List<Order> ordersList = new List<Order>();
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(cnnString))
+        //        {
+        //            connection.Open();
+        //            string query =
+        //                @"
+        //                  SELECT DISTINCT
+        //                    O.id,
+        //                    O.DateTime, 
+        //                    B.name, 
+        //                    D.id, 
+        //                    D.name, 
+        //                    D.cost, 
+        //                    D.volume,
+        //                    LD.count, 
+        //                    S.id, 
+        //                    S.name,
+        //                    S.cost, 
+        //                    S.weigth,
+        //                    LS.count
+        //                FROM Orders O 
+        //                INNER JOIN Buyer B ON O.id_buyer = B.id 
+        //                LEFT JOIN ListOfDrinks LD ON O.id = LD.id_order 
+        //                LEFT JOIN Drink D ON D.id = LD.id_drink 
+        //                LEFT JOIN ListOfSnacks LS ON O.id = LS.id_order 
+        //                LEFT JOIN Snack S ON S.id = LS.id_snack
+        //                WHERE LD.id_order IS NOT NULL OR LS.id_order IS NOT NULL
+        //                ";
 
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cnnString))
-                {
-                    connection.Open();
-                    string query = "SELECT " +
-                                    "O.id, " +
-                                    "O.DateTime, " +
-                                    "B.name, " +
-                                    "D.id, " +
-                                    "D.name, " +
-                                    "D.cost, " +
-                                    "D.volume, " +
-                                    "LD.count, " +
-                                    "S.id, " +
-                                    "S.name, " +
-                                    "S.cost, " +
-                                    "S.weigth, " +
-                                    "LS.count " +
-                                    "FROM Orders O " +
-                                    "INNER JOIN Buyer B ON O.id_buyer = B.id " +
-                                    "INNER JOIN ListOfDrinks LD ON O.id = LD.id_order " +
-                                    "INNER JOIN Drink D ON D.id = LD.id_drink " +
-                                    "INNER JOIN ListOfSnacks LS ON O.id = LS.id_order " +
-                                    "INNER JOIN Snack S ON S.id = LS.id_snack";
+        //            using (SqlCommand cmd = new SqlCommand(query, connection))
+        //            {
+        //                using (SqlDataReader reader = cmd.ExecuteReader())
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        Order order = new Order();
+        //                        order.Id = reader.GetInt32(0);
+        //                        order.DateTime = reader.GetDateTime(1);
+
+        //                        Buyer buyer = new Buyer();
+        //                        buyer.Name = reader.GetString(2);
+        //                        order.BuyerName = buyer;                             
+
+        //                        ListOfDrinks drinksList = new ListOfDrinks();
+        //                        drinksList.Drinks = new List<Drink>();
+        //                        if (drinksList.Drinks != null) 
+        //                        {
+        //                            foreach (Drink drink in drinksList.Drinks)
+        //                            {
+        //                                drink.Id = reader.GetInt32(3);
+        //                                drink.Name = reader.GetString(4);
+        //                                drink.Cost = reader.GetDecimal(5);
+        //                                drink.Volume = reader.GetDouble(6);
+        //                                drinksList.Count = reader.GetInt32(7);
+        //                                drinksList.Drinks.Add(drink);
+        //                            }
+        //                        }                                    
+        //                            order.DrinksList = drinksList;
+
+        //                        ListOfSnacks snacksList = new ListOfSnacks();
+        //                        snacksList.Snacks = new List<Snack>();
+        //                        if (order.SnacksList.Snacks != null) 
+        //                        {
+        //                            foreach (Snack snack in order.SnacksList.Snacks) 
+        //                            {
+        //                                snack.Id = reader.GetInt32(8);
+        //                                snack.Name = reader.GetString(9);
+        //                                snack.Cost = reader.GetDecimal(10);
+        //                                snack.Weigth = reader.GetDouble(11);
+        //                                snacksList.Count = reader.GetInt32(12);
+        //                                snacksList.Snacks.Add(snack);
+
+        //                            }
+        //                        }
+
+        //                        order.SnacksList = snacksList;
+
+
+        //                        ordersList.Add(order);
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        return ordersList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        return null;
+        //    }
+        //}
+
+
+        //public List<Order> GetAllOrders()
+        //{
+        //    var orders = new List<Order>();
+
+        //    using (SqlConnection connection = new SqlConnection(cnnString))
+        //    {
+        //        connection.Open();
+
+        //        string sqlQuery =
+        //        @"
+        //            SELECT 
+        //                O.id As OrderID,
+        //                O.Name As OrderName,
+        //                O.DateTime As DateTime,
+        //                B.id As BuyerID,
+        //                B.name AS BuyerName,
+        //                D.id AS DrinkId, 
+        //                D.name AS DrinkName, 
+        //                D.cost AS DrinkCost, 
+        //                D.volume AS DrinkVolume,
+
+        //                LD.id As ListOfDrinksID,
+        //                LD.count AS ListOfDrinkCount, 
+        //                S.id AS SnackId, 
+        //                S.name AS SnackName,
+        //                S.cost AS SnackCost, 
+        //                S.weigth AS SnackWeigth,
+        //                LS.id As ListOfSnacksID,
+        //                LS.count AS ListOfSnacksCount
+        //            FROM Orders O 
+        //            INNER JOIN Buyer B ON O.id_buyer = B.id 
+        //            LEFT JOIN ListOfDrinks LD ON O.id = LD.id_order 
+        //            LEFT JOIN Drink D ON D.id = LD.id_drink 
+        //            LEFT JOIN ListOfSnacks LS ON O.id = LS.id_order 
+        //            LEFT JOIN Snack S ON S.id = LS.id_snack
+        //            WHERE LD.id_order IS NOT NULL OR LS.id_order IS NOT NULL
+        //        ";
+
+        //        using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+        //        {
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    var Buyer = new Buyer
+        //                    {
+        //                        Id = reader.GetInt32(reader.GetOrdinal("BuyerID")),
+        //                        Name = reader.GetString(reader.GetOrdinal("BuyerName"))
+        //                    };
+
+        //                    ListOfDrinks listOfDrinks = new ListOfDrinks();
+        //                    List<Drink> drinks = new List<Drink>();
+        //                    if (!reader.IsDBNull(reader.GetOrdinal("OrderId")))
+        //                    {
+        //                        foreach (Drink drink in drinks)
+        //                        {
+        //                            drink.Id = reader.GetInt32(reader.GetOrdinal("DrinkID"));
+        //                            drink.Name = reader.GetString(reader.GetOrdinal("DrinkName"));
+        //                            drink.Cost = reader.GetDecimal(reader.GetOrdinal("DrinkCost"));
+        //                            drink.Volume = reader.GetDouble(reader.GetOrdinal("DrinkVolume"));
+        //                            drinks.Add(drink);
+        //                        }
+        //                        if (drinks.Count > 0) 
+        //                        {
+        //                            listOfDrinks.Id = reader.GetInt32(reader.GetOrdinal("ListOfDrinksID"));
+        //                            listOfDrinks.Drinks = drinks;
+        //                            listOfDrinks.Count = reader.GetInt32(reader.GetOrdinal("ListOfDrinkCount"));
+        //                        }
+                                
+        //                    }
 
 
 
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            Order order = new Order();
-                            order.Id = reader.GetInt32(0);
-                            order.DateTime = reader.GetDateTime(1);
-                            order.BuyerName = new Buyer();
-                            order.BuyerName.Name = reader.GetString(2);
+        //                    ListOfSnacks listOfSnacks = new ListOfSnacks();
+        //                    List<Snack> snacks = new List<Snack>();
 
-                            order.DrinksList = new ListOfDrinks();
-                            order.DrinksList.Drinks = new List<Drink>();
+        //                    while (reader.Read())
+        //                    {
+        //                        foreach (Snack snack in snacks) 
+        //                        {
+        //                            snack.Id = reader.GetInt32(reader.GetOrdinal("SnackID"));
+        //                            snack.Name = reader.GetString(reader.GetOrdinal("SnackName"));
+        //                            snack.Cost = reader.GetDecimal(reader.GetOrdinal("SnackCost"));
+        //                            snack.Weigth = reader.GetDouble(reader.GetOrdinal("SnackWeight"));
+        //                            snacks.Add(snack);
+        //                        }
+                                                               
 
-                            int id = reader.GetInt32(3); 
-                            string name = reader.GetString(4); 
-                            decimal cost = reader.GetDecimal(5); 
-                            double volume = reader.GetDouble(6); 
+        //                        if (snacks.Count > 0)
+        //                        {
+        //                            listOfSnacks.Id = reader.GetInt32(reader.GetOrdinal("ListOfSnacksID"));
+        //                            listOfSnacks.Snacks = snacks;
+        //                            listOfSnacks.Count = reader.GetInt32(reader.GetOrdinal("ListOfSnackCount"));
+        //                        }
+        //                    }
 
-                            Drink drink = new Drink(id, name, cost, volume);
-                            order.DrinksList.Drinks.Add(drink);
-                            order.DrinksList.Count = reader.GetInt32(7);
+        //                    Order order = new Order
+        //                    {
+        //                        Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
+        //                        Name = reader.GetString(reader.GetOrdinal("OrderName")),
+        //                        DateTime = reader.GetDateTime(reader.GetOrdinal("DateTime")),
+        //                        BuyerName = Buyer,
+        //                        DrinksList = listOfDrinks,
+        //                        SnacksList = listOfSnacks,
+        //                        TotalCost = drinks.Sum(d => d.Count * d.Cost) + snacks.Sum(s => s.Count * s.Cost)
 
-                            order.SnacksList = new ListOfSnacks();
-                            order.SnacksList.Snacks = new List<Snack>();
+        //                    };
 
-                            int snackId = reader.GetInt32(8); 
-                            string snackName = reader.GetString(9); 
-                            decimal snackCost = reader.GetDecimal(10); 
-                            double weigth = reader.GetDouble(11); 
+        //                    orders.Add(order);
+        //                }
+        //            }
+        //        }
+        //    }
 
-                            Snack snack = new Snack(snackId, snackName, snackCost, weigth);
-                            order.SnacksList.Snacks.Add(snack);
-                            order.SnacksList.Count = reader.GetInt32(12);
+        //    return orders;
+        //}
 
-                            ordersList.Add(order);
-                        }
-                        reader.Close();
-                    }
-                }
-                return ordersList;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
-        }
+
+
+        //public void InsertOrder(Order order)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(cnnString))
+        //    {
+        //        connection.Open();
+        //        string query = "INSERT INTO Orders (name, DateTime, id_buyer) VALUES (@Name, @DateTime, @BuyerId); SELECT SCOPE_IDENTITY();";
+
+        //        using (SqlCommand cmd = new SqlCommand(query, connection))
+        //        {
+        //            cmd.Parameters.AddWithValue("@Name", order.Name);
+        //            cmd.Parameters.AddWithValue("@DateTime", order.DateTime);
+        //            cmd.Parameters.AddWithValue("@BuyerId", order.BuyerName.Id);
+
+        //            order.Id = Convert.ToInt32(cmd.ExecuteScalar());
+
+        //            if (order.DrinksList.Drinks != null)
+        //            {
+        //                foreach (Drink drink in order.DrinksList.Drinks)
+        //                {
+        //                    string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @DrinkCount);";
+        //                    using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
+        //                    {
+        //                        drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
+        //                        drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
+        //                        drinkCmd.Parameters.AddWithValue("@DrinkCount", order.DrinksList.Count);
+        //                        drinkCmd.ExecuteNonQuery();
+        //                    }
+        //                }
+        //            }
+
+        //            if (order.SnacksList.Snacks != null)
+        //            {
+        //                foreach (Snack snack in order.SnacksList.Snacks)
+        //                {
+        //                    string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snack, count) VALUES (@OrderId, @SnackId, @SnackCount);";
+        //                    using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
+        //                    {
+        //                        snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
+        //                        snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
+        //                        snackCmd.Parameters.AddWithValue("@SnackCount", order.SnacksList.Count);
+        //                        snackCmd.ExecuteNonQuery();
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         public void InsertOrder(Order order)
         {
             using (SqlConnection connection = new SqlConnection(cnnString))
             {
                 connection.Open();
-                string query = "INSERT INTO Orders (name, DateTime, id_buyer) VALUES (@Name, @DateTime, @BuyerId); SELECT SCOPE_IDENTITY();";
 
-                using (SqlCommand cmd = new SqlCommand(query, connection))
+                // Insert the buyer into the Buyers table
+                string buyerQuery = "INSERT INTO Buyer (name) VALUES (@BuyerName); SELECT SCOPE_IDENTITY();";
+                using (SqlCommand buyerCmd = new SqlCommand(buyerQuery, connection))
                 {
-                    cmd.Parameters.AddWithValue("@Name", order.Name); // Set the 'name' column value
-                    cmd.Parameters.AddWithValue("@DateTime", order.DateTime);
-                    cmd.Parameters.AddWithValue("@BuyerId", order.BuyerName.Id);
+                    buyerCmd.Parameters.AddWithValue("@BuyerName", order.BuyerName.Name);
+                    order.BuyerName.Id = Convert.ToInt32(buyerCmd.ExecuteScalar());
+                }
 
-                    order.Id = Convert.ToInt32(cmd.ExecuteScalar());
+                // Insert the order into the Orders table
+                string orderQuery = "INSERT INTO Orders (name, DateTime, id_buyer) VALUES (@Name, @DateTime, @BuyerId); SELECT SCOPE_IDENTITY();";
+                using (SqlCommand orderCmd = new SqlCommand(orderQuery, connection))
+                {
+                    orderCmd.Parameters.AddWithValue("@Name", order.Name);
+                    orderCmd.Parameters.AddWithValue("@DateTime", order.DateTime);
+                    orderCmd.Parameters.AddWithValue("@BuyerId", order.BuyerName.Id);
 
-                    if (order.DrinksList.Drinks != null) 
+                    order.Id = Convert.ToInt32(orderCmd.ExecuteScalar());
+                }
+
+                // Insert the drinks into the OrderItems table
+                if (order.DrinksList.Drinks != null && order.DrinksList.Drinks.Count > 0)
+                {
+                    string drinkQuery =
+                        @"
+                             INSERT INTO ListOfDrinks (id_order, id_drink, count)
+                            VALUES (@OrderId, @DrinkId, @DrinkCount);
+                        ";
+
+                    foreach (Drink drink in order.DrinksList.Drinks)
                     {
-                        foreach (Drink drink in order.DrinksList.Drinks)
+                        using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
                         {
-                            string drinkQuery = "INSERT INTO ListOfDrinks (id_order, id_drink, count) VALUES (@OrderId, @DrinkId, @Count);";
-                            using (SqlCommand drinkCmd = new SqlCommand(drinkQuery, connection))
-                            {
-                                drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
-                                drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
-                                drinkCmd.Parameters.AddWithValue("@Count", order.DrinksList.Count);
-                                drinkCmd.ExecuteNonQuery();
-                            }
+                            drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                            drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
+                            drinkCmd.Parameters.AddWithValue("@DrinkCount", order.DrinksList.Count);
+
+                            drinkCmd.ExecuteNonQuery();
                         }
                     }
+                }
 
-                    if (order.SnacksList.Snacks != null) 
+                // Insert the snacks into the OrderItems table
+                if (order.SnacksList.Snacks != null && order.SnacksList.Snacks.Count > 0)
+                {
+                    string snackQuery =
+                        @"
+                            INSERT INTO ListOfSnacks (id_order, id_snack, count)
+                            VALUES (@OrderId, @SnackId, @SnackCount);
+                        ";
+
+                    foreach (Snack snack in order.SnacksList.Snacks)
                     {
-                        foreach (Snack snack in order.SnacksList.Snacks)
+                        using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
                         {
-                            string snackQuery = "INSERT INTO ListOfSnacks (id_order, id_snack, count) VALUES (@OrderId, @SnackId, @Count);";
-                            using (SqlCommand snackCmd = new SqlCommand(snackQuery, connection))
-                            {
-                                snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
-                                snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
-                                snackCmd.Parameters.AddWithValue("@Count", order.SnacksList.Count);
-                                snackCmd.ExecuteNonQuery();
-                            }
+                            snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
+                            snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
+                            snackCmd.Parameters.AddWithValue("@SnackCount", order.SnacksList.Count);
+                            snackCmd.ExecuteNonQuery();
                         }
                     }
-                    
                 }
             }
         }
+
+
+
+
+
+
+
+        public List<Order> GetAllOrders()
+        {
+            var orders = new List<Order>();
+
+            using (SqlConnection connection = new SqlConnection(cnnString))
+            {
+                connection.Open();
+
+                string sqlQuery = @"
+            SELECT 
+                O.id AS OrderID,
+                O.Name AS OrderName,
+                O.DateTime AS DateTime,
+                B.id AS BuyerID,
+                B.name AS BuyerName,
+                D.id AS DrinkId,
+                D.name AS DrinkName,
+                D.cost AS DrinkCost,
+                D.volume AS DrinkVolume,
+                LD.id AS ListOfDrinksID,
+                LD.count AS ListOfDrinkCount,
+                S.id AS SnackId,
+                S.name AS SnackName,
+                S.cost AS SnackCost,
+                S.weigth AS SnackWeight,
+                LS.id AS ListOfSnacksID,
+                LS.count AS ListOfSnacksCount
+            FROM Orders O
+            INNER JOIN Buyer B ON O.id_buyer = B.id
+            LEFT JOIN ListOfDrinks LD ON O.id = LD.id_order
+            LEFT JOIN Drink D ON D.id = LD.id_drink
+            LEFT JOIN ListOfSnacks LS ON O.id = LS.id_order
+            LEFT JOIN Snack S ON S.id = LS.id_snack
+            WHERE LD.id_order IS NOT NULL OR LS.id_order IS NOT NULL";
+
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int orderId = reader.GetInt32(reader.GetOrdinal("OrderID"));
+                            Order order = orders.FirstOrDefault(o => o.Id == orderId);
+
+                            if (order == null)
+                            {
+                                order = new Order
+                                {
+                                    Id = orderId,
+                                    Name = reader.IsDBNull(reader.GetOrdinal("OrderName")) ? null : reader.GetString(reader.GetOrdinal("OrderName")),
+                                    DateTime = reader.IsDBNull(reader.GetOrdinal("DateTime")) ? default(DateTime) : reader.GetDateTime(reader.GetOrdinal("DateTime")),
+                                    BuyerName = reader.IsDBNull(reader.GetOrdinal("BuyerID")) || reader.IsDBNull(reader.GetOrdinal("BuyerName")) ? null : new Buyer
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("BuyerID")),
+                                        Name = reader.GetString(reader.GetOrdinal("BuyerName"))
+                                    },
+                                    DrinksList = reader.IsDBNull(reader.GetOrdinal("ListOfDrinksID")) || reader.IsDBNull(reader.GetOrdinal("ListOfDrinkCount")) ? null : new ListOfDrinks
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("ListOfDrinksID")),
+                                        Count = reader.GetInt32(reader.GetOrdinal("ListOfDrinkCount")),
+                                        Drinks = new List<Drink>()
+                                    },
+                                    SnacksList = reader.IsDBNull(reader.GetOrdinal("ListOfSnacksID")) || reader.IsDBNull(reader.GetOrdinal("ListOfSnacksCount")) ? null : new ListOfSnacks
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("ListOfSnacksID")),
+                                        Count = reader.GetInt32(reader.GetOrdinal("ListOfSnacksCount")),
+                                        Snacks = new List<Snack>()
+                                    }
+                                };
+
+                                orders.Add(order);
+                            }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("DrinkId")))
+                            {
+                                int drinkId = reader.GetInt32(reader.GetOrdinal("DrinkId"));
+                                string drinkName = reader.GetString(reader.GetOrdinal("DrinkName"));
+                                decimal drinkCost = reader.GetDecimal(reader.GetOrdinal("DrinkCost"));
+                                double drinkVolume = reader.GetDouble(reader.GetOrdinal("DrinkVolume"));
+
+                                Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume);
+                                order.DrinksList?.Drinks.Add(drink);
+                            }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("SnackId")))
+                            {
+                                int snackId = reader.GetInt32(reader.GetOrdinal("SnackId"));
+                                string snackName = reader.GetString(reader.GetOrdinal("SnackName"));
+                                decimal snackCost = reader.GetDecimal(reader.GetOrdinal("SnackCost"));
+                                double snackWeight = reader.GetDouble(reader.GetOrdinal("SnackWeight"));
+
+                                Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
+                                order.SnacksList?.Snacks.Add(snack);
+                            }
+
+                            order.TotalCost = CalculateTotalCost(order);
+                        }
+                    }
+                }
+            }
+
+            return orders;
+        }
+
+        private decimal CalculateTotalCost(Order order)
+        {
+            decimal totalCost = 0;
+
+            if (order.DrinksList != null && order.DrinksList.Drinks != null)
+            {
+                foreach (var drink in order.DrinksList.Drinks)
+                {
+                    totalCost += drink.Cost; 
+                }
+            }
+
+            if (order.SnacksList != null && order.SnacksList.Snacks != null)
+            {
+                foreach (var snack in order.SnacksList.Snacks)
+                {
+                    totalCost += snack.Cost; 
+                }
+            }
+
+            return totalCost;
+        }
+
 
 
 

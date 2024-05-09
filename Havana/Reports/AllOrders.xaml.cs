@@ -32,7 +32,20 @@ namespace Havana.Reports
 
         private void ShowTheBills(List<Order> orders)
         {
-            
+            string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SummaryReports");
+            Directory.CreateDirectory(folderPath);
+
+            string fileName = System.IO.Path.Combine(folderPath, $"SummaryReport_{orders[0].DateTime:yyyyMMdd_HHmmss}.txt");
+
+            try
+            {
+                string content = File.ReadAllText(fileName);
+                BillTextBlock.Text = content;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void PrintBill(List<Order> orders)

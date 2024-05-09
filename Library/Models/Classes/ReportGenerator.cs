@@ -30,6 +30,7 @@ namespace Library.Models.Classes
 
             string currencySymbol = "BYN ";
             int itemNameColumnWidth = 70;
+
             try
             {
                 string fileName = Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
@@ -47,32 +48,31 @@ namespace Library.Models.Classes
                     sw.WriteLine($"{"".PadRight(16)}Phone: +37525-222-2222");
                     sw.WriteLine("".PadRight(87, '-'));
                     sw.WriteLine($"DateTime :  {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
-                    sw.WriteLine($"Buyer Name: {order.BuyerName.Name}");
+                    sw.WriteLine($"Buyer Name: {(order.BuyerName?.Name ?? "")}");
                     sw.WriteLine("".PadRight(87, '-'));
                     sw.WriteLine("Items".PadRight(itemNameColumnWidth, ' ') + "Price".PadRight(12, ' ') + "Count");
                     sw.WriteLine("".PadRight(87, '-'));
-                    if (order.DrinksList.Drinks != null && order.DrinksList.Drinks.Any())
-                    {
 
+                    if (order.DrinksList != null)
+                    {
                         foreach (Drink drink in order.DrinksList.Drinks)
                         {
-                            string itemLine = $"{drink.Name.ToLower()}";
+                            string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
                             int remainingSpace = itemNameColumnWidth - itemLine.Length;
                             string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
-                            string countOfItems = $"".PadRight(5, ' ') + $"{drink.Count}";
+                            string countOfItems = $"".PadRight(5, ' ') + $"{order.DrinksList.Count}";
                             sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
                         }
-
                     }
 
-                    if (order.SnacksList.Snacks != null && order.SnacksList.Snacks.Any())
+                    if (order.SnacksList != null)
                     {
                         foreach (Snack snack in order.SnacksList.Snacks)
                         {
-                            string itemLine = $"{snack.Name.ToLower()}";
+                            string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
                             int remainingSpace = itemNameColumnWidth - itemLine.Length;
                             string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
-                            string countOfItems = $"".PadRight(5, ' ') + $"{snack.Count}";
+                            string countOfItems = $"".PadRight(5, ' ') + $"{order.SnacksList.Count}";
                             sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
                         }
                     }
@@ -95,7 +95,7 @@ namespace Library.Models.Classes
 
             try
             {
-                string fileName = Path.Combine(folderPath, $"SummaryReport_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
+                string fileName = Path.Combine(folderPath, $"SummaryReport_{orders[0].DateTime:yyyyMMdd_HHmmss}.txt");
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
@@ -103,54 +103,69 @@ namespace Library.Models.Classes
 
                 using (StreamWriter sw = File.CreateText(fileName))
                 {
-                    sw.WriteLine("Summary Report");
-                    sw.WriteLine("===============");
-                    sw.WriteLine();
+                    string currencySymbol = "BYN ";
+                    int itemNameColumnWidth = 70;
 
-                    decimal totalCost = 0;
+                    sw.WriteLine("".PadRight(87, '-'));
+                    sw.WriteLine($"{"".PadRight(24)}Havana".PadRight(45));
+                    sw.WriteLine($"{"".PadRight(14)}Address 99,99 , City Gomel");
+                    sw.WriteLine($"{"".PadRight(16)}Phone: +37525-222-2222");
+                    sw.WriteLine("".PadRight(87, '='));
+                    sw.WriteLine("\n\n");
 
+                    decimal TotalRevenue = 0;
                     foreach (Order order in orders)
                     {
                         sw.WriteLine($"Order ID: {order.Id}");
-                        sw.WriteLine($"Buyer Name: {order.BuyerName.Name}");
-                        sw.WriteLine($"Date: {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
-                        sw.WriteLine();
+                        sw.WriteLine($"DateTime: {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
+                        sw.WriteLine($"Buyer Name: {(order.BuyerName?.Name ?? "")}");
+                        sw.WriteLine("".PadRight(87, '-'));
+                        sw.WriteLine("Items".PadRight(itemNameColumnWidth, ' ') + "Price".PadRight(12, ' ') + "Count");
+                        sw.WriteLine("".PadRight(87, '-'));
 
-                        decimal orderCost = 0;
 
-                        if (order.DrinksList.Drinks != null && order.DrinksList.Drinks.Any())
+                        decimal TotalCost = 0;
+                        
+                      
+                        if (order.DrinksList.Drinks != null && order.DrinksList.Drinks != null )
                         {
-                            sw.WriteLine("Drinks:");
                             foreach (Drink drink in order.DrinksList.Drinks)
                             {
-                                decimal drinkTotalCost = drink.Cost * drink.Count;
-                                orderCost += drinkTotalCost;
-                                sw.WriteLine($"- {drink.Name}: {drink.Count} x {drink.Cost.ToString("0.0#")} = {drinkTotalCost.ToString("0.####")}");
+                                string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
+                                int remainingSpace = itemNameColumnWidth - itemLine.Length;
+                                string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
+                                string countOfItems = $"".PadRight(5, ' ') + $"{order.DrinksList.Count}";
+                                sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
+                                TotalCost += order.DrinksList.Count * drink.Cost;
+                                TotalRevenue += TotalCost;
+
                             }
-                            sw.WriteLine();
                         }
 
-                        if (order.SnacksList.Snacks != null && order.SnacksList.Snacks.Any())
+                        if (order.SnacksList != null && order.SnacksList.Snacks != null)
                         {
-                            sw.WriteLine("Snacks:");
+                           
+                       
                             foreach (Snack snack in order.SnacksList.Snacks)
                             {
-                                decimal snackTotalCost = snack.Cost * snack.Count;
-                                orderCost += snackTotalCost;
-                                sw.WriteLine($"- {snack.Name}: {snack.Count} x {snack.Cost.ToString("0.0#")} = {snackTotalCost.ToString("0.####")}");
+                                string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
+                                int remainingSpace = itemNameColumnWidth - itemLine.Length;
+                                string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
+                                string countOfItems = $"".PadRight(5, ' ') + $"{order.SnacksList.Count}";
+                                sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
+                                TotalCost += order.SnacksList.Count * snack.Cost;
+                                TotalRevenue += TotalCost;
                             }
-                            sw.WriteLine();
                         }
 
-                        sw.WriteLine($"Order Total Cost: {orderCost.ToString("0.####")}");
-                        sw.WriteLine();
-                        sw.WriteLine("=======================================");
-                        sw.WriteLine();
-
-                        totalCost += orderCost;
+                        sw.WriteLine("".PadRight(87, '-'));
+                        sw.WriteLine($"Total:".PadRight(itemNameColumnWidth) + $"{currencySymbol}{TotalCost.ToString("0.##")}");
+                        sw.WriteLine("".PadRight(87, '='));
                     }
-
-                    sw.WriteLine($"Summary Total Cost: {totalCost.ToString("0.####")}");
+                    sw.WriteLine();
+                    sw.WriteLine($"Total Revenu = {TotalRevenue}");
+                    sw.WriteLine();
+                    sw.WriteLine("".PadRight(87, '='));
                 }
 
                 MessageBox.Show("Summary report generated successfully.");

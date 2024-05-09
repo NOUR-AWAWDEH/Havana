@@ -155,6 +155,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DB_BackUp\Havana.bak" />
     <None Include="HavanaDataSet.xsc">
       <DependentUpon>HavanaDataSet.xsd</DependentUpon>
     </None>

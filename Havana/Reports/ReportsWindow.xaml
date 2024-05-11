@@ -30,14 +30,14 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        
+
         <Button x:Name="BringAllOrders"
                 Content="Bring All Orders"
                 HorizontalAlignment="Left"
-                Margin="38,265,0,0"
+                Margin="155,269,0,0"
                 VerticalAlignment="Top"
                 Height="46"
-                Width="141"
+                Width="135"
                 Click="BringAllOrders_Click"
                 Visibility="Visible"
                 Foreground="White"
@@ -50,6 +50,54 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+
+        <Label Content="From:"
+               Foreground = "#FF344C0E"
+               FontSize="20"
+               FontWeight = "Bold"
+               HorizontalAlignment="Left"
+               Margin="155,180,0,0"
+               VerticalAlignment="Top"
+               />
+
+        <Label Content="To:"
+               Foreground = "#FF344C0E"
+               FontSize="20"
+               FontWeight = "Bold"
+               HorizontalAlignment="Left"
+               Margin="413,179,0,0"
+               VerticalAlignment="Top"
+               />
+
+        <Label  Content="Choose the Period of Time :"
+                Foreground = "#FF344C0E"
+                FontSize="20"
+                FontWeight = "Bold"
+                HorizontalAlignment="Left"
+                Margin="155,122,0,0"
+                VerticalAlignment="Top"
+               />
+        <ComboBox   x:Name="FromDateTime"
+                    HorizontalAlignment="Left"
+                    Height="19"
+                    Margin="222,191,0,0"
+                    VerticalAlignment="Top"
+                    Width="160"
+                    ItemsSource="{Binding YourDateTimeCollection}"
+                    SelectedItem="{Binding SelectedDateTime}"
+                    ItemStringFormat="yyyy-MM-dd HH:mm:ss.fff" 
+                    />
+
+        <ComboBox   x:Name="ToDateTime"
+                    HorizontalAlignment="Left"
+                    Height="19"
+                    Margin="456,189,0,0"
+                    VerticalAlignment="Top"
+                    Width="160"
+                    ItemsSource="{Binding YourDateTimeCollection}"
+                    SelectedItem="{Binding SelectedDateTime}"
+                    ItemStringFormat="yyyy-MM-dd HH:mm:ss.fff"
+                  />
 
 
 

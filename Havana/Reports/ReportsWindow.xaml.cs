@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Havana.Main;
-using Havana.Orders;
 using Library.Models.Classes;
 
 namespace Havana.Reports
@@ -16,6 +15,19 @@ namespace Havana.Reports
         public ReportsWindow()
         {
             InitializeComponent();
+            ShowDatesInComboBox();
+        }
+
+        private void ShowDatesInComboBox()
+        {
+            DataAccess dataAccess = new DataAccess();
+            List<string> dateTimeList = dataAccess.GetOrdersDates();
+
+            foreach (string dateTime in dateTimeList)
+            {
+                FromDateTime.Items.Add(dateTime);
+                ToDateTime.Items.Add(dateTime);
+            }
         }
 
         private void BackToHavana(object sender, RoutedEventArgs e)
@@ -30,22 +42,32 @@ namespace Havana.Reports
 
         private void BringAllOrders_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
-                DataAccess dataAccess = new DataAccess();
-                List<Order> orders = dataAccess.GetAllOrders();
-                ReportGenerator report = new ReportGenerator();
-                report.SummeryBills(orders);
+                string fromDateTime = FromDateTime.SelectedItem.ToString();
+                string toDateTime = ToDateTime.SelectedItem.ToString();
 
-                AllOrders allOrders = new AllOrders(orders);
-                allOrders.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                allOrders.Show();
+                if(FromDateTime.SelectedItem != null && ToDateTime.SelectedItem != null) 
+                {
+                
+                    DataAccess dataAccess = new DataAccess();
+                    List<Order> orders = dataAccess.GetAllOrders(fromDateTime, toDateTime);
+
+                    ReportGenerator report = new ReportGenerator();
+                    report.SummeryBills(orders);
+                                      
+                    AllOrders allOrders = new AllOrders(orders);
+                    allOrders.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    allOrders.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Please Add From TO Date Time : ","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-
-                MessageBox.Show("Failed to Bring the orders From the  the database: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Library.Models.Classes
 
         public override string ToString() 
         {
-            return $"{Drink.Id}{Drink.Name}{Drink.Cost}{Drink.Volume}";
+            return $"{Drink.Id}\t{Drink.Name}\t{Drink.Cost}\t{Drink.Volume}";
         }
     }
 }

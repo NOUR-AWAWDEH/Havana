@@ -21,7 +21,7 @@ namespace Havana.DB
         public void OpenWindow(Type windowType)
         {
             Window window = (Window)Activator.CreateInstance(windowType);
-            this.Visibility = Visibility.Visible;
+            this.Visibility = Visibility.Hidden;
             window.Show();
         }
 

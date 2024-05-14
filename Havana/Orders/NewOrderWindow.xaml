@@ -86,7 +86,7 @@
 
         </DataGrid>
 
-        <Label Content="Snaks :"
+        <Label Content="Snacks :"
                HorizontalAlignment="Left"
                Height="54" 
                Margin="14,512,0,0"

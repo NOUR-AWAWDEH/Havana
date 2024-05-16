@@ -737,7 +737,7 @@ namespace Library.Models.Classes
                         {
                             drinkCmd.Parameters.AddWithValue("@OrderId", order.Id);
                             drinkCmd.Parameters.AddWithValue("@DrinkId", drink.Id);
-                            drinkCmd.Parameters.AddWithValue("@DrinkCount", order.DrinksList.Count);
+                            drinkCmd.Parameters.AddWithValue("@DrinkCount", drink.Count);
 
                             drinkCmd.ExecuteNonQuery();
                         }
@@ -759,7 +759,7 @@ namespace Library.Models.Classes
                         {
                             snackCmd.Parameters.AddWithValue("@OrderId", order.Id);
                             snackCmd.Parameters.AddWithValue("@SnackId", snack.Id);
-                            snackCmd.Parameters.AddWithValue("@SnackCount", order.SnacksList.Count);
+                            snackCmd.Parameters.AddWithValue("@SnackCount", snack.Count);
                             snackCmd.ExecuteNonQuery();
                         }
                     }
@@ -818,13 +818,13 @@ namespace Library.Models.Classes
                     D.cost AS DrinkCost,
                     D.volume AS DrinkVolume,
                     LD.id AS ListOfDrinksID,
-                    LD.count AS ListOfDrinkCount,
+                    LD.count As DrinkCount,
                     S.id AS SnackId,
                     S.name AS SnackName,
                     S.cost AS SnackCost,
                     S.weight AS SnackWeight,
                     LS.id AS ListOfSnacksID,
-                    LS.count AS ListOfSnacksCount
+                    LS.count As SnackCount
                 FROM Orders O
                 INNER JOIN Buyer B ON O.id_buyer = B.id
                 LEFT JOIN ListOfDrinks LD ON O.id = LD.id_order
@@ -864,13 +864,13 @@ namespace Library.Models.Classes
                                             DrinksList = !reader.IsDBNull(reader.GetOrdinal("ListOfDrinksID")) ? new ListOfDrinks
                                             {
                                                 Id = reader.GetInt32(reader.GetOrdinal("ListOfDrinksID")),
-                                                Count = reader.GetInt32(reader.GetOrdinal("ListOfDrinkCount")),
+                                                Count = reader.GetInt32(reader.GetOrdinal("DrinkCount")),
                                                 Drinks = new List<Drink>() // Initialize the Drinks collection
                                             } : null,
                                             SnacksList = !reader.IsDBNull(reader.GetOrdinal("ListOfSnacksID")) ? new ListOfSnacks
                                             {
                                                 Id = reader.GetInt32(reader.GetOrdinal("ListOfSnacksID")),
-                                                Count = reader.GetInt32(reader.GetOrdinal("ListOfSnacksCount")),
+                                                Count = reader.GetInt32(reader.GetOrdinal("SnackCount")),
                                                 Snacks = new List<Snack>() // Initialize the Snacks collection
                                             } : null
                                         };
@@ -884,8 +884,8 @@ namespace Library.Models.Classes
                                         string drinkName = reader.GetString(reader.GetOrdinal("DrinkName"));
                                         decimal drinkCost = reader.GetDecimal(reader.GetOrdinal("DrinkCost"));
                                         double drinkVolume = reader.GetDouble(reader.GetOrdinal("DrinkVolume"));
-
-                                        Drink drink = new Drink(drinkId, drinkName, drinkCost, drinkVolume);
+                                        int drinkcount = reader.GetInt32(reader.GetOrdinal("DrinkCount"));
+                                        Drink drink = new Drink(drinkId, drinkName, drinkcount,drinkCost, drinkVolume);
                                         order.DrinksList.Drinks.Add(drink);
                                     }
 
@@ -895,8 +895,8 @@ namespace Library.Models.Classes
                                         string snackName = reader.GetString(reader.GetOrdinal("SnackName"));
                                         decimal snackCost = reader.GetDecimal(reader.GetOrdinal("SnackCost"));
                                         double snackWeight = reader.GetDouble(reader.GetOrdinal("SnackWeight"));
-
-                                        Snack snack = new Snack(snackId, snackName, snackCost, snackWeight);
+                                        int snackCount = reader.GetInt32(reader.GetOrdinal("SnackCount"));
+                                        Snack snack = new Snack(snackId, snackName, snackCount, snackCost, snackWeight);
                                         order.SnacksList.Snacks.Add(snack);
                                     }
 
@@ -923,7 +923,7 @@ namespace Library.Models.Classes
             {
                 foreach (var drink in order.DrinksList.Drinks)
                 {
-                    totalCost += drink.Cost;
+                    totalCost += drink.Cost * drink.Count;
                 }
             }
 
@@ -931,7 +931,7 @@ namespace Library.Models.Classes
             {
                 foreach (var snack in order.SnacksList.Snacks)
                 {
-                    totalCost += snack.Cost;
+                    totalCost += snack.Cost * snack.Count;
                 }
             }
 

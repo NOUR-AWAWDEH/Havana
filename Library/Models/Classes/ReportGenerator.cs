@@ -97,7 +97,7 @@ namespace Library.Models.Classes
             try
             {
                 string fileName = Path.Combine(folderPath, $"SummaryReport_{orders[0].DateTime:yyyyMMdd_HHmmss}.txt");
-                
+
                 StringBuilder sb = new StringBuilder();
 
                 string currencySymbol = "BYN ";
@@ -121,21 +121,22 @@ namespace Library.Models.Classes
                     sb.AppendLine("Items".PadRight(itemNameColumnWidth, ' ') + "Price".PadRight(12, ' '));
                     sb.AppendLine("".PadRight(87, '-'));
 
-                    decimal totalCost = 0;
+                    decimal totalCost = order.TotalCost;
 
-                    Dictionary<int, int> itemDictionary = new Dictionary<int, int>();
+                    Dictionary<int, int> drinkDictionary = new Dictionary<int, int>();
+                    Dictionary<int, int> snackDictionary = new Dictionary<int, int>();
 
                     if (order.DrinksList != null && order.DrinksList.Drinks != null)
                     {
                         foreach (Drink drink in order.DrinksList.Drinks)
                         {
-                            if (itemDictionary.ContainsKey(drink.Id))
+                            if (drinkDictionary.ContainsKey(drink.Id))
                             {
-                                itemDictionary[drink.Id]++;
+                                drinkDictionary[drink.Id]++;
                             }
                             else
                             {
-                                itemDictionary[drink.Id] = 1;
+                                drinkDictionary[drink.Id] = 1;
                             }
                         }
                     }
@@ -144,50 +145,51 @@ namespace Library.Models.Classes
                     {
                         foreach (Snack snack in order.SnacksList.Snacks)
                         {
-                            if (itemDictionary.ContainsKey(snack.Id))
+                            if (snackDictionary.ContainsKey(snack.Id))
                             {
-                                itemDictionary[snack.Id]++;
+                                snackDictionary[snack.Id]++;
                             }
                             else
                             {
-                                itemDictionary[snack.Id] = 1;
+                                snackDictionary[snack.Id] = 1;
                             }
                         }
                     }
 
-                    foreach (var kvp in itemDictionary)
+                    foreach (var kvp in drinkDictionary)
                     {
                         int itemId = kvp.Key;
                         int itemCount = kvp.Value;
 
-                        if (order.DrinksList != null && order.DrinksList.Drinks != null)
+                        // Find the drink with the matching ID
+                        Drink drink = order.DrinksList.Drinks.FirstOrDefault(d => d.Id == itemId);
+                        if (drink != null)
                         {
-                            // Find the drink with the matching ID
-                            Drink drink = order.DrinksList.Drinks.FirstOrDefault(d => d.Id == itemId);
-                            if (drink != null)
-                            {
-                                string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
-                                int remainingSpace = itemNameColumnWidth - itemLine.Length;
-                                string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
-                                sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
-                                totalCost += drink.Cost * itemCount;
-                            }
-                        }
-
-                        if (order.SnacksList != null && order.SnacksList.Snacks != null)
-                        {
-                            // Find the snack with the matching ID
-                            Snack snack = order.SnacksList.Snacks.FirstOrDefault(s => s.Id == itemId);
-                            if (snack != null)
-                            {
-                                string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
-                                int remainingSpace = itemNameColumnWidth - itemLine.Length;
-                                string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
-                                sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
-                                totalCost += snack.Cost * itemCount;
-                            }
+                            string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
+                            int remainingSpace = itemNameColumnWidth - itemLine.Length;
+                            string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
+                            sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
+                           
                         }
                     }
+
+                    foreach (var kvp in snackDictionary)
+                    {
+                        int itemId = kvp.Key;
+                        int itemCount = kvp.Value;
+
+                        // Find the snack with the matching ID
+                        Snack snack = order.SnacksList.Snacks.FirstOrDefault(s => s.Id == itemId);
+                        if (snack != null)
+                        {
+                            string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
+                            int remainingSpace = itemNameColumnWidth - itemLine.Length;
+                            string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
+                            sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
+                           
+                        }
+                    }
+
                     sb.AppendLine("".PadRight(87, '-'));
                     sb.AppendLine($"Drinks Count:".PadRight(itemNameColumnWidth) + $"{(order.DrinksList != null ? order.DrinksList.Count.ToString("0") : "0")}");
                     sb.AppendLine($"Snacks Count:".PadRight(itemNameColumnWidth) + $"{(order.SnacksList != null ? order.SnacksList.Count.ToString("0") : "0")}");

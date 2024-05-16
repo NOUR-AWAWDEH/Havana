@@ -832,7 +832,7 @@ namespace Library.Models.Classes
                 LEFT JOIN ListOfSnacks LS ON O.id = LS.id_order
                 LEFT JOIN Snack S ON S.id = LS.id_snack
                 WHERE (LD.id_order IS NOT NULL OR LS.id_order IS NOT NULL)
-                AND O.DateTime BETWEEN @StartDate AND @EndDate ;";
+                AND O.DateTime BETWEEN @StartDate AND @EndDate;";
 
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
@@ -865,13 +865,13 @@ namespace Library.Models.Classes
                                             {
                                                 Id = reader.GetInt32(reader.GetOrdinal("ListOfDrinksID")),
                                                 Count = reader.GetInt32(reader.GetOrdinal("ListOfDrinkCount")),
-                                                Drinks = new List<Drink>()
+                                                Drinks = new List<Drink>() // Initialize the Drinks collection
                                             } : null,
                                             SnacksList = !reader.IsDBNull(reader.GetOrdinal("ListOfSnacksID")) ? new ListOfSnacks
                                             {
                                                 Id = reader.GetInt32(reader.GetOrdinal("ListOfSnacksID")),
                                                 Count = reader.GetInt32(reader.GetOrdinal("ListOfSnacksCount")),
-                                                Snacks = new List<Snack>()
+                                                Snacks = new List<Snack>() // Initialize the Snacks collection
                                             } : null
                                         };
 
@@ -915,7 +915,6 @@ namespace Library.Models.Classes
 
             return orders;
         }
-
         private decimal CalculateTotalCost(Order order)
         {
             decimal totalCost = 0;

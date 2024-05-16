@@ -54,7 +54,7 @@ namespace Havana.Reports
                     List<Order> orders = dataAccess.GetAllOrders(fromDateTime, toDateTime);
 
                     ReportGenerator report = new ReportGenerator();
-                    report.SummeryBills(orders);
+                    report.SummaryBills(orders);
                                       
                     AllOrders allOrders = new AllOrders(orders);
                     allOrders.WindowStartupLocation = WindowStartupLocation.CenterOwner;

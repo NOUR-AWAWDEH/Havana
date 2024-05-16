@@ -8,6 +8,7 @@ using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
+using System.Text;
 
 namespace Library.Models.Classes 
 {
@@ -88,7 +89,7 @@ namespace Library.Models.Classes
             }
         }
 
-        public void SummeryBills(List<Order> orders)
+        public void SummaryBills(List<Order> orders)
         {
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SummaryReports");
             Directory.CreateDirectory(folderPath);
@@ -96,77 +97,112 @@ namespace Library.Models.Classes
             try
             {
                 string fileName = Path.Combine(folderPath, $"SummaryReport_{orders[0].DateTime:yyyyMMdd_HHmmss}.txt");
-                if (File.Exists(fileName))
+                
+                StringBuilder sb = new StringBuilder();
+
+                string currencySymbol = "BYN ";
+                int itemNameColumnWidth = 70;
+
+                sb.AppendLine("".PadRight(87, '-'));
+                sb.AppendLine($"{"".PadRight(24)}Havana".PadRight(45));
+                sb.AppendLine($"{"".PadRight(14)}Address 99,99 , City Gomel");
+                sb.AppendLine($"{"".PadRight(16)}Phone: +37525-222-2222");
+                sb.AppendLine("".PadRight(87, '='));
+                sb.AppendLine("\n\n");
+
+                decimal totalRevenue = 0;
+
+                foreach (Order order in orders)
                 {
-                    File.Delete(fileName);
-                }
+                    sb.AppendLine($"Order ID: {order.Id}");
+                    sb.AppendLine($"DateTime: {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
+                    sb.AppendLine($"Buyer Name: {(order.BuyerName?.Name ?? "")}");
+                    sb.AppendLine("".PadRight(87, '-'));
+                    sb.AppendLine("Items".PadRight(itemNameColumnWidth, ' ') + "Price".PadRight(12, ' '));
+                    sb.AppendLine("".PadRight(87, '-'));
 
-                using (StreamWriter sw = File.CreateText(fileName))
-                {
-                    string currencySymbol = "BYN ";
-                    int itemNameColumnWidth = 70;
+                    decimal totalCost = 0;
 
-                    sw.WriteLine("".PadRight(87, '-'));
-                    sw.WriteLine($"{"".PadRight(24)}Havana".PadRight(45));
-                    sw.WriteLine($"{"".PadRight(14)}Address 99,99 , City Gomel");
-                    sw.WriteLine($"{"".PadRight(16)}Phone: +37525-222-2222");
-                    sw.WriteLine("".PadRight(87, '='));
-                    sw.WriteLine("\n\n");
+                    Dictionary<int, int> itemDictionary = new Dictionary<int, int>();
 
-                    decimal TotalRevenue = 0;
-                    foreach (Order order in orders)
+                    if (order.DrinksList != null && order.DrinksList.Drinks != null)
                     {
-                        sw.WriteLine($"Order ID: {order.Id}");
-                        sw.WriteLine($"DateTime: {order.DateTime.ToString("M/d/yyyy h:mm:ss tt")}");
-                        sw.WriteLine($"Buyer Name: {(order.BuyerName?.Name ?? "")}");
-                        sw.WriteLine("".PadRight(87, '-'));
-                        sw.WriteLine("Items".PadRight(itemNameColumnWidth, ' ') + "Price".PadRight(12, ' ') + "Count");
-                        sw.WriteLine("".PadRight(87, '-'));
-
-
-                        decimal TotalCost = 0;
-                        
-                      
-                        if (order.DrinksList.Drinks != null && order.DrinksList.Drinks != null )
+                        foreach (Drink drink in order.DrinksList.Drinks)
                         {
-                            foreach (Drink drink in order.DrinksList.Drinks)
+                            if (itemDictionary.ContainsKey(drink.Id))
+                            {
+                                itemDictionary[drink.Id]++;
+                            }
+                            else
+                            {
+                                itemDictionary[drink.Id] = 1;
+                            }
+                        }
+                    }
+
+                    if (order.SnacksList != null && order.SnacksList.Snacks != null)
+                    {
+                        foreach (Snack snack in order.SnacksList.Snacks)
+                        {
+                            if (itemDictionary.ContainsKey(snack.Id))
+                            {
+                                itemDictionary[snack.Id]++;
+                            }
+                            else
+                            {
+                                itemDictionary[snack.Id] = 1;
+                            }
+                        }
+                    }
+
+                    foreach (var kvp in itemDictionary)
+                    {
+                        int itemId = kvp.Key;
+                        int itemCount = kvp.Value;
+
+                        if (order.DrinksList != null && order.DrinksList.Drinks != null)
+                        {
+                            // Find the drink with the matching ID
+                            Drink drink = order.DrinksList.Drinks.FirstOrDefault(d => d.Id == itemId);
+                            if (drink != null)
                             {
                                 string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
                                 int remainingSpace = itemNameColumnWidth - itemLine.Length;
                                 string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
-                                string countOfItems = $"".PadRight(5, ' ') + $"{order.DrinksList.Count}";
-                                sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
-                                TotalCost += order.DrinksList.Count * drink.Cost;
-                                TotalRevenue += TotalCost;
-
+                                sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
+                                totalCost += drink.Cost * itemCount;
                             }
                         }
 
                         if (order.SnacksList != null && order.SnacksList.Snacks != null)
                         {
-                           
-                       
-                            foreach (Snack snack in order.SnacksList.Snacks)
+                            // Find the snack with the matching ID
+                            Snack snack = order.SnacksList.Snacks.FirstOrDefault(s => s.Id == itemId);
+                            if (snack != null)
                             {
                                 string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
                                 int remainingSpace = itemNameColumnWidth - itemLine.Length;
                                 string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
-                                string countOfItems = $"".PadRight(5, ' ') + $"{order.SnacksList.Count}";
-                                sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
-                                TotalCost += order.SnacksList.Count * snack.Cost;
-                                TotalRevenue += TotalCost;
+                                sb.AppendLine($"{itemLine}{priceLine}{itemCount}");
+                                totalCost += snack.Cost * itemCount;
                             }
                         }
-
-                        sw.WriteLine("".PadRight(87, '-'));
-                        sw.WriteLine($"Total:".PadRight(itemNameColumnWidth) + $"{currencySymbol}{TotalCost.ToString("0.##")}");
-                        sw.WriteLine("".PadRight(87, '='));
                     }
-                    sw.WriteLine();
-                    sw.WriteLine($"Total Revenu = {TotalRevenue}");
-                    sw.WriteLine();
-                    sw.WriteLine("".PadRight(87, '='));
+                    sb.AppendLine("".PadRight(87, '-'));
+                    sb.AppendLine($"Drinks Count:".PadRight(itemNameColumnWidth) + $"{(order.DrinksList != null ? order.DrinksList.Count.ToString("0") : "0")}");
+                    sb.AppendLine($"Snacks Count:".PadRight(itemNameColumnWidth) + $"{(order.SnacksList != null ? order.SnacksList.Count.ToString("0") : "0")}");
+                    sb.AppendLine("".PadRight(87, '-'));
+                    sb.AppendLine($"Total:".PadRight(itemNameColumnWidth) + $"{currencySymbol}{totalCost.ToString("0.##")}");
+                    sb.AppendLine("".PadRight(87, '='));
+                    totalRevenue += totalCost;
                 }
+
+                sb.AppendLine();
+                sb.AppendLine($"Total Revenue: {currencySymbol}{totalRevenue.ToString("0.##")}");
+                sb.AppendLine();
+                sb.AppendLine("".PadRight(87, '='));
+
+                File.WriteAllText(fileName, sb.ToString());
 
                 MessageBox.Show("Summary report generated successfully.");
             }

@@ -612,9 +612,9 @@ namespace Library.Models.Classes
                                 double snackWeight = reader.GetDouble(6);
 
                                 Snack snack = new Snack(snackId, snackName, snackCost, snackWeight, idTypeOFSnack);
-                                SnackPhoto drinkPhoto = new SnackPhoto(SnackPhotoId, ImageSource.Source, snack);
+                                SnackPhoto snackPhoto = new SnackPhoto(SnackPhotoId, ImageSource.Source, snack);
 
-                                snackPhotos.Add(drinkPhoto);
+                                snackPhotos.Add(snackPhoto);
                             }
                         }
                     }

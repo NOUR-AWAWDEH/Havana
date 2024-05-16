@@ -60,7 +60,7 @@ namespace Library.Models.Classes
                             string itemLine = $"{(drink.Name?.ToLower() ?? "")}";
                             int remainingSpace = itemNameColumnWidth - itemLine.Length;
                             string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{drink.Cost.ToString("0.0#")}";
-                            string countOfItems = $"".PadRight(5, ' ') + $"{order.DrinksList.Count}";
+                            string countOfItems = $"".PadRight(5, ' ') + $"{drink.Count}";
                             sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
                         }
                     }
@@ -72,7 +72,7 @@ namespace Library.Models.Classes
                             string itemLine = $"{(snack.Name?.ToLower() ?? "")}";
                             int remainingSpace = itemNameColumnWidth - itemLine.Length;
                             string priceLine = $"{new string(' ', remainingSpace)}{currencySymbol}{snack.Cost.ToString("0.0#")}";
-                            string countOfItems = $"".PadRight(5, ' ') + $"{order.SnacksList.Count}";
+                            string countOfItems = $"".PadRight(5, ' ') + $"{snack.Count}";
                             sw.WriteLine($"{itemLine}{priceLine}{countOfItems}");
                         }
                     }

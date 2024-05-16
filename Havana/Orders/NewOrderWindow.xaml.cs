@@ -132,7 +132,7 @@ namespace Havana.Orders
             CheckBuyerName();
             Order newOrder = new Order();
             DateTime setDateTime = DateTime.Now;
-            
+
             ListOfDrinks listOfDrinks = new ListOfDrinks();
             ListOfSnacks listOfSnacks = new ListOfSnacks();
             List<Drink> drinks = new List<Drink>();
@@ -170,27 +170,26 @@ namespace Havana.Orders
                 }
             }
 
-            if (listOfDrinks != null) 
+            if (listOfDrinks != null)
             {
                 listOfDrinks.Id = -1;
+                listOfDrinks.Drinks = drinks;
+                listOfDrinks.Count = drinks.Count;
             }
 
             if (listOfSnacks != null)
-            { 
+            {
                 listOfSnacks.Id = -1;
+                listOfSnacks.Snacks = snacks;
+                listOfSnacks.Count = snacks.Count;
             }
 
-            //Sing Order
             newOrder.Id = -1;
             newOrder.Name = "Table_1";
             newOrder.DateTime = setDateTime;
-            newOrder.BuyerName = buyer; 
-            listOfDrinks.Drinks = drinks;
-            listOfSnacks.Snacks = snacks;
-            listOfDrinks.Count = drinks.Count;
-            listOfSnacks.Count = snacks.Count;    
+            newOrder.BuyerName = buyer;
             newOrder.DrinksList = listOfDrinks;
-            newOrder.SnacksList = listOfSnacks; 
+            newOrder.SnacksList = listOfSnacks;
             newOrder.TotalCost = newOrder.CalculateTotalCost();
             ReportGenerator report = new ReportGenerator();
             report.CreateBill(newOrder);

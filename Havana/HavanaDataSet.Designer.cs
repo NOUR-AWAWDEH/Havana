@@ -2206,7 +2206,7 @@ namespace Havana {
             
             private global::System.Data.DataColumn columncost;
             
-            private global::System.Data.DataColumn columnweigth;
+            private global::System.Data.DataColumn columnweight;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -2275,9 +2275,9 @@ namespace Havana {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn weigthColumn {
+            public global::System.Data.DataColumn weightColumn {
                 get {
-                    return this.columnweigth;
+                    return this.columnweight;
                 }
             }
             
@@ -2318,14 +2318,14 @@ namespace Havana {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public SnackRow AddSnackRow(string name, TypeOfSnackRow parentTypeOfSnackRowByFK_Snack_TypeOfSnack, decimal cost, double weigth) {
+            public SnackRow AddSnackRow(string name, TypeOfSnackRow parentTypeOfSnackRowByFK_Snack_TypeOfSnack, decimal cost, double weight) {
                 SnackRow rowSnackRow = ((SnackRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
                         null,
                         cost,
-                        weigth};
+                        weight};
                 if ((parentTypeOfSnackRowByFK_Snack_TypeOfSnack != null)) {
                     columnValuesArray[2] = parentTypeOfSnackRowByFK_Snack_TypeOfSnack[0];
                 }
@@ -2362,7 +2362,7 @@ namespace Havana {
                 this.columnname = base.Columns["name"];
                 this.columnid_type_sn = base.Columns["id_type_sn"];
                 this.columncost = base.Columns["cost"];
-                this.columnweigth = base.Columns["weigth"];
+                this.columnweight = base.Columns["weight"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2376,8 +2376,8 @@ namespace Havana {
                 base.Columns.Add(this.columnid_type_sn);
                 this.columncost = new global::System.Data.DataColumn("cost", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncost);
-                this.columnweigth = new global::System.Data.DataColumn("weigth", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnweigth);
+                this.columnweight = new global::System.Data.DataColumn("weight", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnweight);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -2390,7 +2390,7 @@ namespace Havana {
                 this.columnname.MaxLength = 50;
                 this.columnid_type_sn.AllowDBNull = false;
                 this.columncost.AllowDBNull = false;
-                this.columnweigth.AllowDBNull = false;
+                this.columnweight.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4128,12 +4128,12 @@ namespace Havana {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public double weigth {
+            public double weight {
                 get {
-                    return ((double)(this[this.tableSnack.weigthColumn]));
+                    return ((double)(this[this.tableSnack.weightColumn]));
                 }
                 set {
-                    this[this.tableSnack.weigthColumn] = value;
+                    this[this.tableSnack.weightColumn] = value;
                 }
             }
             
@@ -6488,7 +6488,7 @@ SELECT id, name, id_buyer, DateTime FROM Orders WHERE (id = @id)";
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("id_type_sn", "id_type_sn");
             tableMapping.ColumnMappings.Add("cost", "cost");
-            tableMapping.ColumnMappings.Add("weigth", "weigth");
+            tableMapping.ColumnMappings.Add("weigth", "weight");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;

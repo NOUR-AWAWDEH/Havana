@@ -8,7 +8,7 @@
         Title="AllOrders" 
         Height="1000" 
         Width="1000"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid >
         <Button 
                 Content="Exit"

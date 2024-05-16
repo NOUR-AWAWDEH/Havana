@@ -1,6 +1,7 @@
 ﻿using Library.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -52,6 +53,7 @@ namespace Havana.Orders
         {
             string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bills");
             Directory.CreateDirectory(folderPath);
+            
 
             string fileName = System.IO.Path.Combine(folderPath, $"Bill_{order.DateTime:yyyyMMdd_HHmmss}.txt");
 
@@ -65,6 +67,7 @@ namespace Havana.Orders
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

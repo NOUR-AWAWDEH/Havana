@@ -34,10 +34,10 @@ namespace Havana.DB.Snacks
             int id = -1;
             string nameSnack = SnackNameTextBox.Text;
             decimal costSnack = Convert.ToDecimal(SnackCostTextBox.Text);
-            double weigthSnack = Convert.ToDouble(SnackWeigthTextBox.Text);
+            double weightSnack = Convert.ToDouble(SnackWeightTextBox.Text);
             int idTypeOFSnack = TypeSnacksSelectedItemID();
 
-            Snack newSnack = new Snack(id, nameSnack, costSnack, weigthSnack, idTypeOFSnack);
+            Snack newSnack = new Snack(id, nameSnack, costSnack, weightSnack, idTypeOFSnack);
 
             int newIdSnack = dataAccess.InsertSnack(newSnack);
             string photoPath = FilePathTextBox.Text;
@@ -57,8 +57,8 @@ namespace Havana.DB.Snacks
             var selectedItem = (TypeOfSnack)TypeOfSnackComboBox.SelectedItem;
             int idTypeOFSnack = selectedItem.Id;
             decimal snackCost = Convert.ToDecimal(SnackCostTextBox.Text);
-            double snackWeigth = Convert.ToDouble(SnackWeigthTextBox.Text);
-            Snack updatedSnack = new Snack(snackId, snackName, snackCost, snackWeigth, idTypeOFSnack);
+            double snackWeight = Convert.ToDouble(SnackWeightTextBox.Text);
+            Snack updatedSnack = new Snack(snackId, snackName, snackCost, snackWeight, idTypeOFSnack);
 
             dataAccess.UpdateSnack(updatedSnack);
 
@@ -146,7 +146,7 @@ namespace Havana.DB.Snacks
                     SnackImage.Source = snackPhoto.Image;
                     SnackNameTextBox.Text = snackPhoto.Snack.Name;
                     SnackCostTextBox.Text = snackPhoto.Snack.Cost.ToString();
-                    SnackWeigthTextBox.Text = snackPhoto.Snack.Weigth.ToString();
+                    SnackWeightTextBox.Text = snackPhoto.Snack.Weight.ToString();
 
                 }
             }
@@ -161,7 +161,7 @@ namespace Havana.DB.Snacks
             SnackImage.Source = null;
             SnackNameTextBox.Text = null;
             SnackCostTextBox.Text = null;
-            SnackWeigthTextBox.Text = null;
+            SnackWeightTextBox.Text = null;
             FilePathTextBox.Text = null;
             SnacksComboBox.SelectedItem = null;
             SnackIdTextBox.Text = null;
@@ -189,7 +189,7 @@ namespace Havana.DB.Snacks
                 int snackId = selectedSnack.Id;
                 string snackName = selectedSnack.Name;
                 decimal snackCost = selectedSnack.Cost;
-                double snackVolume = selectedSnack.Weigth;
+                double snackVolume = selectedSnack.Weight;
             }
 
             ShowCRUDButtons();
@@ -219,7 +219,7 @@ namespace Havana.DB.Snacks
                     SnackIdTextBox.Text = selectedSnackPhoto.Snack.Id.ToString();
                     SnackNameTextBox.Text = selectedSnackPhoto.Snack.Name;
                     SnackCostTextBox.Text = selectedSnackPhoto.Snack.Cost.ToString();
-                    SnackWeigthTextBox.Text = selectedSnackPhoto.Snack.Weigth.ToString();
+                    SnackWeightTextBox.Text = selectedSnackPhoto.Snack.Weight.ToString();
                 }
             }
             ShowSnacks(SnacksInfo, typeOfSnacks);
@@ -286,7 +286,7 @@ namespace Havana.DB.Snacks
 
         private void ShowCRUDButtons()
         {
-            if (SnackNameTextBox.Text != null && SnackCostTextBox.Text != null && SnackWeigthTextBox.Text != null && TypeOfSnackComboBox.SelectedItem != null)
+            if (SnackNameTextBox.Text != null && SnackCostTextBox.Text != null && SnackWeightTextBox.Text != null && TypeOfSnackComboBox.SelectedItem != null)
             {
                 AddSnackButt.Visibility = Visibility.Visible;
                 DeleteSnackButt.Visibility = Visibility.Visible;

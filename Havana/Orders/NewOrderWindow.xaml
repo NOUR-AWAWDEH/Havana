@@ -71,7 +71,7 @@
                                     />
 
                 <DataGridTextColumn Header="Weight"
-                                    Binding="{Binding Weigth}"
+                                    Binding="{Binding Weight}"
                                     CanUserResize="True"
                                     Width="80"
                                     />

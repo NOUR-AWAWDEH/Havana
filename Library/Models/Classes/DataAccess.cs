@@ -382,7 +382,7 @@ namespace Library.Models.Classes
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
                     cnn.Open();
-                    string request = "SELECT id, name, cost , weigth FROM dbo.Snack";
+                    string request = "SELECT id, name, cost , weight FROM dbo.Snack";
                     SqlCommand cmd = new SqlCommand(request, cnn);
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.HasRows)
@@ -414,8 +414,8 @@ namespace Library.Models.Classes
                 {
                     connection.Open();
 
-                    string insertSnackSql = "INSERT INTO Snack (name, id_type_sn, cost, weigth) " +
-                            "VALUES (@name, @id_type_sn, @cost, @weigth); " +
+                    string insertSnackSql = "INSERT INTO Snack (name, id_type_sn, cost, weight) " +
+                            "VALUES (@name, @id_type_sn, @cost, @weight); " +
                             "SELECT @id = SCOPE_IDENTITY();";
 
                     using (SqlCommand command = new SqlCommand(insertSnackSql, connection))
@@ -423,7 +423,7 @@ namespace Library.Models.Classes
                         command.Parameters.AddWithValue("@name", snack.Name);
                         command.Parameters.AddWithValue("@id_type_sn", snack.TypeOfSnakId);
                         command.Parameters.AddWithValue("@cost", snack.Cost);
-                        command.Parameters.AddWithValue("@weigth", snack.Weigth);
+                        command.Parameters.AddWithValue("@weight", snack.Weight);
 
                         SqlParameter idParameter = new SqlParameter("@id", SqlDbType.Int);
                         idParameter.Direction = ParameterDirection.Output;
@@ -483,13 +483,13 @@ namespace Library.Models.Classes
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
                     connection.Open();
-                    string query = "UPDATE Snack SET Name = @Name, Cost = @Cost, Weigth = @Weigth, id_type_sn = @TypeOfSnackId WHERE Id = @Id";
+                    string query = "UPDATE Snack SET Name = @Name, Cost = @Cost, Weight = @Weight, id_type_sn = @TypeOfSnackId WHERE Id = @Id";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Name", snack.Name);
                         command.Parameters.AddWithValue("@Cost", snack.Cost);
-                        command.Parameters.AddWithValue("@Weigth", snack.Weigth);
+                        command.Parameters.AddWithValue("@Weight", snack.Weight);
                         command.Parameters.AddWithValue("@TypeOfSnackId", snack.TypeOfSnakId);
                         command.Parameters.AddWithValue("@Id", snack.Id);
 
@@ -513,7 +513,7 @@ namespace Library.Models.Classes
                 using (SqlConnection cnn = new SqlConnection(cnnString))
                 {
                     cnn.Open();
-                    string request = "SELECT id, name, cost, weigth FROM dbo.Snack where id =@id";
+                    string request = "SELECT id, name, cost, weight FROM dbo.Snack where id =@id";
                     SqlCommand cmd = new SqlCommand(request, cnn);
                     SqlParameter idParametr = new SqlParameter("id", id);
                     cmd.Parameters.Add(idParametr);
@@ -590,7 +590,7 @@ namespace Library.Models.Classes
                 using (SqlConnection connection = new SqlConnection(cnnString))
                 {
                     connection.Open();
-                    string query = "Select SP.id, SP.photo ,S.id, S.name, S.id_type_sn ,S.cost, S.weigth From SnackPhotos SP inner join Snack S on S.id = SP.id_Snack";
+                    string query = "Select SP.id, SP.photo ,S.id, S.name, S.id_type_sn ,S.cost, S.weight From SnackPhotos SP inner join Snack S on S.id = SP.id_Snack";
                     SqlCommand command = new SqlCommand(query, connection);
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -609,9 +609,9 @@ namespace Library.Models.Classes
                                 string snackName = reader.GetString(3);
                                 int idTypeOFSnack = reader.GetInt32(4);
                                 decimal snackCost = reader.GetDecimal(5);
-                                double snackWeigth = reader.GetDouble(6);
+                                double snackWeight = reader.GetDouble(6);
 
-                                Snack snack = new Snack(snackId, snackName, snackCost, snackWeigth, idTypeOFSnack);
+                                Snack snack = new Snack(snackId, snackName, snackCost, snackWeight, idTypeOFSnack);
                                 SnackPhoto drinkPhoto = new SnackPhoto(SnackPhotoId, ImageSource.Source, snack);
 
                                 snackPhotos.Add(drinkPhoto);
@@ -678,9 +678,9 @@ namespace Library.Models.Classes
                                 int id = reader.GetInt32(reader.GetOrdinal("id"));
                                 string name = reader.GetString(reader.GetOrdinal("Name"));
                                 decimal cost = reader.GetDecimal(reader.GetOrdinal("Cost"));
-                                double weigth = reader.GetDouble(reader.GetOrdinal("Weigth"));
+                                double weight = reader.GetDouble(reader.GetOrdinal("Weight"));
 
-                                snack = new Snack(id, name, cost, weigth);
+                                snack = new Snack(id, name, cost, weight);
                             }
                         }
                     }
@@ -822,7 +822,7 @@ namespace Library.Models.Classes
                     S.id AS SnackId,
                     S.name AS SnackName,
                     S.cost AS SnackCost,
-                    S.weigth AS SnackWeight,
+                    S.weight AS SnackWeight,
                     LS.id AS ListOfSnacksID,
                     LS.count AS ListOfSnacksCount
                 FROM Orders O

@@ -100,8 +100,8 @@
                  VerticalAlignment="Top"
                  Width="269"/>
 
-        <Label   x:Name="WeigthLable"
-                 Content="Weigth :" 
+        <Label   x:Name="WeightLable"
+                 Content="Weight :" 
                  FontSize="15" 
                  Background="#FFCAE2A8" 
                  Foreground="#FF344C0E"
@@ -112,7 +112,7 @@
                  VerticalAlignment="Top" 
                  Width="114"/>
 
-        <TextBox x:Name="SnackWeigthTextBox"
+        <TextBox x:Name="SnackWeightTextBox"
                  PreviewTextInput="NumberValidationTextBox"
                  HorizontalAlignment="Left"
                  Height="18"

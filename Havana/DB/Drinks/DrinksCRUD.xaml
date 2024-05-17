@@ -165,7 +165,7 @@
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
-                 Width="47" />
+                 Width="47" TextChanged="DrinkCostTextBox_TextChanged" />
 
         <TextBox x:Name="FilePathTextBox"
                  HorizontalAlignment="Left"

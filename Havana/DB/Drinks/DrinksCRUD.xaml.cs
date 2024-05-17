@@ -286,6 +286,9 @@ namespace Havana.DB.Drinks
             }
         }
 
+        private void DrinkCostTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }
